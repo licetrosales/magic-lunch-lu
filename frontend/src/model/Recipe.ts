@@ -9,8 +9,10 @@ export type Recipe = {
     ingredients: Ingredient[];
     prepTime: string;
     preparation: string;
-    dishTypeCategory: DishTypeCategory;
     portions: number;
+    favorite: boolean;
+    dishTypeCategory: DishTypeCategory;
+
     recipeCategory: RecipeCategory;
     menuCategory: MenuCatefory;
     garnish: Garnish;
