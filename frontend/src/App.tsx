@@ -1,12 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import CreateRecipeForm from "./components/CreateRecipeForm";
+import MyMagicLunchApp from "./components/MyMagicLunchApp";
 
 function App() {
   return (
     <div className="App">
-      <h1>Magic Lunch</h1>
-        <img alt="food" src={require("./images/comida-mexicana-Stock-Photos.jpeg")}/>
+      <MyMagicLunchApp/>
     </div>
   );
 }

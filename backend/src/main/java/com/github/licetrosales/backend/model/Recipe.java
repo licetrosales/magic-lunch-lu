@@ -16,8 +16,10 @@ public record Recipe(
         List<Ingredient> ingredients,
         String prepTime,
         String preparation,
-        DishTypeCategory dishTypeCategory,
         int portions,
+        Boolean favorite,
+        DishTypeCategory dishTypeCategory,
+
         RecipeCategory recipeCategory,
         MenuCategory menuCategory,
         Garnish garnish
