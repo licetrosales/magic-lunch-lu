@@ -1,57 +1,21 @@
 import {Ingredient} from "./Ingredient";
 
 export type Recipe = {
-    id: string;
-    name: string;
-    mealType: MealType;
-    source: string;
-    image: string
-    ingredients: Ingredient[];
-    prepTime: string;
-    preparation: string;
-    portions: number;
-    favorite: boolean;
-    dishTypeCategory: DishTypeCategory;
-
-    recipeCategory: RecipeCategory;
-    menuCategory: MenuCatefory;
-    garnish: Garnish;
+    id?: string,
+    name: string,
+    mealType?: "BREAKFAST"|"LUNCH"|"DINNER",
+    source: string,
+    image: string,
+    ingredients?: Ingredient[],
+    prepTime: string,
+    preparation: string,
+    portions: number,
+    favorite: boolean,
+    dishTypeCategory?: "VEGGIE"|"MEAT"|"PASTA"|"FISH"|"NICHTS",
+    recipeCategory?:"SALAT"|"APPETIZERS"|"SOUPS"|"LOW_CARB"|"HIGH_PROTEIN",
+    menuCategory?: "ENTREE"|"MAIN_COURSE"|"DESSERT"|"SNACK",
+    garnish?: string
 }
 
-export enum MealType {
-    BREAKFAST = "BREAKFAST",
-    LUNCH = "LUNCH",
-    DINNER = "DINNER"
-}
 
-export enum DishTypeCategory {
-    VEGGIE = "VEGGIE",
-    MEAT = "MEAT",
-    PASTA = "PASTA",
-    FISH = "FISH",
-    NICHTS = "NICHTS"
-}
 
-export enum RecipeCategory {
-    SALAT = "SALAT",
-    APPETIZERS = "APPETIZERS",
-    SOUPS = "SOUPS",
-    LOW_CARB = "LOW CARB",
-    HIHG_PROTEIN = "HIGH PROTEIN"
-}
-
-export enum MenuCatefory {
-    ENTREE = "ENTREE",
-    MAIN_COURSE = "MAIN COURSE",
-    DESSERT = "DESSET",
-    SNACK = "SNACK"
-}
-
-export enum Garnish {
-    GRILLED_VEGETABLES = "GRILLED VEGETABLES",
-    GARLIC_MASHED_CAULIFLOWER = "GARLIC MASHED CAULIFLOWER",
-    CLASSIC_GREEN_BEAN_CASSEROLE = "CLASSIC GREEN BEAN CASSEROLE",
-    CHEESY_POTATO_CASSEROLE = "CHEESY POTATO CASSEROLE",
-    GREEN_SALAD = "GREEN SALAD",
-    LEMON_PARMESAN_ROASTED_BROCCOLI = "LEMON PARMESAN ROASTED BROCCOLI"
-}

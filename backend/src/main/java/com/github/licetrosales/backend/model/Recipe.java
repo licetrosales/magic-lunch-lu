@@ -7,7 +7,7 @@ import java.util.List;
 @With
 
 public record Recipe(
-       // @Id
+        // @Id
         String id,
         String name,
         MealType mealType,
@@ -19,9 +19,8 @@ public record Recipe(
         int portions,
         Boolean favorite,
         DishTypeCategory dishTypeCategory,
-
         RecipeCategory recipeCategory,
         MenuCategory menuCategory,
-        Garnish garnish
+        String garnish
 ) {
 }

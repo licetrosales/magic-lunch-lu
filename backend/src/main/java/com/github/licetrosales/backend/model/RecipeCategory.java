@@ -5,5 +5,5 @@ public enum RecipeCategory {
     APPETIZERS,
     SOUPS,
     LOW_CARB,
-    HIHG_PROTEIN
+    HIGH_PROTEIN
 }
