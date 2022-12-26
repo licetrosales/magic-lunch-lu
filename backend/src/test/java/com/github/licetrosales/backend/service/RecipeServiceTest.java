@@ -28,14 +28,16 @@ class RecipeServiceTest {
     List<Ingredient> ingredients =  Collections.emptyList();
     String prepTime = "30 min,";
     String preparation = "Anweisungen eintragen";
-    DishTypeCategory dishTypeCategory = DishTypeCategory.FISH;
+
     int portions = 2;
+    boolean favorite = true;
+    DishTypeCategory dishTypeCategory = DishTypeCategory.FISH;
     RecipeCategory recipeCategory = RecipeCategory.LOW_CARB;
     MenuCategory menuCategory = MenuCategory.MAIN_COURSE;
-    Garnish garnish = Garnish.GREEN_SALAD;
+    String garnish = "Salat";
 
     Recipe recipeTest = new Recipe(recipeId, name, mealType, source, image,
-            ingredients, prepTime, preparation, dishTypeCategory, portions,
+            ingredients, prepTime, preparation, portions, favorite, dishTypeCategory,
             recipeCategory, menuCategory, garnish);
 
     @Test
