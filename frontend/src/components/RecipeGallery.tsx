@@ -8,7 +8,7 @@ type RecipeGalleryProps = {
 export default function RecipeGallery(props: RecipeGalleryProps) {
 
     const recipeItemComponents = props.recipesToMap.map(recipeShortInfo => {
-        return <RecipeCardGalleryView recipeToDisplay={recipeShortInfo}/>
+        return <RecipeCardGalleryView recipeToDisplay={recipeShortInfo} key={recipeShortInfo.id}/>
     })
     return (
         <section>
