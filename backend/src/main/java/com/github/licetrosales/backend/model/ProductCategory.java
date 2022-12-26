@@ -6,9 +6,9 @@ public enum ProductCategory {
     CANNED_JARED_GOODS,
     DAIRY,
     PRODUCE,
-    DRY_BACKINGGOODS,
+    DRY_BACKING_GOODS,
     FROZEN_FOODS,
     MEAT,
-    OTHERS,
-    PERSONAL_CARE
+    PERSONAL_CARE,
+    OTHERS
 }
