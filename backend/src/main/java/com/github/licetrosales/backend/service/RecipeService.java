@@ -17,13 +17,13 @@ public class RecipeService {
         this.idRecipeService = idRecipeService;
     }
    public List<Recipe> getAllRecipes(){
-    return recipeRepo.getAllRecipes();
+    return recipeRepo.findAll();
    }
 
     public Recipe addRecipe(Recipe recipe){
         String id = idRecipeService.generateId();
         Recipe newRecipeWithId = recipe.withId(id);
-        return recipeRepo.addRecipe(newRecipeWithId);
+        return recipeRepo.save(newRecipeWithId);
     }
 
 }
