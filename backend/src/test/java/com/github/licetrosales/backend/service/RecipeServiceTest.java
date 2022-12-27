@@ -42,20 +42,20 @@ class RecipeServiceTest {
 
     @Test
     void getAllRecipes_shouldReturnEmptyList_whenRecipeGalleryIsEmpty(){
-        when(recipeRepo.getAllRecipes())
+        when(recipeRepo.findAll())
                 .thenReturn(Collections.emptyList());
         List<Recipe> result = recipeService.getAllRecipes();
-        verify(recipeRepo).getAllRecipes();
+        verify(recipeRepo).findAll();
         assertEquals(Collections.emptyList(), result);
 
     }
 
     @Test
     void getAllRecipes_shouldReturnOneRecipe_whenOneRecipeIsInRecipeGallery (){
-        when(recipeRepo.getAllRecipes())
+        when(recipeRepo.findAll())
                 .thenReturn(Collections.singletonList(recipeTest));
         List<Recipe> result = recipeService.getAllRecipes();
-        verify(recipeRepo).getAllRecipes();
+        verify(recipeRepo).findAll();
         Assertions.assertThat(result).containsExactly(recipeTest);
 
     }
@@ -64,10 +64,10 @@ class RecipeServiceTest {
 
 
         when(idRecipeService.generateId()).thenReturn("testId1");
-        when(recipeRepo.addRecipe(recipeTest)).thenReturn(recipeTest);
+        when(recipeRepo.save(recipeTest)).thenReturn(recipeTest);
 
         Recipe result = recipeService.addRecipe(recipeTest);
-        verify(recipeRepo).addRecipe(recipeTest);
+        verify(recipeRepo).save(recipeTest);
         assertEquals(recipeTest, result);
     }
 
