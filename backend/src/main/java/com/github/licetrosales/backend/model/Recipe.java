@@ -4,6 +4,7 @@ import lombok.With;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Collections;
 import java.util.List;
 
 @With
@@ -25,4 +26,12 @@ public record Recipe(
         MenuCategory menuCategory,
         String garnish
 ) {
+        Recipe(
+                String name,
+                MealType mealType,
+                String source
+        ) {
+                this(null, name, mealType, source, null, Collections.emptyList(), null, null, 0, null,null, null, null, null);
+        }
+
 }
