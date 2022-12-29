@@ -1,6 +1,7 @@
-import {Button, TextField} from "@mui/material";
+import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField} from "@mui/material";
 import {ChangeEvent, FormEvent, FormEventHandler, useEffect, useState} from "react";
 import {Recipe} from "../model/Recipe";
+import IngredientList from "./IngredientList";
 
 type CreateRecipeProps = {
     handleCreateRecipe(newRecipe: Recipe): void
@@ -20,7 +21,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
     const emptyNewRecipeForm: NewRecipeType = {
 
         name: "",
-       // mealType: "LUNCH",
+        // mealType: "LUNCH",
         source: "",
         image: "",
         //ingredients: [],
@@ -35,9 +36,18 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
 
     }
     const [newRecipe, setNewRecipe] = useState<NewRecipeType>(emptyNewRecipeForm)
+    const [open, setOpen] = useState<boolean>(false)
     useEffect(() => {
         console.log(newRecipe)
     }, [newRecipe])
+
+    function handleOpen() {
+        setOpen(true)
+    }
+
+    function handleClose() {
+        setOpen(false)
+    }
 
     function handleFormChange(event: ChangeEvent<HTMLInputElement>) {
         const fieldName = event.target.name
@@ -48,7 +58,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
             {
                 ...prevNewRecipe,
                 [fieldName]: fieldType === "checkbox"
-                ? event.target.checked
+                    ? event.target.checked
                     : fieldValue
             }
 
@@ -62,77 +72,90 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
     }
 
     return (
-        <section>
-            <form onSubmit={handleCreateRecipeSubmit}>
-                <label>
-                    Name:
-                    <input
-                        type={"text"}
-                        name={"name"}
-                        value={newRecipe.name}
-                        onChange={handleFormChange}
+        <div>
+            <Button onClick={handleOpen}>Neues Rezept</Button>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Neues Rezept</DialogTitle>
+                <DialogContent>
+                    <form onSubmit={handleCreateRecipeSubmit}>
+                        <label>
+                            Name:
+                            <input
+                                type={"text"}
+                                name={"name"}
+                                value={newRecipe.name}
+                                onChange={handleFormChange}
 
-                    />
-                </label><br/>
-                <label>
-                    Upload image
-                    <input
-                        type={"text"}
-                        name={"image"}
-                        value={newRecipe.image}
-                        onChange={handleFormChange}
+                            />
+                        </label><br/>
+                        <label>
+                            Upload image
+                            <input
+                                type={"text"}
+                                name={"image"}
+                                value={newRecipe.image}
+                                onChange={handleFormChange}
 
-                    />
-                </label><br/>
-                <label>
-                    Quelle:
-                    <input
-                        type={"text"}
-                        name={"source"}
-                        value={newRecipe.source}
-                        onChange={handleFormChange}
-                    />
-                </label><br/>
-                <label>
-                    Kochzeit :
-                    <input
-                        type={"text"}
-                        name={"prepTime"}
-                        value={newRecipe.prepTime}
-                        onChange={handleFormChange}
-                    />
-                </label><br/>
-                <label>
-                    Portions:
-                    <input
-                        type={"number"}
-                        name={"portions"}
-                        value={newRecipe.portions}
-                        onChange={handleFormChange}
-                    />
-                </label><br/>
+                            />
+                        </label><br/>
+                        <label>
+                            Quelle:
+                            <input
+                                type={"text"}
+                                name={"source"}
+                                value={newRecipe.source}
+                                onChange={handleFormChange}
+                            />
+                        </label><br/>
+                        <label>
+                            Kochzeit :
+                            <input
+                                type={"text"}
+                                name={"prepTime"}
+                                value={newRecipe.prepTime}
+                                onChange={handleFormChange}
+                            />
+                        </label><br/>
+                        <label>
+                            Portions:
+                            <input
+                                type={"number"}
+                                name={"portions"}
+                                value={newRecipe.portions}
+                                onChange={handleFormChange}
+                            />
+                        </label><br/>
 
-                <label>
-                    Preparation:
-                    <TextField placeholder={"Preparation"}
-                        type={"text"}
-                        name={"preparation"}
-                        value={newRecipe.preparation}
-                        onChange={handleFormChange}
-                    />
-                </label><br/>
-                <label>
-                    Favorite:
-                    <input
-                        type={"checkbox"}
-                         name ="favorite"
-                        checked={newRecipe.favorite}
-                        onChange={handleFormChange}
+                        <label>
+                            Preparation:
+                            <TextField placeholder={"Preparation"}
+                                       type={"text"}
+                                       name={"preparation"}
+                                       value={newRecipe.preparation}
+                                       onChange={handleFormChange}
+                            />
+                        </label><br/>
+                        <label>
+                            Favorite:
+                            <input
+                                type={"checkbox"}
+                                name="favorite"
+                                checked={newRecipe.favorite}
+                                onChange={handleFormChange}
 
-                    />
-                </label>
-                <Button type={"submit"} color={"success"}variant={"contained"}>Rezept speichern</Button>
-            </form>
-        </section>
+                            />
+                        </label>
+                        <IngredientList/>
+                        <Button type={"submit"} color={"success"} variant={"contained"}>Rezept speichern</Button>
+                    </form>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>
+                        Cancel
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+        </div>
     )
 }

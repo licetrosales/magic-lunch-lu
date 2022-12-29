@@ -83,7 +83,7 @@ export default function AddItem(props: AddItemProps){
                       Cancel
                   </Button>
                   <Button onClick={handleAddItem}>
-                      Add
+                      Speichern
                   </Button>
               </DialogActions>
           </Dialog>
