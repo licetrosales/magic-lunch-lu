@@ -15,13 +15,13 @@ export default function IngredientList() {
     return (
         <div className="Ingridient-list">
             <Container>
-                <AppBar>
+                {/*<AppBar>
                     <Toolbar>
                         <Typography variant={"h6"}>
                             Zutaten
                         </Typography>
                     </Toolbar>
-                </AppBar>
+                </AppBar>*/}
                 <AddItem handleAddItem={addItem}/>
             </Container>
         </div>
