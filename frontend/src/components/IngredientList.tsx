@@ -1,5 +1,6 @@
-import {AppBar, Container, Toolbar, Typography} from "@mui/material";
+import {AppBar, Container, ListItem, ListItemText, Stack, Toolbar, Typography} from "@mui/material";
 import {useState} from "react";
+import List from "@mui/material/List"
 import {Ingredient} from "../model/Ingredient";
 import AddItem from "./AddItem";
 
@@ -9,7 +10,8 @@ export default function IngredientList() {
 
     function addItem(item: Ingredient) {
         setItems(prevItems => {
-            return [item, ...prevItems]})
+            return [item, ...prevItems]
+        })
     }
 
     return (
@@ -22,7 +24,19 @@ export default function IngredientList() {
                         </Typography>
                     </Toolbar>
                 </AppBar>*/}
-                <AddItem handleAddItem={addItem}/>
+                <Stack alignItems={"center"}>
+                    <AddItem handleAddItem={addItem}/>
+                    <List>{
+                        items.map((item, index) =>
+                            <ListItem key={index} divider>
+                                <ListItemText
+                                    primary={item.quantity + " " + item.nameItem}
+                                />
+                            </ListItem>
+                        )
+                    }
+                    </List>
+                </Stack>
             </Container>
         </div>
     )
