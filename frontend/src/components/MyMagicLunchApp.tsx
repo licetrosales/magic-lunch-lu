@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {Recipe} from "../model/Recipe";
 import axios from "axios";
 import CreateRecipeForm from "./CreateRecipeForm";
+import IngredientList from "./IngredientList";
 
 export default function MyMagicLunchApp() {
 
@@ -40,6 +41,7 @@ export default function MyMagicLunchApp() {
             <h1>Meine Rezepte</h1>
             <RecipeGallery recipesToMap={recipes}/>
             <CreateRecipeForm handleCreateRecipe={addRecipe}/>
+            <IngredientList/>
         </section>
     )
 
