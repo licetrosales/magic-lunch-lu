@@ -1,9 +1,10 @@
 import {Ingredient} from "./Ingredient";
+import exp from "constants";
 
 export type Recipe = {
     id?: string,
     name: string,
-    mealType?: "BREAKFAST"|"LUNCH"|"DINNER",
+    mealType?: MealType,
     source: string,
     image: string,
     ingredients?: Ingredient[],
@@ -25,6 +26,12 @@ export type NewRecipe = {
     preparation: string,
     portions: number
     favorite: boolean
+}
+
+export enum MealType {
+    BREAKFAST="BREAKFAST",
+    LUNCH= "LUNCH",
+    DINNER= "DINNER"
 }
 
 

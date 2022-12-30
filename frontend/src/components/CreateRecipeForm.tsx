@@ -1,6 +1,16 @@
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField} from "@mui/material";
-import {ChangeEvent, FormEvent, FormEventHandler, useEffect, useState} from "react";
-import {NewRecipe, Recipe} from "../model/Recipe";
+import {
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    MenuItem,
+    Select,
+    SelectChangeEvent,
+    TextField
+} from "@mui/material";
+import {ChangeEvent, FormEvent, useEffect, useState} from "react";
+import {MealType, NewRecipe, Recipe} from "../model/Recipe";
 import IngredientList from "./IngredientList";
 
 type CreateRecipeProps = {
@@ -9,10 +19,10 @@ type CreateRecipeProps = {
 
 
 export default function CreateRecipeForm(props: CreateRecipeProps) {
-    const emptyNewRecipeForm: NewRecipe = {
+    const emptyNewRecipeForm: Recipe = {
 
         name: "",
-        // mealType: "LUNCH",
+        mealType: MealType.LUNCH,
         source: "",
         image: "",
         //ingredients: [],
@@ -26,7 +36,9 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
         //garnish: Garnish.GREEN_SALAD
 
     }
-    const [newRecipe, setNewRecipe] = useState<NewRecipe>(emptyNewRecipeForm)
+    const [newRecipe, setNewRecipe] = useState<Recipe>(emptyNewRecipeForm)
+    const [mealType, setMealType] = useState<MealType>(MealType.LUNCH)
+
     const [open, setOpen] = useState<boolean>(false)
     useEffect(() => {
         console.log(newRecipe)
@@ -55,7 +67,9 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
 
         )))
     }
-
+function onMealTypeChange(event: SelectChangeEvent){
+        setMealType(event.target.value as MealType)
+}
     function handleCreateRecipeSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         props.handleCreateRecipe(newRecipe)
@@ -70,18 +84,17 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                 <DialogContent>
                     <form onSubmit={handleCreateRecipeSubmit}>
                         <label>
-                            Name:
-                            <input
+                            <TextField
+                                label={"name"}
                                 type={"text"}
                                 name={"name"}
                                 value={newRecipe.name}
                                 onChange={handleFormChange}
-
                             />
                         </label><br/>
                         <label>
-                            Upload image
-                            <input
+                            <TextField
+                                label={"upload Bild"}
                                 type={"text"}
                                 name={"image"}
                                 value={newRecipe.image}
@@ -90,8 +103,21 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             />
                         </label><br/>
                         <label>
-                            Quelle:
-                            <input
+                            <Select
+                            value={newRecipe.mealType}
+                            label="MealType"
+                            onChange={onMealTypeChange}
+                            >
+                                <MenuItem value={MealType.BREAKFAST}>Frühstück</MenuItem>
+                                <MenuItem value={MealType.LUNCH}>Mittagessen</MenuItem>
+                                <MenuItem value={MealType.DINNER}>Abendessen</MenuItem>
+
+                            </Select>
+                        </label><br/>
+
+                        <label>
+                            <TextField
+                                label={"Quelle"}
                                 type={"text"}
                                 name={"source"}
                                 value={newRecipe.source}
@@ -99,8 +125,8 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             />
                         </label><br/>
                         <label>
-                            Kochzeit :
-                            <input
+                            <TextField
+                                label={"Kochzeit"}
                                 type={"text"}
                                 name={"prepTime"}
                                 value={newRecipe.prepTime}
@@ -108,8 +134,9 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             />
                         </label><br/>
                         <label>
-                            Portions:
-                            <input
+
+                            <TextField
+                                label={"Portion"}
                                 type={"number"}
                                 name={"portions"}
                                 value={newRecipe.portions}
@@ -118,8 +145,8 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                         </label><br/>
 
                         <label>
-                            Preparation:
-                            <TextField placeholder={"Preparation"}
+
+                            <TextField label={"Zubereitung"}
                                        type={"text"}
                                        name={"preparation"}
                                        value={newRecipe.preparation}
