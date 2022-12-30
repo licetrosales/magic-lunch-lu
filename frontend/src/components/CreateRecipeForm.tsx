@@ -146,12 +146,16 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             />
                         </label>
                         <IngredientList/>
-                        <Button type={"submit"} color={"success"} variant={"contained"}>Rezept speichern</Button>
+
+                        <Button type={"submit"} color={"success"} variant={"contained"}>Bestätigen</Button>
                     </form>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>
                         Cancel
+                    </Button>
+                    <Button onClick={handleClose}>
+                        Rezept speichern
                     </Button>
                 </DialogActions>
             </Dialog>
