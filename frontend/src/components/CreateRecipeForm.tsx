@@ -1,24 +1,15 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField} from "@mui/material";
 import {ChangeEvent, FormEvent, FormEventHandler, useEffect, useState} from "react";
-import {Recipe} from "../model/Recipe";
+import {NewRecipe, Recipe} from "../model/Recipe";
 import IngredientList from "./IngredientList";
 
 type CreateRecipeProps = {
     handleCreateRecipe(newRecipe: Recipe): void
 }
 
-export type NewRecipeType = {
 
-    name: string,
-    source: string,
-    image: string,
-    prepTime: string,
-    preparation: string,
-    portions: number
-    favorite: boolean
-}
 export default function CreateRecipeForm(props: CreateRecipeProps) {
-    const emptyNewRecipeForm: NewRecipeType = {
+    const emptyNewRecipeForm: NewRecipe = {
 
         name: "",
         // mealType: "LUNCH",
@@ -35,7 +26,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
         //garnish: Garnish.GREEN_SALAD
 
     }
-    const [newRecipe, setNewRecipe] = useState<NewRecipeType>(emptyNewRecipeForm)
+    const [newRecipe, setNewRecipe] = useState<NewRecipe>(emptyNewRecipeForm)
     const [open, setOpen] = useState<boolean>(false)
     useEffect(() => {
         console.log(newRecipe)
@@ -152,10 +143,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>
-                        Cancel
-                    </Button>
-                    <Button onClick={handleClose}>
-                        Rezept speichern
+                        Schließen
                     </Button>
                 </DialogActions>
             </Dialog>

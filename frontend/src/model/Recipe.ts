@@ -16,6 +16,16 @@ export type Recipe = {
     menuCategory?: "ENTREE"|"MAIN_COURSE"|"DESSERT"|"SNACK",
     garnish?: string
 }
+export type NewRecipe = {
+
+    name: string,
+    source: string,
+    image: string,
+    prepTime: string,
+    preparation: string,
+    portions: number
+    favorite: boolean
+}
 
 
 
