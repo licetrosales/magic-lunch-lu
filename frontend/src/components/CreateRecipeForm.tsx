@@ -1,6 +1,6 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, TextField} from "@mui/material";
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
-import {MealType, NewRecipe, Recipe} from "../model/Recipe";
+import {DishTypeCategory, MealType, NewRecipe, Recipe} from "../model/Recipe";
 import IngredientList from "./IngredientList";
 import {findSourceMap} from "module";
 
@@ -29,6 +29,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
     }
     const [recipeWithoutEnums, setRecipeWithoutEnums] = useState<NewRecipe>(emptyRecipeFormWithoutEnums)
     const [mealType, setMealType] = useState<MealType|string>('')
+    const [dishTypeCategory, setDishTypeCategory] = useState<MealType|string>("")
 
     const [open, setOpen] = useState<boolean>(false)
 
@@ -58,6 +59,9 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
 function onMealTypeChange(event: ChangeEvent<HTMLInputElement>){
         setMealType(event.target.value as MealType)
 }
+    function onDishTypeCategoryChange(event: ChangeEvent<HTMLInputElement>){
+        setDishTypeCategory(event.target.value as DishTypeCategory)
+    }
 
     function handleCreateRecipeSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -71,12 +75,15 @@ function onMealTypeChange(event: ChangeEvent<HTMLInputElement>){
             preparation: recipeWithoutEnums.preparation,
             portions: recipeWithoutEnums.portions,
             favorite: recipeWithoutEnums.favorite,
-            //dishTypeCategory?: "VEGGIE"|"MEAT"|"PASTA"|"FISH"|"NICHTS",
+            dishTypeCategory: dishTypeCategory,
             //recipeCategory?:"SALAT"|"APPETIZERS"|"SOUPS"|"LOW_CARB"|"HIGH_PROTEIN",
             //menuCategory?: "ENTREE"|"MAIN_COURSE"|"DESSERT"|"SNACK",
             //garnish?: string
             })
         setRecipeWithoutEnums(emptyRecipeFormWithoutEnums)
+        setMealType("")
+        setDishTypeCategory("")
+
     }
     useEffect(() => {
 
@@ -154,6 +161,23 @@ function onMealTypeChange(event: ChangeEvent<HTMLInputElement>){
                                 onChange={handleFormChange}
                             />
                         </label> <br/>
+                        <TextField
+                            placeholder={"Wähl Speiseart"}
+                            select
+                            name={"dishTypeCategory"}
+                            value={dishTypeCategory}
+                            label="Speiseart"
+                            onChange={onDishTypeCategoryChange}
+                        >
+                            <MenuItem value={DishTypeCategory.VEGGIE}>Veggie</MenuItem>
+                            <MenuItem value={DishTypeCategory.MEAT}>Fleisch</MenuItem>
+                            <MenuItem value={DishTypeCategory.PASTA}>Psta</MenuItem>
+                            <MenuItem value={DishTypeCategory.FISH}>Fish</MenuItem>
+                            <MenuItem value={DishTypeCategory.NOTHING_TODAY}>Heute nichts</MenuItem>
+
+                        </TextField><br/>
+
+
                         <Button type={"submit"} color={"success"} variant={"contained"}>Bestätigen</Button>
                     </form>
                 </DialogContent>
