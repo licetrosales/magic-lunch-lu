@@ -12,7 +12,7 @@ export type Recipe = {
     preparation: string,
     portions: number,
     favorite: boolean,
-    dishTypeCategory?: "VEGGIE"|"MEAT"|"PASTA"|"FISH"|"NICHTS",
+    dishTypeCategory?: DishTypeCategory|string,
     recipeCategory?:"SALAT"|"APPETIZERS"|"SOUPS"|"LOW_CARB"|"HIGH_PROTEIN",
     menuCategory?: "ENTREE"|"MAIN_COURSE"|"DESSERT"|"SNACK",
     garnish?: string
@@ -33,6 +33,14 @@ export enum MealType {
     LUNCH= "LUNCH",
     DINNER= "DINNER",
 
+}
+
+export enum DishTypeCategory {
+    VEGGIE="VEGGIE",
+    MEAT="FLEISCH",
+    PASTA="PASTA",
+    FISH="FISCH",
+    NOTHING_TODAY="NICHTS"
 }
 
 
