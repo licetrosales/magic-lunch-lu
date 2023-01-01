@@ -1,17 +1,8 @@
-import {
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    MenuItem,
-    Select,
-    SelectChangeEvent,
-    TextField
-} from "@mui/material";
+import {Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, TextField} from "@mui/material";
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {MealType, NewRecipe, Recipe} from "../model/Recipe";
 import IngredientList from "./IngredientList";
+import {findSourceMap} from "module";
 
 type CreateRecipeProps = {
     handleCreateRecipe(newRecipe: Recipe): void
@@ -19,10 +10,10 @@ type CreateRecipeProps = {
 
 
 export default function CreateRecipeForm(props: CreateRecipeProps) {
-    const emptyNewRecipeForm: Recipe = {
+    const emptyRecipeFormWithoutEnums: NewRecipe = {
 
         name: "",
-        mealType: MealType.LUNCH,
+        //mealType: MealType.BREAKFAST,
         source: "",
         image: "",
         //ingredients: [],
@@ -36,13 +27,10 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
         //garnish: Garnish.GREEN_SALAD
 
     }
-    const [newRecipe, setNewRecipe] = useState<Recipe>(emptyNewRecipeForm)
-    const [mealType, setMealType] = useState<MealType>(MealType.LUNCH)
+    const [recipeWithoutEnums, setRecipeWithoutEnums] = useState<NewRecipe>(emptyRecipeFormWithoutEnums)
+    const [mealType, setMealType] = useState<MealType|string>('')
 
     const [open, setOpen] = useState<boolean>(false)
-    useEffect(() => {
-        console.log(newRecipe)
-    }, [newRecipe])
 
     function handleOpen() {
         setOpen(true)
@@ -57,7 +45,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
         const fieldValue = event.target.value
         const fieldType = event.target.type
 
-        setNewRecipe((prevNewRecipe => (
+        setRecipeWithoutEnums((prevNewRecipe => (
             {
                 ...prevNewRecipe,
                 [fieldName]: fieldType === "checkbox"
@@ -67,14 +55,32 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
 
         )))
     }
-function onMealTypeChange(event: SelectChangeEvent){
+function onMealTypeChange(event: ChangeEvent<HTMLInputElement>){
         setMealType(event.target.value as MealType)
 }
+
     function handleCreateRecipeSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        props.handleCreateRecipe(newRecipe)
-        setNewRecipe(emptyNewRecipeForm)
+        props.handleCreateRecipe({
+            name: recipeWithoutEnums.name,
+            mealType: mealType,
+            source: recipeWithoutEnums.source,
+            image:recipeWithoutEnums.image,
+            ingredients:[],
+            prepTime: recipeWithoutEnums.prepTime,
+            preparation: recipeWithoutEnums.preparation,
+            portions: recipeWithoutEnums.portions,
+            favorite: recipeWithoutEnums.favorite,
+            //dishTypeCategory?: "VEGGIE"|"MEAT"|"PASTA"|"FISH"|"NICHTS",
+            //recipeCategory?:"SALAT"|"APPETIZERS"|"SOUPS"|"LOW_CARB"|"HIGH_PROTEIN",
+            //menuCategory?: "ENTREE"|"MAIN_COURSE"|"DESSERT"|"SNACK",
+            //garnish?: string
+            })
+        setRecipeWithoutEnums(emptyRecipeFormWithoutEnums)
     }
+    useEffect(() => {
+
+    }, [recipeWithoutEnums])
 
     return (
         <div>
@@ -83,88 +89,71 @@ function onMealTypeChange(event: SelectChangeEvent){
                 <DialogTitle>Neues Rezept</DialogTitle>
                 <DialogContent>
                     <form onSubmit={handleCreateRecipeSubmit}>
-                        <label>
                             <TextField
-                                label={"name"}
+                                label={"Name"}
+                                placeholder={"Rezeptename"}
                                 type={"text"}
                                 name={"name"}
-                                value={newRecipe.name}
+                                value={recipeWithoutEnums.name}
                                 onChange={handleFormChange}
                             />
-                        </label><br/>
-                        <label>
-                            <TextField
-                                label={"upload Bild"}
+                            <input
+                                placeholder={"upload Bild"}
                                 type={"text"}
                                 name={"image"}
-                                value={newRecipe.image}
+                                value={recipeWithoutEnums.image}
                                 onChange={handleFormChange}
-
-                            />
-                        </label><br/>
-                        <label>
-                            <Select
-                            value={newRecipe.mealType}
-                            label="MealType"
-                            onChange={onMealTypeChange}
+                            /><br/>
+                            <TextField
+                                placeholder={"Wähl Typ von Speise"}
+                                select
+                                name={"mealType"}
+                            value={mealType}
+                            label="Speisetyp"
+                                onChange={onMealTypeChange}
                             >
                                 <MenuItem value={MealType.BREAKFAST}>Frühstück</MenuItem>
                                 <MenuItem value={MealType.LUNCH}>Mittagessen</MenuItem>
                                 <MenuItem value={MealType.DINNER}>Abendessen</MenuItem>
 
-                            </Select>
-                        </label><br/>
-
-                        <label>
-                            <TextField
+                            </TextField><br/>
+                        <TextField
                                 label={"Quelle"}
                                 type={"text"}
                                 name={"source"}
-                                value={newRecipe.source}
+                                value={recipeWithoutEnums.source}
                                 onChange={handleFormChange}
-                            />
-                        </label><br/>
-                        <label>
-                            <TextField
+                            /><br/>
+                        <IngredientList/>
+                        <TextField
                                 label={"Kochzeit"}
                                 type={"text"}
                                 name={"prepTime"}
-                                value={newRecipe.prepTime}
+                                value={recipeWithoutEnums.prepTime}
                                 onChange={handleFormChange}
-                            />
-                        </label><br/>
-                        <label>
-
-                            <TextField
+                            /><br/>
+                        <TextField
                                 label={"Portion"}
                                 type={"number"}
                                 name={"portions"}
-                                value={newRecipe.portions}
+                                value={recipeWithoutEnums.portions}
                                 onChange={handleFormChange}
-                            />
-                        </label><br/>
-
-                        <label>
-
-                            <TextField label={"Zubereitung"}
+                            /><br/>
+                        <TextField label={"Zubereitung"}
                                        type={"text"}
                                        name={"preparation"}
-                                       value={newRecipe.preparation}
+                                       value={recipeWithoutEnums.preparation}
                                        onChange={handleFormChange}
-                            />
-                        </label><br/>
+                            /><br/>
                         <label>
                             Favorite:
                             <input
                                 type={"checkbox"}
                                 name="favorite"
-                                checked={newRecipe.favorite}
+                                checked={recipeWithoutEnums.favorite}
                                 onChange={handleFormChange}
-
                             />
-                        </label>
-                        <IngredientList/>
-
+                        </label> <br/>
                         <Button type={"submit"} color={"success"} variant={"contained"}>Bestätigen</Button>
                     </form>
                 </DialogContent>

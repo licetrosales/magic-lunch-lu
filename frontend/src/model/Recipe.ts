@@ -4,7 +4,7 @@ import exp from "constants";
 export type Recipe = {
     id?: string,
     name: string,
-    mealType?: MealType,
+    mealType: MealType|string,
     source: string,
     image: string,
     ingredients?: Ingredient[],
@@ -31,7 +31,8 @@ export type NewRecipe = {
 export enum MealType {
     BREAKFAST="BREAKFAST",
     LUNCH= "LUNCH",
-    DINNER= "DINNER"
+    DINNER= "DINNER",
+
 }
 
 
