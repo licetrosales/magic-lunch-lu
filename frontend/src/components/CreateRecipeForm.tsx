@@ -21,10 +21,10 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
         preparation: "",
         //dishTypeCategory: DishTypeCategory.VEGGIE,
         portions: 1,
-        favorite: false
+        favorite: false,
         //recipeCategory: RecipeCategory.LOW_CARB,
         //menuCategory: MenuCatefory.MAIN_COURSE,
-        //garnish: Garnish.GREEN_SALAD
+        garnish: ""
 
     }
     const [recipeWithoutEnums, setRecipeWithoutEnums] = useState<NewRecipe>(emptyRecipeFormWithoutEnums)
@@ -70,9 +70,11 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
     function onRecipeCategoryChange(event: ChangeEvent<HTMLInputElement>) {
         setRecipeCategory(event.target.value as RecipeCategory)
     }
+
     function onMenuCategoryChange(event: ChangeEvent<HTMLInputElement>) {
         setMenuCategory(event.target.value as MenuCategory)
     }
+
     function handleCreateRecipeSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         props.handleCreateRecipe({
@@ -88,7 +90,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
             dishTypeCategory: dishTypeCategory,
             recipeCategory: recipeCategory,
             menuCategory: menuCategory,
-            //garnish?: string
+            garnish: recipeWithoutEnums.garnish
         })
         setRecipeWithoutEnums(emptyRecipeFormWithoutEnums)
         setMealType('')
@@ -187,7 +189,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             <MenuItem value={DishTypeCategory.FISH}>Fish</MenuItem>
                             <MenuItem value={DishTypeCategory.NOTHING_TODAY}>Heute nichts</MenuItem>
 
-                        </TextField><br/>
+                        </TextField>
                         <TextField
                             placeholder={"Wähl Typ von Recipe"}
                             select
@@ -202,7 +204,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             <MenuItem value={RecipeCategory.LOW_CARB}>Low carb</MenuItem>
                             <MenuItem value={RecipeCategory.HIGH_PROTEIN}>High protein</MenuItem>
 
-                        </TextField><br/>
+                        </TextField>
                         <TextField
                             placeholder={"Wähl ...."}
                             select
@@ -216,6 +218,14 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             <MenuItem value={MenuCategory.DESSERT}>Nachspeise</MenuItem>
                             <MenuItem value={MenuCategory.SNACK}>Snack</MenuItem>
                         </TextField><br/>
+                        <TextField
+                            label={"Garnish"}
+                            placeholder={"ccc"}
+                            type={"text"}
+                            name={"garnish"}
+                            value={recipeWithoutEnums.garnish}
+                            onChange={handleFormChange}
+                        /><br/>
 
                         <Button type={"submit"} color={"success"} variant={"contained"}>Bestätigen</Button>
                     </form>
