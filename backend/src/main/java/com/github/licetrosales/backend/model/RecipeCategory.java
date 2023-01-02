@@ -1,9 +1,9 @@
 package com.github.licetrosales.backend.model;
 
 public enum RecipeCategory {
-    SALAT,
-    APPETIZERS,
-    SOUPS,
+    SALAD,
+    APPETIZER,
+    SOUP,
     LOW_CARB,
     HIGH_PROTEIN
 }

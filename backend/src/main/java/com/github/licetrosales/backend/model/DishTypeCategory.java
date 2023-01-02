@@ -5,5 +5,5 @@ public enum DishTypeCategory {
     MEAT,
     PASTA,
     FISH,
-    NICHTS
+    NOTHING_TODAY
 }
