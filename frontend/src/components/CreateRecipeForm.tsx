@@ -28,10 +28,10 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
 
     }
     const [recipeWithoutEnums, setRecipeWithoutEnums] = useState<NewRecipe>(emptyRecipeFormWithoutEnums)
-    const [mealType, setMealType] = useState<MealType | string>('')
-    const [dishTypeCategory, setDishTypeCategory] = useState<DishTypeCategory | string>('')
-    const [recipeCategory, setRecipeCategory] = useState<RecipeCategory | string>('')
-    const [menuCategory, setMenuCategory] = useState<MenuCategory | string>('')
+    const [mealType, setMealType] = useState<MealType | string>(MealType.LUNCH)
+    const [dishTypeCategory, setDishTypeCategory] = useState<DishTypeCategory | string>(DishTypeCategory.VEGGIE)
+    const [recipeCategory, setRecipeCategory] = useState<RecipeCategory | string>(RecipeCategory.LOW_CARB)
+    const [menuCategory, setMenuCategory] = useState<MenuCategory | string>(MenuCategory.MAIN_COURSE)
 
     const [open, setOpen] = useState<boolean>(false)
 
@@ -93,10 +93,10 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
             garnish: recipeWithoutEnums.garnish
         })
         setRecipeWithoutEnums(emptyRecipeFormWithoutEnums)
-        setMealType('')
-        setDishTypeCategory('')
-        setRecipeCategory('')
-        setMenuCategory('')
+        setMealType(MealType.LUNCH)
+        setDishTypeCategory(DishTypeCategory.VEGGIE)
+        setRecipeCategory(RecipeCategory.LOW_CARB)
+        setMenuCategory(MenuCategory.MAIN_COURSE)
     }
 
     useEffect(() => {
@@ -126,8 +126,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             onChange={handleFormChange}
                         /><br/>
                         <TextField
-                            placeholder={"Wähl Typ von Speise"}
-                            select
+                              select
                             name={"mealType"}
                             value={mealType}
                             label="Speisetyp"
@@ -199,7 +198,6 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             onChange={onRecipeCategoryChange}
                         >
                             <MenuItem value={RecipeCategory.SALAD}>Salat</MenuItem>
-                            <MenuItem value={RecipeCategory.APPETIZER}>Vorspeise</MenuItem>
                             <MenuItem value={RecipeCategory.SOUP}>Suppe</MenuItem>
                             <MenuItem value={RecipeCategory.LOW_CARB}>Low carb</MenuItem>
                             <MenuItem value={RecipeCategory.HIGH_PROTEIN}>High protein</MenuItem>
