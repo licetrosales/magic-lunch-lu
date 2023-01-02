@@ -162,6 +162,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                         <TextField label={"Zubereitung"}
                                    type={"text"}
                                    name={"preparation"}
+                                   multiline
                                    value={recipeWithoutEnums.preparation}
                                    onChange={handleFormChange}
                         /><br/>
@@ -221,6 +222,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             placeholder={"ccc"}
                             type={"text"}
                             name={"garnish"}
+                            multiline
                             value={recipeWithoutEnums.garnish}
                             onChange={handleFormChange}
                         /><br/>
