@@ -1,10 +1,10 @@
 import {Ingredient} from "./Ingredient";
-import exp from "constants";
+
 
 export type Recipe = {
     id?: string,
     name: string,
-    mealType: MealType|string,
+    mealType: MealType | string,
     source: string,
     image: string,
     ingredients?: Ingredient[],
@@ -12,9 +12,9 @@ export type Recipe = {
     preparation: string,
     portions: number,
     favorite: boolean,
-    dishTypeCategory?: DishTypeCategory|string,
-    recipeCategory?:"SALAT"|"APPETIZERS"|"SOUPS"|"LOW_CARB"|"HIGH_PROTEIN",
-    menuCategory?: "ENTREE"|"MAIN_COURSE"|"DESSERT"|"SNACK",
+    dishTypeCategory?: DishTypeCategory | string,
+    recipeCategory?: RecipeCategory | string,
+    menuCategory?: MenuCategory | string,
     garnish?: string
 }
 export type NewRecipe = {
@@ -29,19 +29,32 @@ export type NewRecipe = {
 }
 
 export enum MealType {
-    BREAKFAST="BREAKFAST",
-    LUNCH= "LUNCH",
-    DINNER= "DINNER",
+    BREAKFAST = "BREAKFAST",
+    LUNCH = "LUNCH",
+    DINNER = "DINNER",
 
 }
 
 export enum DishTypeCategory {
-    VEGGIE="VEGGIE",
-    MEAT="FLEISCH",
-    PASTA="PASTA",
-    FISH="FISCH",
-    NOTHING_TODAY="NICHTS"
+    VEGGIE = "VEGGIE",
+    MEAT = "MEAT",
+    PASTA = "PASTA",
+    FISH = "FISH",
+    NOTHING_TODAY = "NOTHING_TODAY",
 }
 
+export enum RecipeCategory {
+    SALAD = "SALAD",
+    APPETIZER = "APPETIZER",
+    SOUP = "SOUP",
+    LOW_CARB = "LOW_CARB",
+    HIGH_PROTEIN = "HIGH_PROTEIN",
+}
+export enum MenuCategory {
+    ENTREE= "ENTREE",
+    MAIN_COURSE ="MAIN_COURSE",
+    DESSERT="DESSERT",
+    SNACK="SNACK",
+}
 
 

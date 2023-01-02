@@ -1,6 +1,6 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, TextField} from "@mui/material";
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
-import {DishTypeCategory, MealType, NewRecipe, Recipe, RecipeCategory} from "../model/Recipe";
+import {DishTypeCategory, MealType, MenuCategory, NewRecipe, Recipe, RecipeCategory} from "../model/Recipe";
 import IngredientList from "./IngredientList";
 
 
@@ -31,6 +31,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
     const [mealType, setMealType] = useState<MealType | string>('')
     const [dishTypeCategory, setDishTypeCategory] = useState<DishTypeCategory | string>('')
     const [recipeCategory, setRecipeCategory] = useState<RecipeCategory | string>('')
+    const [menuCategory, setMenuCategory] = useState<MenuCategory | string>('')
 
     const [open, setOpen] = useState<boolean>(false)
 
@@ -69,7 +70,9 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
     function onRecipeCategoryChange(event: ChangeEvent<HTMLInputElement>) {
         setRecipeCategory(event.target.value as RecipeCategory)
     }
-
+    function onMenuCategoryChange(event: ChangeEvent<HTMLInputElement>) {
+        setMenuCategory(event.target.value as MenuCategory)
+    }
     function handleCreateRecipeSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         props.handleCreateRecipe({
@@ -84,14 +87,14 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
             favorite: recipeWithoutEnums.favorite,
             dishTypeCategory: dishTypeCategory,
             recipeCategory: recipeCategory,
-            //menuCategory?: "ENTREE"|"MAIN_COURSE"|"DESSERT"|"SNACK",
+            menuCategory: menuCategory,
             //garnish?: string
         })
         setRecipeWithoutEnums(emptyRecipeFormWithoutEnums)
         setMealType('')
         setDishTypeCategory('')
         setRecipeCategory('')
-
+        setMenuCategory('')
     }
 
     useEffect(() => {
@@ -193,14 +196,26 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             label="Speiseart"
                             onChange={onRecipeCategoryChange}
                         >
-                            <MenuItem value={RecipeCategory.SALAD}>Salad</MenuItem>
+                            <MenuItem value={RecipeCategory.SALAD}>Salat</MenuItem>
                             <MenuItem value={RecipeCategory.APPETIZER}>Vorspeise</MenuItem>
                             <MenuItem value={RecipeCategory.SOUP}>Suppe</MenuItem>
                             <MenuItem value={RecipeCategory.LOW_CARB}>Low carb</MenuItem>
                             <MenuItem value={RecipeCategory.HIGH_PROTEIN}>High protein</MenuItem>
 
                         </TextField><br/>
-
+                        <TextField
+                            placeholder={"Wähl ...."}
+                            select
+                            name={"menuCategory"}
+                            value={menuCategory}
+                            label="Speiseart"
+                            onChange={onMenuCategoryChange}
+                        >
+                            <MenuItem value={MenuCategory.ENTREE}>Vorspeise</MenuItem>
+                            <MenuItem value={MenuCategory.MAIN_COURSE}>Hauptspeise</MenuItem>
+                            <MenuItem value={MenuCategory.DESSERT}>Nachspeise</MenuItem>
+                            <MenuItem value={MenuCategory.SNACK}>Snack</MenuItem>
+                        </TextField><br/>
 
                         <Button type={"submit"} color={"success"} variant={"contained"}>Bestätigen</Button>
                     </form>
