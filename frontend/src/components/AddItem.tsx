@@ -58,7 +58,7 @@ export default function AddItem(props: AddItemProps) {
 
     return (
         <div>
-            <Button onClick={handleOpen}>Zutaten hizufügen</Button>
+            <Button onClick={handleOpen}>Zutat hizufügen</Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Neue Zutat</DialogTitle>
                 <DialogContent>
