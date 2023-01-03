@@ -1,17 +1,16 @@
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, TextField} from "@mui/material";
+import {Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, Stack, TextField} from "@mui/material";
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {DishTypeCategory, MealType, MenuCategory, NewRecipe, Recipe, RecipeCategory} from "../model/Recipe";
 import IngredientList from "./IngredientList";
+import {Ingredient} from "../model/Ingredient";
 
 
 type CreateRecipeProps = {
     handleCreateRecipe(newRecipe: Recipe): void
+
 }
-
-
 export default function CreateRecipeForm(props: CreateRecipeProps) {
     const emptyRecipeFormWithoutEnums: NewRecipe = {
-
         name: "",
         //mealType: MealType.BREAKFAST,
         source: "",
@@ -25,15 +24,15 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
         //recipeCategory: RecipeCategory.LOW_CARB,
         //menuCategory: MenuCatefory.MAIN_COURSE,
         garnish: ""
-
     }
+
     const [recipeWithoutEnums, setRecipeWithoutEnums] = useState<NewRecipe>(emptyRecipeFormWithoutEnums)
     const [mealType, setMealType] = useState<MealType | string>(MealType.LUNCH)
     const [dishTypeCategory, setDishTypeCategory] = useState<DishTypeCategory | string>(DishTypeCategory.VEGGIE)
     const [recipeCategory, setRecipeCategory] = useState<RecipeCategory | string>(RecipeCategory.LOW_CARB)
     const [menuCategory, setMenuCategory] = useState<MenuCategory | string>(MenuCategory.MAIN_COURSE)
-
     const [open, setOpen] = useState<boolean>(false)
+    const [items, setItems] = useState<Ingredient []>([])
 
     function handleOpen() {
         setOpen(true)
@@ -75,6 +74,11 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
         setMenuCategory(event.target.value as MenuCategory)
     }
 
+
+    function handleCallbackItems(childData: Ingredient[]) {
+        setItems(childData)
+    }
+
     function handleCreateRecipeSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         props.handleCreateRecipe({
@@ -82,7 +86,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
             mealType: mealType,
             source: recipeWithoutEnums.source,
             image: recipeWithoutEnums.image,
-            ingredients: [],
+            ingredients: items,
             prepTime: recipeWithoutEnums.prepTime,
             preparation: recipeWithoutEnums.preparation,
             portions: recipeWithoutEnums.portions,
@@ -111,26 +115,30 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                 <DialogContent>
                     <form onSubmit={handleCreateRecipeSubmit}>
                         <TextField
+                            type={"text"}
                             label={"Name"}
                             placeholder={"Rezeptename"}
-                            type={"text"}
                             name={"name"}
                             value={recipeWithoutEnums.name}
                             onChange={handleFormChange}
+                            margin={"dense"}
+                            fullWidth
                         />
                         <input
-                            placeholder={"Upload Bild"}
                             type={"text"}
+                            placeholder={"Upload Bild"}
                             name={"image"}
                             value={recipeWithoutEnums.image}
                             onChange={handleFormChange}
                         /><br/>
                         <TextField
-                              select
+                            select
+                            label="Speisetyp"
                             name={"mealType"}
                             value={mealType}
-                            label="Speisetyp"
                             onChange={onMealTypeChange}
+                            margin={"dense"}
+                            fullWidth
                         >
                             <MenuItem value={MealType.BREAKFAST}>Frühstück</MenuItem>
                             <MenuItem value={MealType.LUNCH}>Mittagessen</MenuItem>
@@ -138,34 +146,46 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
 
                         </TextField><br/>
                         <TextField
-                            label={"Quelle"}
                             type={"text"}
+                            label={"Quelle"}
                             name={"source"}
                             value={recipeWithoutEnums.source}
                             onChange={handleFormChange}
+                            margin={"dense"}
+                            fullWidth
                         /><br/>
-                        <IngredientList/>
+                        <label>Zutaten</label>
+                        <IngredientList handleCallbackItems={handleCallbackItems}/>
+
                         <TextField
-                            label={"Kochzeit"}
                             type={"text"}
+                            label={"Kochzeit"}
                             name={"prepTime"}
                             value={recipeWithoutEnums.prepTime}
                             onChange={handleFormChange}
+                            margin={"dense"}
+                            fullWidth
                         /><br/>
                         <TextField
-                            label={"Portion"}
                             type={"number"}
+                            label={"Portion"}
                             name={"portions"}
                             value={recipeWithoutEnums.portions}
                             onChange={handleFormChange}
+                            margin={"dense"}
+                            fullWidth
                         /><br/>
-                        <TextField label={"Zubereitung"}
-                                   type={"text"}
-                                   name={"preparation"}
-                                   multiline
-                                   value={recipeWithoutEnums.preparation}
-                                   onChange={handleFormChange}
+                        <TextField
+                            type={"text"}
+                            label={"Zubereitung"}
+                            name={"preparation"}
+                            multiline
+                            value={recipeWithoutEnums.preparation}
+                            onChange={handleFormChange}
+                            margin={"dense"}
+                            fullWidth
                         /><br/>
+
                         <label>
                             Favorite:
                             <input
@@ -175,13 +195,16 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                                 onChange={handleFormChange}
                             />
                         </label> <br/>
+
                         <TextField
-                            placeholder={"Wähl Speiseart"}
                             select
+                            label="Speiseart"
+                            placeholder={"Wähl Speiseart"}
                             name={"dishTypeCategory"}
                             value={dishTypeCategory}
-                            label="Speiseart"
                             onChange={onDishTypeCategoryChange}
+                            margin={"dense"}
+                            fullWidth
                         >
                             <MenuItem value={DishTypeCategory.VEGGIE}>Veggie</MenuItem>
                             <MenuItem value={DishTypeCategory.MEAT}>Fleisch</MenuItem>
@@ -191,12 +214,14 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
 
                         </TextField>
                         <TextField
-                            placeholder={"Wähl Typ von Recipe"}
                             select
+                            label="Speiseart"
+                            placeholder={"Wähl Typ von Recipe"}
                             name={"recipeCategory"}
                             value={recipeCategory}
-                            label="Speiseart"
                             onChange={onRecipeCategoryChange}
+                            margin={"dense"}
+                            fullWidth
                         >
                             <MenuItem value={RecipeCategory.SALAD}>Salat</MenuItem>
                             <MenuItem value={RecipeCategory.SOUP}>Suppe</MenuItem>
@@ -205,12 +230,14 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
 
                         </TextField>
                         <TextField
-                            placeholder={"Wähl ...."}
                             select
+                            label="Speiseart"
+                            placeholder={"Wähl ...."}
                             name={"menuCategory"}
                             value={menuCategory}
-                            label="Speiseart"
                             onChange={onMenuCategoryChange}
+                            margin={"dense"}
+                            fullWidth
                         >
                             <MenuItem value={MenuCategory.ENTREE}>Vorspeise</MenuItem>
                             <MenuItem value={MenuCategory.MAIN_COURSE}>Hauptspeise</MenuItem>
@@ -218,13 +245,15 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             <MenuItem value={MenuCategory.SNACK}>Snack</MenuItem>
                         </TextField><br/>
                         <TextField
+                            type={"text"}
                             label={"Garnish"}
                             placeholder={"ccc"}
-                            type={"text"}
                             name={"garnish"}
-                            multiline
                             value={recipeWithoutEnums.garnish}
                             onChange={handleFormChange}
+                            margin={"dense"}
+                            fullWidth
+                            multiline
                         /><br/>
 
                         <Button type={"submit"} color={"success"} variant={"contained"}>Bestätigen</Button>

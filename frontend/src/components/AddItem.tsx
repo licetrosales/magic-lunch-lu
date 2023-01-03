@@ -62,27 +62,29 @@ export default function AddItem(props: AddItemProps) {
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Neue Zutat</DialogTitle>
                 <DialogContent>
-                    <TextField value={itemWithoutEnums.itemName}
-                               margin={"dense"}
-                               onChange={handleChange}
-                               name={"itemName"}
-                               label="Name"
-                               fullWidth
+                    <TextField
+                        label="Name"
+                        name={"itemName"}
+                        value={itemWithoutEnums.itemName}
+                        onChange={handleChange}
+                        margin={"dense"}
+                        fullWidth
                     />
-                    <TextField value={itemWithoutEnums.quantity}
-                               margin={"dense"}
-                               onChange={handleChange}
-                               name={"quantity"}
-                               label={"Quantity"}
-                               fullWidth
+                    <TextField
+                        label={"Quantity"}
+                        name={"quantity"}
+                        value={itemWithoutEnums.quantity}
+                        onChange={handleChange}
+                        margin={"dense"}
+                        fullWidth
                     />
                     <TextField
                         select
+                        label={"Unit"}
                         name={"unit"}
                         value={unit}
-                        label={"Unit"}
+                        onChange={onUnitChange}
                         margin={"dense"}
-                               onChange={onUnitChange}
                         fullWidth
                     >
                         <MenuItem value={Unit.KG}>kg</MenuItem>
