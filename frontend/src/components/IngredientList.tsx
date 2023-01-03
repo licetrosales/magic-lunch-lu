@@ -33,7 +33,7 @@ function onTrigger(){
                     }
                     </List>
                     <AddItem handleAddItem={addItem}/>
-                    <Button onClick={onTrigger}>Zutat hinzufügen</Button>
+                    <Button onClick={onTrigger}>Zutaten hinzufügen</Button>
                 </Stack>
             </Container>
         </div>
