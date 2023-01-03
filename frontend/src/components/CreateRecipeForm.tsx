@@ -124,13 +124,19 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             margin={"dense"}
                             fullWidth
                         />
-                        <input
-                            type={"text"}
-                            placeholder={"Upload Bild"}
-                            name={"image"}
-                            value={recipeWithoutEnums.image}
-                            onChange={handleFormChange}
-                        /><br/>
+                        <Button variant={"contained"} component={"label"}>
+                            Hochladen
+                            <input
+                                hidden accept={"images/*"}
+                                multiple
+                                type={"file"}
+
+                                name={"image"}
+                                value={recipeWithoutEnums.image}
+                                onChange={handleFormChange}
+                            />
+                        </Button>
+                        <br/>
                         <TextField
                             select
                             label="Speisetyp"
