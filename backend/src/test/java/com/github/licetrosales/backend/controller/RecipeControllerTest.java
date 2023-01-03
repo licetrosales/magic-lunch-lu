@@ -3,6 +3,7 @@ package com.github.licetrosales.backend.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.licetrosales.backend.model.Recipe;
 import com.github.licetrosales.backend.repo.RecipeRepo;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -20,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @SpringBootTest
+
 class RecipeControllerTest {
     @Autowired
     MockMvc mockMvc;
@@ -28,8 +30,11 @@ class RecipeControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
+
     @Test
+
     @DirtiesContext
+
     void getAllRecipes_shouldReturnEmptyList_whenGalleryisEmpty() throws Exception {
         mockMvc.perform(get("/api/users/userId/recipes"))
                 .andExpect(status().isOk())
@@ -43,7 +48,9 @@ class RecipeControllerTest {
 
 
     @Test
+
     @DirtiesContext
+
     void addRecipe_shouldReturnRecipeSendeWithPost_whenPostRequestIsSuccessful() throws Exception {
         MvcResult response = mockMvc.perform(post("/api/users/userId/recipes")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -80,4 +87,6 @@ class RecipeControllerTest {
         Recipe expected = new Recipe(result.id(), result.name(), result.mealType(), result.source(), result.image(), result.ingredients(), result.prepTime(), result.preparation(), result.portions(), result.favorite(), result.dishTypeCategory(), result.recipeCategory(), result.menuCategory(), result.garnish());
         assertEquals(expected, result);
     }
+
+
 }

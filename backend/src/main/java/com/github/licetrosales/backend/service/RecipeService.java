@@ -11,16 +11,18 @@ import java.util.List;
 public class RecipeService {
     private final RecipeRepo recipeRepo;
     private final IdRecipeService idRecipeService;
-@Autowired
-    public RecipeService(RecipeRepo recipeRepo, IdRecipeService idRecipeService){
+
+    @Autowired
+    public RecipeService(RecipeRepo recipeRepo, IdRecipeService idRecipeService) {
         this.recipeRepo = recipeRepo;
         this.idRecipeService = idRecipeService;
     }
-   public List<Recipe> getAllRecipes(){
-    return recipeRepo.findAll();
-   }
 
-    public Recipe addRecipe(Recipe recipe){
+    public List<Recipe> getAllRecipes() {
+        return recipeRepo.findAll();
+    }
+
+    public Recipe addRecipe(Recipe recipe) {
         String id = idRecipeService.generateId();
         Recipe newRecipeWithId = recipe.withId(id);
         return recipeRepo.save(newRecipeWithId);
