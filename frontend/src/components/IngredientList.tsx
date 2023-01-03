@@ -21,26 +21,19 @@ function onTrigger(){
     return (
         <div className="Ingridient-list">
             <Container>
-                {/*<AppBar>
-                    <Toolbar>
-                        <Typography variant={"h6"}>
-                            Zutaten
-                        </Typography>
-                    </Toolbar>
-                </AppBar>*/}
                 <Stack alignItems={"left"}>
-                    <AddItem handleAddItem={addItem}/>
                     <List>{
                         items.map((item, index) =>
                             <ListItem key={index} divider>
                                 <ListItemText
-                                    primary={item.quantity + " " + item.itemName}
+                                    primary={item.quantity + " " + item.unit +" "+ item.itemName}
                                 />
                             </ListItem>
                         )
                     }
                     </List>
-                    <Button onClick={onTrigger}>Add Ingredients</Button>
+                    <AddItem handleAddItem={addItem}/>
+                    <Button onClick={onTrigger}>Zutat hinzufügen</Button>
                 </Stack>
             </Container>
         </div>
