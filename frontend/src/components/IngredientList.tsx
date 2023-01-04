@@ -1,4 +1,4 @@
-import {AppBar, Button, Container, ListItem, ListItemText, Stack, Toolbar, Typography} from "@mui/material";
+import {Button, Container, ListItem, ListItemText, Stack} from "@mui/material";
 import {useState} from "react";
 import List from "@mui/material/List"
 import {Ingredient} from "../model/Ingredient";
@@ -27,9 +27,10 @@ export default function IngredientList(props: IngredientListProps) {
                 <Stack alignItems={"left"}>
                     <List>{
                         items.map((item, index) =>
-                            <ListItem key={index} divider>
+                            <ListItem key={item.id} divider>
                                 <ListItemText
-                                    primary={item.quantity + " " + item.unit + " " + item.itemName}
+
+                                    primary={item.quantity + " " + item.unit + " " + item.name}
                                 />
                             </ListItem>
                         )

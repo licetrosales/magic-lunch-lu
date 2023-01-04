@@ -2,13 +2,10 @@ package com.github.licetrosales.backend.service;
 
 import com.github.licetrosales.backend.model.*;
 import com.github.licetrosales.backend.repo.RecipeRepo;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.util.Collections;
 import java.util.List;
-
-
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -18,13 +15,14 @@ class RecipeServiceTest {
 
     RecipeService recipeService = new RecipeService(recipeRepo, idRecipeService);
 
-    String recipeId = "testId1";
+    String id = "testId";
+    String idDay1 = "testIdDay1";
     String name = "Big Mac Salat";
     MealType mealType = MealType.LUNCH;
     String source = "GU";
-    String image = "./image";
+    String image = "./image.png";
     List<Ingredient> ingredients = Collections.emptyList();
-    String prepTime = "30 min,";
+    String prepTime = "30 min.";
     String preparation = "Anweisungen eintragen";
 
     int portions = 2;
@@ -34,7 +32,15 @@ class RecipeServiceTest {
     MenuCategory menuCategory = MenuCategory.MAIN_COURSE;
     String garnish = "Salat";
 
-    Recipe recipeTest = new Recipe(recipeId, name, mealType, source, image,
+
+    Recipe recipeTestWithoutId = new Recipe(null, name, mealType, source, image,
+            ingredients, prepTime, preparation, portions, favorite, dishTypeCategory,
+            recipeCategory, menuCategory, garnish);
+    Recipe recipeTestWithId = new Recipe(id, name, mealType, source, image,
+            ingredients, prepTime, preparation, portions, favorite, dishTypeCategory,
+            recipeCategory, menuCategory, garnish);
+
+    Recipe recipeTestWithIdDay1 = new Recipe(idDay1, name, mealType, source, image,
             ingredients, prepTime, preparation, portions, favorite, dishTypeCategory,
             recipeCategory, menuCategory, garnish);
 
@@ -42,7 +48,9 @@ class RecipeServiceTest {
     void getAllRecipes_shouldReturnEmptyList_whenRecipeGalleryIsEmpty() {
         when(recipeRepo.findAll())
                 .thenReturn(Collections.emptyList());
+
         List<Recipe> result = recipeService.getAllRecipes();
+
         verify(recipeRepo).findAll();
         assertEquals(Collections.emptyList(), result);
 
@@ -51,24 +59,38 @@ class RecipeServiceTest {
     @Test
     void getAllRecipes_shouldReturnOneRecipe_whenOneRecipeIsInRecipeGallery() {
         when(recipeRepo.findAll())
-                .thenReturn(Collections.singletonList(recipeTest));
-        List<Recipe> result = recipeService.getAllRecipes();
-        verify(recipeRepo).findAll();
-        Assertions.assertThat(result).containsExactly(recipeTest);
+                .thenReturn(Collections.singletonList(recipeTestWithId));
 
+        List<Recipe> result = recipeService.getAllRecipes();
+
+        verify(recipeRepo).findAll();
+        assertThat(result).containsExactly(recipeTestWithId);
     }
 
     @Test
     void addRecipe_shouldReturnRecipe_whenRecipeIsAdded() {
+        when(idRecipeService.generateId()).thenReturn("testId");
+        when(recipeRepo.save(recipeTestWithId)).thenReturn(recipeTestWithId);
 
+        Recipe result = recipeService.addRecipe(recipeTestWithoutId);
 
-        when(idRecipeService.generateId()).thenReturn("testId1");
-        when(recipeRepo.save(recipeTest)).thenReturn(recipeTest);
-
-        Recipe result = recipeService.addRecipe(recipeTest);
-        verify(recipeRepo).save(recipeTest);
-        assertEquals(recipeTest, result);
+        verify(recipeRepo).save(recipeTestWithId);
+        assertEquals(recipeTestWithId, result);
     }
 
+    @Test
+    void addRecipe_shouldAddRecipeId_whenRecipeWithoutIdIsGiven() {
+
+        Recipe recipeToAdd = recipeTestWithoutId;
+
+        when(idRecipeService.generateId()).thenReturn("testIdDay1");
+        when(recipeRepo.save(recipeTestWithIdDay1)).thenReturn(recipeTestWithIdDay1);
+
+        Recipe result= recipeService.addRecipe(recipeToAdd);
+
+        verify(recipeRepo).save(recipeTestWithIdDay1);
+        assertEquals(recipeTestWithIdDay1.id(),result.id());
+
+    }
 
 }
