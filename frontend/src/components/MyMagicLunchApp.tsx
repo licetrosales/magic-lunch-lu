@@ -3,7 +3,6 @@ import {useEffect, useState} from "react";
 import {Recipe} from "../model/Recipe";
 import axios from "axios";
 import CreateRecipeForm from "./CreateRecipeForm";
-import IngredientList from "./IngredientList";
 import {AppBar, Container, Toolbar, Typography} from "@mui/material";
 
 export default function MyMagicLunchApp() {

@@ -31,9 +31,17 @@ class RecipeControllerTest {
 
 
     @Test
-
     @DirtiesContext
     void getAllRecipes_shouldReturnEmptyList_whenGalleryisEmpty() throws Exception {
+        mockMvc.perform(get("/api/users/userId/recipes"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        []
+                        """));
+    }
+    @Test
+    @DirtiesContext
+    void getAllRecipes_shouldReturnListOfRecipes_whenGalleryisNotEmpty() throws Exception {
         mockMvc.perform(get("/api/users/userId/recipes"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
@@ -43,9 +51,7 @@ class RecipeControllerTest {
 
     }
 
-
     @Test
-
     @DirtiesContext
     void addRecipe_shouldReturnRecipeSendeWithPost_whenPostRequestIsSuccessful() throws Exception {
         MvcResult response = mockMvc.perform(post("/api/users/userId/recipes")

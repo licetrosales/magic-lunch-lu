@@ -1,13 +1,13 @@
 export type Ingredient = {
     id?: string,
-    itemName: string,
+    name: string,
     quantity: string,
     unit?: Unit | string,
     productCategory?: ProductCategory | string,
     isInShoppingList?: boolean,
 }
 export type NewItem = {
-    itemName: string,
+    name: string,
     quantity: string,
     isInShoppingList: boolean
 }

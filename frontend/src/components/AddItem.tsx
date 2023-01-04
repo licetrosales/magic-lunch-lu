@@ -1,8 +1,7 @@
 import {ChangeEvent, useState} from "react";
 
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, TextField} from "@mui/material";
-import {Ingredient, NewItem, ProductCategory, Unit} from "../model/Ingredient";
-import {MealType, MenuCategory} from "../model/Recipe";
+import {Ingredient, NewItem, Unit} from "../model/Ingredient";
 
 type AddItemProps = {
     handleAddItem(newItem: Ingredient): void
@@ -10,7 +9,7 @@ type AddItemProps = {
 
 export default function AddItem(props: AddItemProps) {
     const emptyItemFormWithoutEnums: NewItem = {
-        itemName: "",
+        name: "",
         quantity: "",
         isInShoppingList: true
     }
@@ -41,14 +40,14 @@ export default function AddItem(props: AddItemProps) {
 
     function handleAddItem() {
         const newItem: Ingredient = {
-            itemName: itemWithoutEnums.itemName,
+            name: itemWithoutEnums.name,
             quantity: itemWithoutEnums.quantity,
             unit: unit,
 
         }
         props.handleAddItem(newItem)
         setItemWithoutEnums({
-            itemName: "",
+            name: "",
             quantity: "",
             isInShoppingList: true
         })
@@ -64,8 +63,8 @@ export default function AddItem(props: AddItemProps) {
                 <DialogContent>
                     <TextField
                         label="Name"
-                        name={"itemName"}
-                        value={itemWithoutEnums.itemName}
+                        name={"name"}
+                        value={itemWithoutEnums.name}
                         onChange={handleChange}
                         margin={"dense"}
                         fullWidth

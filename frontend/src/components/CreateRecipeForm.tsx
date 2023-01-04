@@ -1,4 +1,13 @@
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, Stack, TextField} from "@mui/material";
+import {
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    MenuItem,
+    TextField,
+    Typography
+} from "@mui/material";
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {DishTypeCategory, MealType, MenuCategory, NewRecipe, Recipe, RecipeCategory} from "../model/Recipe";
 import IngredientList from "./IngredientList";
@@ -160,7 +169,9 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             margin={"dense"}
                             fullWidth
                         /><br/>
-                        <label>Zutaten</label>
+                        <Typography>
+                            Zutaten
+                        </Typography>
                         <IngredientList handleCallbackItems={handleCallbackItems}/>
 
                         <TextField
