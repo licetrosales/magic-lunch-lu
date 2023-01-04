@@ -6,18 +6,19 @@ export type Ingredient = {
     productCategory?: ProductCategory | string,
     isInShoppingList?: boolean,
 }
-export type NewItem ={
+export type NewItem = {
     itemName: string,
     quantity: string,
-    isInShoppingList:boolean
+    isInShoppingList: boolean
 }
+
 export enum Unit {
     OZ = "OZ",
     LB = "LB",
     G = "G",
     KG = "KG",
     LT = "LT",
-    OTHER="OTHER"
+    OTHER = "OTHER"
 }
 
 export enum ProductCategory {

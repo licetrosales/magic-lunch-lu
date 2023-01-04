@@ -14,17 +14,20 @@ import java.util.List;
 public class RecipeController {
     private final RecipeRepo recipeRepo;
     private final RecipeService recipeService;
+
     @Autowired
-    public RecipeController(RecipeService recipeService, RecipeRepo recipeRepo){
+    public RecipeController(RecipeService recipeService, RecipeRepo recipeRepo) {
         this.recipeService = recipeService;
         this.recipeRepo = recipeRepo;
     }
+
     @GetMapping("/recipes")
-    List<Recipe> getAllRecipes(){
+    List<Recipe> getAllRecipes() {
         return recipeService.getAllRecipes();
     }
+
     @PostMapping("/recipes")
-    Recipe addRecipe(@RequestBody Recipe recipe){
+    Recipe addRecipe(@RequestBody Recipe recipe) {
 
         return recipeService.addRecipe(recipe);
     }

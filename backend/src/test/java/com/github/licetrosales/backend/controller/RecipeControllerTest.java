@@ -21,7 +21,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @SpringBootTest
-
 class RecipeControllerTest {
     @Autowired
     MockMvc mockMvc;
@@ -34,7 +33,6 @@ class RecipeControllerTest {
     @Test
 
     @DirtiesContext
-
     void getAllRecipes_shouldReturnEmptyList_whenGalleryisEmpty() throws Exception {
         mockMvc.perform(get("/api/users/userId/recipes"))
                 .andExpect(status().isOk())
@@ -46,11 +44,9 @@ class RecipeControllerTest {
     }
 
 
-
     @Test
 
     @DirtiesContext
-
     void addRecipe_shouldReturnRecipeSendeWithPost_whenPostRequestIsSuccessful() throws Exception {
         MvcResult response = mockMvc.perform(post("/api/users/userId/recipes")
                         .contentType(MediaType.APPLICATION_JSON)

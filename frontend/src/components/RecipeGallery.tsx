@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import {Container} from "@mui/material";
 import {Recipe} from "../model/Recipe";
 import RecipeCardGalleryView from "./RecipeCardGalleryView";
 
@@ -14,7 +14,7 @@ export default function RecipeGallery(props: RecipeGalleryProps) {
     return (
         <section>
             <Container>
-            {recipeItemComponents}
+                {recipeItemComponents}
             </Container>
         </section>
     )

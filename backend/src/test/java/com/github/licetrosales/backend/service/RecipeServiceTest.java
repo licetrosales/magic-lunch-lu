@@ -4,6 +4,7 @@ import com.github.licetrosales.backend.model.*;
 import com.github.licetrosales.backend.repo.RecipeRepo;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -22,7 +23,7 @@ class RecipeServiceTest {
     MealType mealType = MealType.LUNCH;
     String source = "GU";
     String image = "./image";
-    List<Ingredient> ingredients =  Collections.emptyList();
+    List<Ingredient> ingredients = Collections.emptyList();
     String prepTime = "30 min,";
     String preparation = "Anweisungen eintragen";
 
@@ -38,7 +39,7 @@ class RecipeServiceTest {
             recipeCategory, menuCategory, garnish);
 
     @Test
-    void getAllRecipes_shouldReturnEmptyList_whenRecipeGalleryIsEmpty(){
+    void getAllRecipes_shouldReturnEmptyList_whenRecipeGalleryIsEmpty() {
         when(recipeRepo.findAll())
                 .thenReturn(Collections.emptyList());
         List<Recipe> result = recipeService.getAllRecipes();
@@ -48,7 +49,7 @@ class RecipeServiceTest {
     }
 
     @Test
-    void getAllRecipes_shouldReturnOneRecipe_whenOneRecipeIsInRecipeGallery (){
+    void getAllRecipes_shouldReturnOneRecipe_whenOneRecipeIsInRecipeGallery() {
         when(recipeRepo.findAll())
                 .thenReturn(Collections.singletonList(recipeTest));
         List<Recipe> result = recipeService.getAllRecipes();
@@ -56,6 +57,7 @@ class RecipeServiceTest {
         Assertions.assertThat(result).containsExactly(recipeTest);
 
     }
+
     @Test
     void addRecipe_shouldReturnRecipe_whenRecipeIsAdded() {
 
@@ -67,7 +69,6 @@ class RecipeServiceTest {
         verify(recipeRepo).save(recipeTest);
         assertEquals(recipeTest, result);
     }
-
 
 
 }

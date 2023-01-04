@@ -10,5 +10,5 @@ public record User(
         List<Recipe> recipes,
         List<WeekPlan> weekplans,
         List<ShoppingList> shoppingLists
-        ) {
+) {
 }
