@@ -3,8 +3,9 @@ import {useState} from "react";
 import List from "@mui/material/List"
 import {Ingredient} from "../model/Ingredient";
 import AddItem from "./AddItem";
-type IngredientListProps={
-    handleCallbackItems(childData:Ingredient[]):void
+
+type IngredientListProps = {
+    handleCallbackItems(childData: Ingredient[]): void
 }
 
 export default function IngredientList(props: IngredientListProps) {
@@ -15,9 +16,11 @@ export default function IngredientList(props: IngredientListProps) {
             return [item, ...prevItems]
         })
     }
-function onTrigger(){
+
+    function onTrigger() {
         props.handleCallbackItems(items)
-}
+    }
+
     return (
         <div className="Ingridient-list">
             <Container>
@@ -26,7 +29,7 @@ function onTrigger(){
                         items.map((item, index) =>
                             <ListItem key={index} divider>
                                 <ListItemText
-                                    primary={item.quantity + " " + item.unit +" "+ item.itemName}
+                                    primary={item.quantity + " " + item.unit + " " + item.itemName}
                                 />
                             </ListItem>
                         )

@@ -51,11 +51,12 @@ export enum RecipeCategory {
     LOW_CARB = "LOW_CARB",
     HIGH_PROTEIN = "HIGH_PROTEIN",
 }
+
 export enum MenuCategory {
-    ENTREE= "ENTREE",
-    MAIN_COURSE ="MAIN_COURSE",
-    DESSERT="DESSERT",
-    SNACK="SNACK",
+    ENTREE = "ENTREE",
+    MAIN_COURSE = "MAIN_COURSE",
+    DESSERT = "DESSERT",
+    SNACK = "SNACK",
 }
 
 

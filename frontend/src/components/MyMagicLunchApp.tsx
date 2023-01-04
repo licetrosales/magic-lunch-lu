@@ -11,20 +11,22 @@ export default function MyMagicLunchApp() {
     const [recipes, setRecipes] = useState<Recipe[]>([])
     useEffect(() => {
         getRecipes()
-    },[])
+    }, [])
 
-    const recipeBaseUrl="/api/users/userId/recipes"
-    function getRecipes(){
+    const recipeBaseUrl = "/api/users/userId/recipes"
+
+    function getRecipes() {
         axios.get(recipeBaseUrl)
-            .then(recipeGalleryResponse =>{
-                const newRecipeGallery : Recipe [] = recipeGalleryResponse.data;
+            .then(recipeGalleryResponse => {
+                const newRecipeGallery: Recipe [] = recipeGalleryResponse.data;
                 setRecipes(newRecipeGallery);
             })
             .catch(errorMessageResponse => {
                 console.log("There is an error by GET request: " + errorMessageResponse)
             })
     }
-    function addRecipe(newRecipeWithoutId: Recipe){
+
+    function addRecipe(newRecipeWithoutId: Recipe) {
         axios.post(recipeBaseUrl, newRecipeWithoutId)
             .then(newRecipeResponse => {
                 console.log("Neue Rezept: " + newRecipeResponse.data)
@@ -32,9 +34,9 @@ export default function MyMagicLunchApp() {
                     return [...prevRecipeGallery, newRecipeResponse.data]
                 })
             })
-            .catch(errorMessageReponse =>{
+            .catch(errorMessageReponse => {
                 console.log("There is an error by POST request: " + errorMessageReponse)
-        })
+            })
     }
 
     return (

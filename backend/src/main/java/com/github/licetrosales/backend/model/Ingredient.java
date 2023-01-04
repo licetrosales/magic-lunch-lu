@@ -2,7 +2,7 @@ package com.github.licetrosales.backend.model;
 
 import java.util.Collections;
 
-public record Ingredient (
+public record Ingredient(
         String id,
         String name,
         String quantity,
@@ -15,6 +15,6 @@ public record Ingredient (
             Unit unit,
             Boolean isInShoppingList
     ) {
-        this(null, name, quantity,unit, null,true );
+        this(null, name, quantity, unit, null, true);
     }
 }
