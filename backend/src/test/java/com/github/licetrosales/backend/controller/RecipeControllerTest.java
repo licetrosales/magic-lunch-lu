@@ -39,6 +39,7 @@ class RecipeControllerTest {
                         []
                         """));
     }
+
     @Test
     @DirtiesContext
     void getAllRecipes_shouldReturnListOfRecipes_whenGalleryisNotEmpty() throws Exception {
@@ -58,29 +59,29 @@ class RecipeControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(
                                 """
-                                        {
-                                           "name": "Salat 11",
-                                           "mealType": "LUNCH",
-                                           "source": "GU",
-                                           "image": "BigMacSalat.jpg",
-                                           "ingredients": [{
-                                             "id": "1",
-                                             "name": "Brot",
-                                             "quantity": "1",
-                                             "unit": "KLEIN",
-                                             "productCategory": "BREAD_BAKERY",
-                                             "isInShoppingList": true
-                                           }],
-                                           "prepTime": "30 min.",
-                                           "preparation": "Anweisungen eintragen",
-                                           "portions": 2,
-                                           "favorite": false,
-                                           "dishTypeCategory": "FISH",
-                                           "recipeCategory": "LOW_CARB",
-                                           "menuCategory": "MAIN_COURSE",
-                                           "garnish": "Salat"
-                                         }
-                                        """
+                                          {
+                                             "name": "Salat 11",
+                                             "mealType": "LUNCH",
+                                             "source": "GU",
+                                             "image": "BigMacSalat.jpg",
+                                             "ingredients": [{
+                                               "id": "1",
+                                               "name": "Brot",
+                                               "quantity": "1",
+                                               "unit": "SMALL",
+                                               "isInShoppingList": false,
+                                               "productCategory": "BREAD_BAKERY"
+                                             }],
+                                             "prepTime": "30 min.",
+                                             "preparation": "Anweisungen eintragen",
+                                             "portions": 2,
+                                             "favorite": false,
+                                             "dishTypeCategory": "FISH",
+                                             "recipeCategory": "LOW_CARB",
+                                             "menuCategory": "MAIN_COURSE",
+                                             "garnish": "Salat"
+                                           }
+                                          """
                         ))
                 .andExpect(status().isOk())
                 .andReturn();
