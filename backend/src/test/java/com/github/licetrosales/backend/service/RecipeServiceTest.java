@@ -35,7 +35,7 @@ class RecipeServiceTest {
     String garnish = "Salat";
 
 
-    Recipe recipeTestWithoutId = new Recipe(null, name, mealType, source, image,
+    RecipeDTO recipeTestWithoutId = new RecipeDTO( name, mealType, source, image,
             ingredients, prepTime, preparation, portions, favorite, dishTypeCategory,
             recipeCategory, menuCategory, garnish);
     Recipe recipeTestWithId = new Recipe(id, name, mealType, source, image,
@@ -61,7 +61,7 @@ class RecipeServiceTest {
     Ingredient ingredientWithoutId2 = new Ingredient(idDay1, ingredientName2, ingredientQuantity2, ingredientUnit2, isInShoppingList, null);
 
     List<Ingredient> ingredientsWithoutId = List.of(ingredientWithoutId1, ingredientWithoutId2);
-    Recipe recipeTestWithoutIdWithIngredients = new Recipe(null, name, mealType, source, image,
+    RecipeDTO recipeTestWithoutIdWithIngredients = new RecipeDTO( name, mealType, source, image,
             ingredientsWithoutId, prepTime, preparation, portions, favorite, dishTypeCategory,
             recipeCategory, menuCategory, garnish);
     Recipe recipeTestWithIdWithIngredient = new Recipe(id, name, mealType, source, image,
@@ -105,7 +105,7 @@ class RecipeServiceTest {
     @Test
     void addRecipe_shouldAddRecipeId_whenRecipeWithoutIdIsGiven() {
 
-        Recipe recipeToAdd = recipeTestWithoutId;
+        RecipeDTO recipeToAdd = recipeTestWithoutId;
 
         when(idRecipeService.generateId()).thenReturn("testIdDay1");
         when(recipeRepo.save(recipeTestWithIdDay1)).thenReturn(recipeTestWithIdDay1);
@@ -119,7 +119,7 @@ class RecipeServiceTest {
     @Test
     void addRecipe_shouldAddRecipeWithIngredients_whenIngredientsAreGiven() {
 
-        Recipe recipeToAdd = recipeTestWithoutIdWithIngredients;
+        RecipeDTO recipeToAdd = recipeTestWithoutIdWithIngredients;
 
         when(idRecipeService.generateId()).thenReturn(id);
         when(recipeRepo.save(recipeTestWithIdWithIngredient)).thenReturn(recipeTestWithIdWithIngredient);
