@@ -21,20 +21,19 @@ export default function MyMagicLunchApp() {
                 setRecipes(newRecipeGallery);
             })
             .catch(errorMessageResponse => {
-                console.log("There is an error by GET request: " + errorMessageResponse)
+                console.error("There is an error by GET request: " + errorMessageResponse)
             })
     }
 
     function addRecipe(newRecipeWithoutId: Recipe) {
         axios.post(recipeBaseUrl, newRecipeWithoutId)
             .then(newRecipeResponse => {
-                console.log("Neue Rezept: " + newRecipeResponse.data)
-                setRecipes(prevRecipeGallery => {
+                    setRecipes(prevRecipeGallery => {
                     return [...prevRecipeGallery, newRecipeResponse.data]
                 })
             })
             .catch(errorMessageReponse => {
-                console.log("There is an error by POST request: " + errorMessageReponse)
+                console.error("There is an error by POST request: " + errorMessageReponse)
             })
     }
 

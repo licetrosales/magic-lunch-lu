@@ -112,10 +112,6 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
         setMenuCategory(MenuCategory.MAIN_COURSE)
     }
 
-    useEffect(() => {
-
-    }, [recipeWithoutEnums])
-
     return (
         <div>
             <Button onClick={handleOpen}>Neues Rezept</Button>
