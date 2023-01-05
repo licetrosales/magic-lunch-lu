@@ -3,8 +3,10 @@ package com.github.licetrosales.backend.service;
 import com.github.licetrosales.backend.model.*;
 import com.github.licetrosales.backend.repo.RecipeRepo;
 import org.junit.jupiter.api.Test;
+
 import java.util.Collections;
 import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -42,6 +44,28 @@ class RecipeServiceTest {
 
     Recipe recipeTestWithIdDay1 = new Recipe(idDay1, name, mealType, source, image,
             ingredients, prepTime, preparation, portions, favorite, dishTypeCategory,
+            recipeCategory, menuCategory, garnish);
+
+    String ingredientId1 = "testIngredientId1";
+    String ingredientName1 = "Zwiebel";
+    String ingredientName2 = "Cheddar";
+    String ingredientQuantity1 = "1";
+    String ingredientQuantity2 = "10";
+    Unit ingredientUnit1 = Unit.SMALL;
+    Unit ingredientUnit2 = Unit.G;
+    ProductCategory productCategory1 = ProductCategory.PRODUCE;
+
+    Boolean isInShoppingList = false;
+
+    Ingredient ingredientWithoutId1 = new Ingredient(null, ingredientName1, ingredientQuantity1, ingredientUnit1, isInShoppingList, null);
+    Ingredient ingredientWithoutId2 = new Ingredient(idDay1, ingredientName2, ingredientQuantity2, ingredientUnit2, isInShoppingList, null);
+
+    List<Ingredient> ingredientsWithoutId = List.of(ingredientWithoutId1, ingredientWithoutId2);
+    Recipe recipeTestWithoutIdWithIngredients = new Recipe(null, name, mealType, source, image,
+            ingredientsWithoutId, prepTime, preparation, portions, favorite, dishTypeCategory,
+            recipeCategory, menuCategory, garnish);
+    Recipe recipeTestWithIdWithIngredient = new Recipe(id, name, mealType, source, image,
+            ingredientsWithoutId, prepTime, preparation, portions, favorite, dishTypeCategory,
             recipeCategory, menuCategory, garnish);
 
     @Test
@@ -86,11 +110,24 @@ class RecipeServiceTest {
         when(idRecipeService.generateId()).thenReturn("testIdDay1");
         when(recipeRepo.save(recipeTestWithIdDay1)).thenReturn(recipeTestWithIdDay1);
 
-        Recipe result= recipeService.addRecipe(recipeToAdd);
+        Recipe result = recipeService.addRecipe(recipeToAdd);
 
         verify(recipeRepo).save(recipeTestWithIdDay1);
-        assertEquals(recipeTestWithIdDay1.id(),result.id());
-
+        assertEquals(recipeTestWithIdDay1.id(), result.id());
     }
 
+    @Test
+    void addRecipe_shouldAddRecipeWithIngredients_whenIngredientsAreGiven() {
+
+        Recipe recipeToAdd = recipeTestWithoutIdWithIngredients;
+
+        when(idRecipeService.generateId()).thenReturn(id);
+        when(recipeRepo.save(recipeTestWithIdWithIngredient)).thenReturn(recipeTestWithIdWithIngredient);
+
+        Recipe result = recipeService.addRecipe(recipeToAdd);
+
+        verify(recipeRepo).save(recipeTestWithIdWithIngredient);
+        assertEquals(recipeTestWithIdWithIngredient.ingredients(), result.ingredients());
+
+    }
 }
