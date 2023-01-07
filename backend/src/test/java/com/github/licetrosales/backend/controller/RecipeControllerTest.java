@@ -14,8 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -59,29 +58,29 @@ class RecipeControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(
                                 """
-                                          {
-                                             "name": "Salat 11",
-                                             "mealType": "LUNCH",
-                                             "source": "GU",
-                                             "image": "BigMacSalat.jpg",
-                                             "ingredients": [{
-                                               "id": "1",
-                                               "name": "Brot",
-                                               "quantity": "1",
-                                               "unit": "SMALL",
-                                               "isInShoppingList": false,
-                                               "productCategory": "BREAD_BAKERY"
-                                             }],
-                                             "prepTime": "30 min.",
-                                             "preparation": "Anweisungen eintragen",
-                                             "portions": 2,
-                                             "favorite": false,
-                                             "dishTypeCategory": "FISH",
-                                             "recipeCategory": "LOW_CARB",
-                                             "menuCategory": "MAIN_COURSE",
-                                             "garnish": "Salat"
-                                           }
-                                          """
+                                        {
+                                           "name": "Salat 11",
+                                           "mealType": "LUNCH",
+                                           "source": "GU",
+                                           "image": "BigMacSalat.jpg",
+                                           "ingredients": [{
+                                             "id": "1",
+                                             "name": "Brot",
+                                             "quantity": "1",
+                                             "unit": "SMALL",
+                                             "isInShoppingList": false,
+                                             "productCategory": "BREAD_BAKERY"
+                                           }],
+                                           "prepTime": "30 min.",
+                                           "preparation": "Anweisungen eintragen",
+                                           "portions": 2,
+                                           "favorite": false,
+                                           "dishTypeCategory": "FISH",
+                                           "recipeCategory": "LOW_CARB",
+                                           "menuCategory": "MAIN_COURSE",
+                                           "garnish": "Salat"
+                                         }
+                                        """
                         ))
                 .andExpect(status().isOk())
                 .andReturn();
@@ -91,5 +90,52 @@ class RecipeControllerTest {
         assertEquals(expected, result);
     }
 
+    @Test
+    @DirtiesContext
+    void deleteRecipe_shouldDeleteRecipeIfIdExists_whenDeleteRequestIsSuccessful() throws Exception {
+        String saveResult = mockMvc.perform(
+                        post("/api/users/userId/recipes")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content("""
+                                        {
+                                                                                     "name": "Salat 11",
+                                                                                     "mealType": "LUNCH",
+                                                                                     "source": "GU",
+                                                                                     "image": "BigMacSalat.jpg",
+                                                                                     "ingredients": [{
+                                                                                       "id": "1",
+                                                                                       "name": "Brot",
+                                                                                       "quantity": "1",
+                                                                                       "unit": "SMALL",
+                                                                                       "isInShoppingList": false,
+                                                                                       "productCategory": "BREAD_BAKERY"
+                                                                                     }],
+                                                                                     "prepTime": "30 min.",
+                                                                                     "preparation": "Anweisungen eintragen",
+                                                                                     "portions": 2,
+                                                                                     "favorite": false,
+                                                                                     "dishTypeCategory": "FISH",
+                                                                                     "recipeCategory": "LOW_CARB",
+                                                                                     "menuCategory": "MAIN_COURSE",
+                                                                                     "garnish": "Salat"
+                                                                                   }
+                                        """)
+                )
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        Recipe saveResultRecipe = objectMapper.readValue(saveResult, Recipe.class);
+        String id = saveResultRecipe.id();
+
+        mockMvc.perform(delete("/api/users/userId/recipes/" + id))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/api/users/userId/recipes"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        []
+                        """));
+    }
 
 }
