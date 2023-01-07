@@ -152,4 +152,16 @@ class RecipeServiceTest {
         assertEquals(recipeTestWithId, result);
     }
 
+    @Test
+    void findById_shouldReturnMessage_whenRecipeIdNotExists(){
+        when(recipeRepo.findById("testId1")).thenReturn(Optional.empty());
+
+        try{
+            recipeService.findById("testId2");
+            fail();
+        } catch (IllegalArgumentException message){
+            assertEquals(message.getMessage(), "Recipe Id not found!");
+        }
+    }
+
 }
