@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -128,6 +129,16 @@ class RecipeServiceTest {
 
         verify(recipeRepo).save(recipeTestWithIdWithIngredient);
         assertEquals(recipeTestWithIdWithIngredient.ingredients(), result.ingredients());
+
+    }
+    @Test
+    void deleteRecipe_shouldDeleteRecipe_whenRecipeIdExists(){
+        String recipeToRemoveId = recipeTestWithIdWithIngredient.id();
+        when(recipeRepo.findById(recipeTestWithIdWithIngredient.id())).thenReturn(Optional.of(recipeTestWithIdWithIngredient));
+
+        recipeService.delete(recipeToRemoveId);
+
+        verify(recipeRepo).delete(recipeTestWithIdWithIngredient);
 
     }
 }
