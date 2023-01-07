@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RecipeService {
@@ -44,4 +45,15 @@ public class RecipeService {
         return recipeRepo.save(newRecipeWithId);
     }
 
+public Recipe findById(String id){
+    Optional<Recipe> optionalRecipe = recipeRepo.findById(id);
+    if (optionalRecipe.isPresent()){
+        return optionalRecipe.get();
+    }
+    throw new IllegalArgumentException("Recipe Id not found!");
+}
+public void delete(String id) {
+        Recipe recipe = findById(id);
+        recipeRepo.delete(recipe);
+}
 }
