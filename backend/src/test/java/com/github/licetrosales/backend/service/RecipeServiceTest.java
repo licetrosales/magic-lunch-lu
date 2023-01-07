@@ -141,4 +141,15 @@ class RecipeServiceTest {
         verify(recipeRepo).delete(recipeTestWithIdWithIngredient);
 
     }
+    @Test
+    void findById_shouldFindRecipe_whenRecipeIdExists(){
+        String recipeToFindId= id;
+
+        when(recipeRepo.findById(id)).thenReturn(Optional.of(recipeTestWithId));
+
+        Recipe result = recipeService.findById(recipeToFindId);
+
+        assertEquals(recipeTestWithId, result);
+    }
+
 }
