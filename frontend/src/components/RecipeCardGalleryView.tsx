@@ -1,11 +1,16 @@
 import {Recipe} from "../model/Recipe";
 import "../images/BigMacSalat.jpg"
+import {Button} from "@mui/material";
 
 type RecipeCardGalleryViewProps = {
     recipeToDisplay: Recipe
+    recipeToRemove: (id?: string)=> void
 }
 export default function RecipeCardGalleryView(props: RecipeCardGalleryViewProps) {
 
+    function onDeleteClick(){
+    props.recipeToRemove(props.recipeToDisplay.id)
+}
 
     return (
         <div>
@@ -14,6 +19,7 @@ export default function RecipeCardGalleryView(props: RecipeCardGalleryViewProps)
             <p>{props.recipeToDisplay.mealType} </p>
             <p>{props.recipeToDisplay.prepTime} </p>
             <p>{props.recipeToDisplay.favorite} </p>
+            <Button onClick={onDeleteClick}>Löschen</Button>
         </div>
     )
 

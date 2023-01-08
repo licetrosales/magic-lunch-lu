@@ -37,6 +37,15 @@ export default function MyMagicLunchApp() {
             })
     }
 
+    function removeRecipe(id?: string){
+        axios.delete(recipeBaseUrl+"/" + id)
+            .then(() => {
+                setRecipes(prevRecipeGallery => {
+                    return prevRecipeGallery.filter((recipe) => recipe.id !== id)
+                })
+            })
+    }
+
     return (
         <section>
             <Container>
@@ -47,7 +56,7 @@ export default function MyMagicLunchApp() {
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                <RecipeGallery recipesToMap={recipes}/>
+                <RecipeGallery recipesToMap={recipes} recipeToRemove={removeRecipe} />
                 <CreateRecipeForm handleCreateRecipe={addRecipe}/>
             </Container>
         </section>
