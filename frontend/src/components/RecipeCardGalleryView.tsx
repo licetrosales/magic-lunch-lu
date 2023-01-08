@@ -14,12 +14,13 @@ export default function RecipeCardGalleryView(props: RecipeCardGalleryViewProps)
 
     return (
         <div>
+
             <h2>{props.recipeToDisplay.name}</h2>
             <img alt="photo" src={props.recipeToDisplay.image}/>
             <p>{props.recipeToDisplay.mealType} </p>
             <p>{props.recipeToDisplay.prepTime} </p>
             <p>{props.recipeToDisplay.favorite} </p>
-            <Button onClick={onDeleteClick}>Löschen</Button>
+            <Button onClick={onDeleteClick} variant="outlined">Löschen</Button>
         </div>
     )
 

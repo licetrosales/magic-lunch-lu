@@ -57,13 +57,14 @@ export default function AddItem(props: AddItemProps) {
 
     return (
         <div>
-            <Button onClick={handleOpen}>Zutat hizufügen</Button>
+            <Button onClick={handleOpen}>Zutat eintragen</Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Neue Zutat</DialogTitle>
                 <DialogContent>
                     <TextField
                         label="Name"
                         name={"name"}
+                        placeholder={"Zutatname"}
                         value={itemWithoutEnums.name}
                         onChange={handleChange}
                         margin={"dense"}
@@ -72,6 +73,7 @@ export default function AddItem(props: AddItemProps) {
                     <TextField
                         label={"Quantity"}
                         name={"quantity"}
+                        placeholder={"Menge"}
                         value={itemWithoutEnums.quantity}
                         onChange={handleChange}
                         margin={"dense"}
@@ -81,6 +83,7 @@ export default function AddItem(props: AddItemProps) {
                         select
                         label={"Unit"}
                         name={"unit"}
+                        placeholder={"Einheit"}
                         value={unit}
                         onChange={onUnitChange}
                         margin={"dense"}
@@ -96,7 +99,7 @@ export default function AddItem(props: AddItemProps) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>
-                        Cancel
+                        Abbrechen
                     </Button>
                     <Button onClick={handleAddItem}>
                         Speichern

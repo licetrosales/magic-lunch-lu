@@ -24,7 +24,7 @@ export default function IngredientList(props: IngredientListProps) {
     return (
         <div className="Ingridient-list">
             <Container>
-                <Stack alignItems={"left"}>
+                <Stack alignItems={"center"}>
                     <List>{
                         items.map((item, index) =>
                             <ListItem key={item.id} divider>
@@ -37,7 +37,9 @@ export default function IngredientList(props: IngredientListProps) {
                     }
                     </List>
                     <AddItem handleAddItem={addItem}/>
-                    <Button onClick={onTrigger}>Zutaten hinzufügen</Button>
+                    <Button onClick={onTrigger} variant={"contained"} component={"label"}>
+                        Zutatenliste speichern
+                    </Button>
                 </Stack>
             </Container>
         </div>
