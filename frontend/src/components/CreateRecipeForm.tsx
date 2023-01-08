@@ -1,4 +1,5 @@
 import {
+    Box,
     Button,
     Dialog,
     DialogActions,
@@ -122,15 +123,16 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                         <TextField
                             type={"text"}
                             label={"Name"}
-                            placeholder={"Rezeptename"}
+                            placeholder={"Rezeptname"}
                             name={"name"}
                             value={recipeWithoutEnums.name}
                             onChange={handleFormChange}
                             margin={"dense"}
                             fullWidth
                         />
+                        <Box display="flex" justifyContent="flex-end">
                         <Button variant={"contained"} component={"label"}>
-                            Hochladen
+                            Bild hochladen
                             <input
                                 hidden accept={"images/*"}
                                 multiple
@@ -141,10 +143,11 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                                 onChange={handleFormChange}
                             />
                         </Button>
+                        </Box>
                         <br/>
                         <TextField
                             select
-                            label="Speisetyp"
+                            label="Mahlzeit"
                             name={"mealType"}
                             value={mealType}
                             onChange={onMealTypeChange}
@@ -164,15 +167,16 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             onChange={handleFormChange}
                             margin={"dense"}
                             fullWidth
-                        /><br/>
-                        <Typography>
-                            Zutaten
+                        /><br/><br/>
+                        <Typography align={"center"} variant={"body1"}>
+                            Zutatenliste
                         </Typography>
                         <IngredientList handleCallbackItems={handleCallbackItems}/>
 
                         <TextField
                             type={"text"}
-                            label={"Kochzeit"}
+                            label={"Zubereitungszeit"}
+                            placeholder={"Gesamtzeit inkl. Vorbereitung"}
                             name={"prepTime"}
                             value={recipeWithoutEnums.prepTime}
                             onChange={handleFormChange}
@@ -181,7 +185,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                         /><br/>
                         <TextField
                             type={"number"}
-                            label={"Portion"}
+                            label={"Portionen"}
                             name={"portions"}
                             value={recipeWithoutEnums.portions}
                             onChange={handleFormChange}
@@ -191,6 +195,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                         <TextField
                             type={"text"}
                             label={"Zubereitung"}
+                            placeholder={"Anweisungen eintragen..."}
                             name={"preparation"}
                             multiline
                             value={recipeWithoutEnums.preparation}
@@ -211,8 +216,8 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
 
                         <TextField
                             select
-                            label="Speiseart"
-                            placeholder={"Wähl Speiseart"}
+                            label="Tageskategorie"
+
                             name={"dishTypeCategory"}
                             value={dishTypeCategory}
                             onChange={onDishTypeCategoryChange}
@@ -228,8 +233,8 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                         </TextField>
                         <TextField
                             select
-                            label="Speiseart"
-                            placeholder={"Wähl Typ von Recipe"}
+                            label="Rezeptkategorie"
+
                             name={"recipeCategory"}
                             value={recipeCategory}
                             onChange={onRecipeCategoryChange}
@@ -244,8 +249,8 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                         </TextField>
                         <TextField
                             select
-                            label="Speiseart"
-                            placeholder={"Wähl ...."}
+                            label="Menükategorie"
+
                             name={"menuCategory"}
                             value={menuCategory}
                             onChange={onMenuCategoryChange}
@@ -259,8 +264,8 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                         </TextField><br/>
                         <TextField
                             type={"text"}
-                            label={"Garnish"}
-                            placeholder={"ccc"}
+                            label={"Beilagen"}
+                            placeholder={"falls das Rezept keine Beilage enthält"}
                             name={"garnish"}
                             value={recipeWithoutEnums.garnish}
                             onChange={handleFormChange}
@@ -269,12 +274,12 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             multiline
                         /><br/>
 
-                        <Button type={"submit"} color={"success"} variant={"contained"}>Bestätigen</Button>
+                        <Button type={"submit"} color={"success"} variant={"contained"}>Rezept speichern</Button>
                     </form>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>
-                        Schließen
+                        Abbrechen
                     </Button>
                 </DialogActions>
             </Dialog>
