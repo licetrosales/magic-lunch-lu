@@ -71,7 +71,7 @@ export default function AddItem(props: AddItemProps) {
                         fullWidth
                     />
                     <TextField
-                        label={"Quantity"}
+                        label={"Menge"}
                         name={"quantity"}
                         placeholder={"Menge"}
                         value={itemWithoutEnums.quantity}
@@ -81,7 +81,7 @@ export default function AddItem(props: AddItemProps) {
                     />
                     <TextField
                         select
-                        label={"Unit"}
+                        label={"Einheit"}
                         name={"unit"}
                         placeholder={"Einheit"}
                         value={unit}
