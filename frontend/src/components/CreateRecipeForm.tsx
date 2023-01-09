@@ -279,7 +279,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>
-                        Abbrechen
+                        Schließen
                     </Button>
                 </DialogActions>
             </Dialog>
