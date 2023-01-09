@@ -131,18 +131,18 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             fullWidth
                         />
                         <Box display="flex" justifyContent="flex-end">
-                        <Button variant={"contained"} component={"label"}>
-                            Bild hochladen
-                            <input
-                                hidden accept={"images/*"}
-                                multiple
-                                type={"file"}
+                            <Button variant={"contained"} component={"label"}>
+                                Bild hochladen
+                                <input
+                                    hidden accept={"images/*"}
+                                    multiple
+                                    type={"file"}
 
-                                name={"image"}
-                                value={recipeWithoutEnums.image}
-                                onChange={handleFormChange}
-                            />
-                        </Button>
+                                    name={"image"}
+                                    value={recipeWithoutEnums.image}
+                                    onChange={handleFormChange}
+                                />
+                            </Button>
                         </Box>
                         <br/>
                         <TextField

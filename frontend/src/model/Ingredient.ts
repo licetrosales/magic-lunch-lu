@@ -18,8 +18,8 @@ export enum Unit {
     G = "G",
     KG = "KG",
     LT = "LT",
-    SMALL="SMALL",
-    BIG="BIG",
+    SMALL = "SMALL",
+    BIG = "BIG",
     OTHER = "OTHER"
 }
 

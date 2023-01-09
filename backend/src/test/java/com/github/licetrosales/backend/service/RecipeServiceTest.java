@@ -36,7 +36,7 @@ class RecipeServiceTest {
     String garnish = "Salat";
 
 
-    RecipeDTO recipeTestWithoutId = new RecipeDTO( name, mealType, source, image,
+    RecipeDTO recipeTestWithoutId = new RecipeDTO(name, mealType, source, image,
             ingredients, prepTime, preparation, portions, favorite, dishTypeCategory,
             recipeCategory, menuCategory, garnish);
     Recipe recipeTestWithId = new Recipe(id, name, mealType, source, image,
@@ -62,7 +62,7 @@ class RecipeServiceTest {
     Ingredient ingredientWithoutId2 = new Ingredient(idDay1, ingredientName2, ingredientQuantity2, ingredientUnit2, isInShoppingList, null);
 
     List<Ingredient> ingredientsWithoutId = List.of(ingredientWithoutId1, ingredientWithoutId2);
-    RecipeDTO recipeTestWithoutIdWithIngredients = new RecipeDTO( name, mealType, source, image,
+    RecipeDTO recipeTestWithoutIdWithIngredients = new RecipeDTO(name, mealType, source, image,
             ingredientsWithoutId, prepTime, preparation, portions, favorite, dishTypeCategory,
             recipeCategory, menuCategory, garnish);
     Recipe recipeTestWithIdWithIngredient = new Recipe(id, name, mealType, source, image,
@@ -131,8 +131,9 @@ class RecipeServiceTest {
         assertEquals(recipeTestWithIdWithIngredient.ingredients(), result.ingredients());
 
     }
+
     @Test
-    void deleteRecipe_shouldDeleteRecipe_whenRecipeIdExists(){
+    void deleteRecipe_shouldDeleteRecipe_whenRecipeIdExists() {
         String recipeToRemoveId = recipeTestWithIdWithIngredient.id();
         when(recipeRepo.findById(recipeTestWithIdWithIngredient.id())).thenReturn(Optional.of(recipeTestWithIdWithIngredient));
 
@@ -141,9 +142,10 @@ class RecipeServiceTest {
         verify(recipeRepo).delete(recipeTestWithIdWithIngredient);
 
     }
+
     @Test
-    void findById_shouldFindRecipe_whenRecipeIdExists(){
-        String recipeToFindId= id;
+    void findById_shouldFindRecipe_whenRecipeIdExists() {
+        String recipeToFindId = id;
 
         when(recipeRepo.findById(id)).thenReturn(Optional.of(recipeTestWithId));
 
@@ -153,13 +155,13 @@ class RecipeServiceTest {
     }
 
     @Test
-    void findById_shouldReturnMessage_whenRecipeIdNotExists(){
+    void findById_shouldReturnMessage_whenRecipeIdNotExists() {
         when(recipeRepo.findById("testId1")).thenReturn(Optional.empty());
 
-        try{
+        try {
             recipeService.findById("testId2");
             fail();
-        } catch (IllegalArgumentException message){
+        } catch (IllegalArgumentException message) {
             assertEquals("Recipe Id not found!", message.getMessage());
         }
     }

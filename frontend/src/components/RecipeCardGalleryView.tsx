@@ -4,13 +4,13 @@ import {Button} from "@mui/material";
 
 type RecipeCardGalleryViewProps = {
     recipeToDisplay: Recipe
-    recipeToRemove: (id?: string)=> void
+    recipeToRemove: (id?: string) => void
 }
 export default function RecipeCardGalleryView(props: RecipeCardGalleryViewProps) {
 
-    function onDeleteClick(){
-    props.recipeToRemove(props.recipeToDisplay.id)
-}
+    function onDeleteClick() {
+        props.recipeToRemove(props.recipeToDisplay.id)
+    }
 
     return (
         <div>
