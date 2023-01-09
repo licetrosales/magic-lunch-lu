@@ -16,7 +16,7 @@ export default function RecipeGallery(props: RecipeGalleryProps) {
         <section>
 
             <Container>
-
+                <br/><br/>
                 {recipeItemComponents}
 
             </Container>
