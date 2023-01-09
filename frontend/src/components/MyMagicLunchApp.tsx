@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {Recipe} from "../model/Recipe";
 import axios from "axios";
 import CreateRecipeForm from "./CreateRecipeForm";
-import {AppBar, Container, Toolbar, Typography} from "@mui/material";
+import {AppBar, Box, Container, Toolbar, Typography} from "@mui/material";
 
 export default function MyMagicLunchApp() {
 
@@ -49,6 +49,7 @@ export default function MyMagicLunchApp() {
     return (
         <section>
             <Container>
+                <Box sx={{ flexGrow: 1 }}>
                 <AppBar>
                     <Toolbar>
                         <Typography variant={"h6"}>
@@ -58,6 +59,7 @@ export default function MyMagicLunchApp() {
                 </AppBar>
                 <RecipeGallery recipesToMap={recipes} recipeToRemove={removeRecipe} />
                 <CreateRecipeForm handleCreateRecipe={addRecipe}/>
+                    </Box>
             </Container>
         </section>
     )
