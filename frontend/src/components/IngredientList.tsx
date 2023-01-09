@@ -11,13 +11,13 @@ type IngredientListProps = {
 export default function IngredientList(props: IngredientListProps) {
     const [items, setItems] = useState<Ingredient []>([])
 
-    function addItem(item: Ingredient) {
+    function handleAddItem(item: Ingredient) {
         setItems(prevItems => {
             return [item, ...prevItems]
         })
     }
 
-    function onTrigger() {
+    function handleOnClick() {
         props.handleCallbackItems(items)
     }
 
@@ -36,8 +36,8 @@ export default function IngredientList(props: IngredientListProps) {
                         )
                     }
                     </List>
-                    <AddItem handleAddItem={addItem}/>
-                    <Button onClick={onTrigger} variant={"contained"} component={"label"}>
+                    <AddItem handleAddItem={handleAddItem}/>
+                    <Button onClick={handleOnClick} variant={"contained"} component={"label"}>
                         Zutatenliste speichern
                     </Button>
                 </Stack>

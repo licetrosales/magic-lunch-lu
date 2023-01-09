@@ -64,7 +64,7 @@ export default function AddItem(props: AddItemProps) {
                     <TextField
                         label="Name"
                         name={"name"}
-                        placeholder={"Zutatname"}
+                        placeholder={"Zutat"}
                         value={itemWithoutEnums.name}
                         onChange={handleChange}
                         margin={"dense"}
