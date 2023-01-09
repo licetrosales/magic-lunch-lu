@@ -160,7 +160,7 @@ class RecipeServiceTest {
             recipeService.findById("testId2");
             fail();
         } catch (IllegalArgumentException message){
-            assertEquals(message.getMessage(), "Recipe Id not found!");
+            assertEquals("Recipe Id not found!", message.getMessage());
         }
     }
 

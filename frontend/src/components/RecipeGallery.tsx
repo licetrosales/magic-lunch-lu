@@ -1,4 +1,4 @@
-import {Box, Container} from "@mui/material";
+import {Container} from "@mui/material";
 import {Recipe} from "../model/Recipe";
 import RecipeCardGalleryView from "./RecipeCardGalleryView";
 
