@@ -3,7 +3,7 @@ package com.github.licetrosales.backend.model;
 import lombok.With;
 import org.springframework.data.annotation.Id;
 
-import java.util.Collections;
+
 @With
 public record Ingredient(
         @Id
@@ -13,7 +13,7 @@ public record Ingredient(
         Unit unit,
         boolean isInShoppingList,
         ProductCategory productCategory
-        ) {
+) {
     Ingredient(
             String name,
             String quantity,
