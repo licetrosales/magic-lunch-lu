@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -165,5 +166,17 @@ class RecipeServiceTest {
             assertEquals("Recipe Id not found!", message.getMessage());
         }
     }
+    @Test
+    void updateRecipe_shouldReturnRecipeWithChanges_whenRecipeIdExists(){
+        Recipe recipeToUpdate = new Recipe(recipeTestWithId.id(), "suppe 1",MealType.BREAKFAST,"");
+
+        when(recipeRepo.existsById(recipeTestWithId.id())).thenReturn(true);
+
+        Recipe result = recipeService.updateRecipe(recipeToUpdate);
+
+        assertNotEquals(recipeTestWithId, result);
+    }
+
+
 
 }
