@@ -26,12 +26,19 @@ public record Recipe(
         MenuCategory menuCategory,
         String garnish
 ) {
-    Recipe(
+    public Recipe(
             String name,
             MealType mealType,
             String source
     ) {
         this(null, name, mealType, source, null, Collections.emptyList(), null, null, 0, null, null, null, null, null);
     }
-
+   public Recipe(
+            String id,
+            String name,
+            MealType mealType,
+            String source
+    ) {
+        this(id, name, mealType, source, null, Collections.emptyList(), null, null, 0, null, null, null, null, null);
+    }
 }
