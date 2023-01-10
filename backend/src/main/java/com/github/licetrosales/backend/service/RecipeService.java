@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
-
+import static org.springframework.data.mongodb.core.query.Update.update;
 @Service
 public class RecipeService {
     private final RecipeRepo recipeRepo;
@@ -55,5 +56,14 @@ public Recipe findById(String id){
 public void delete(String id) {
         Recipe recipe = findById(id);
         recipeRepo.delete(recipe);
+}
+public Recipe updateRecipe(Recipe recipeToUpdate){
+
+        if(!recipeRepo.existsById(recipeToUpdate.id())){
+            throw new NoSuchElementException("There is no element with the requested ID");
+        } else {
+            recipeRepo.save(recipeToUpdate);
+        }
+        return recipeToUpdate;
 }
 }
