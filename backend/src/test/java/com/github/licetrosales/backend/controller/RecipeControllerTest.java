@@ -1,5 +1,6 @@
 package com.github.licetrosales.backend.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.licetrosales.backend.model.Recipe;
 import com.github.licetrosales.backend.repo.RecipeRepo;
@@ -136,6 +137,129 @@ class RecipeControllerTest {
                 .andExpect(content().json("""
                         []
                         """));
+    }
+
+    @DirtiesContext
+    @Test
+    void updateRecipe_shouldUpdateRecipeIfIdExists_whenUpdateRequestIsSuccessfull() throws Exception {
+        String saveResult = mockMvc.perform(
+                post("/api/users/userId/recipes")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                   {
+                                       "name": "Salat 11",
+                                       "mealType": "LUNCH",
+                                       "source": "GU",
+                                       "image": "BigMacSalat.jpg",
+                                       "ingredients": [{
+                                             "id": "1",
+                                             "name": "Brot",
+                                             "quantity": "1",
+                                             "unit": "SMALL",
+                                             "isInShoppingList": false,
+                                             "productCategory": "BREAD_BAKERY"
+                                                         }],
+                                        "prepTime": "30 min.",
+                                         "preparation": "Anweisungen eintragen",
+                                         "portions": 2,
+                                          "favorite": false,
+                                          "dishTypeCategory": "FISH",
+                                          "recipeCategory": "LOW_CARB",
+                                          "menuCategory": "MAIN_COURSE",
+                                          "garnish": "Salat"
+                                   }
+                                """)
+
+        )
+        .andExpect(status().isOk())
+                .andExpect(content().json("""
+{
+                                       "name": "Salat 11",
+                                       "mealType": "LUNCH",
+                                       "source": "GU",
+                                       "image": "BigMacSalat.jpg",
+                                       "ingredients": [{
+                                             "id": "1",
+                                             "name": "Brot",
+                                             "quantity": "1",
+                                             "unit": "SMALL",
+                                             "isInShoppingList": false,
+                                             "productCategory": "BREAD_BAKERY"
+                                                         }],
+                                        "prepTime": "30 min.",
+                                         "preparation": "Anweisungen eintragen",
+                                         "portions": 2,
+                                          "favorite": false,
+                                          "dishTypeCategory": "FISH",
+                                          "recipeCategory": "LOW_CARB",
+                                          "menuCategory": "MAIN_COURSE",
+                                          "garnish": "Salat"
+                                   }
+
+"""))
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        Recipe saveResultRecipe = objectMapper.readValue(saveResult, Recipe.class);
+        String id = saveResultRecipe.id();
+
+        mockMvc.perform(
+                put("/api/users/userId/recipes/" + id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                   {
+                                       "id": "<ID>",
+                                        "name": "Salat 22",
+                                       "mealType": "LUNCH",
+                                       "source": "Fitness World",
+                                       "image": "BigMacSalat.jpg",
+                                       "ingredients": [{
+                                             "id": "1",
+                                             "name": "Brot",
+                                             "quantity": "1",
+                                             "unit": "SMALL",
+                                             "isInShoppingList": false,
+                                             "productCategory": "BREAD_BAKERY"
+                                                         }],
+                                        "prepTime": "30 min.",
+                                         "preparation": "Anweisungen eintragen",
+                                         "portions": 2,
+                                          "favorite": false,
+                                          "dishTypeCategory": "FISH",
+                                          "recipeCategory": "LOW_CARB",
+                                          "menuCategory": "MAIN_COURSE",
+                                          "garnish": "Salat"
+                                   }
+
+""".replaceFirst("<ID>", id))
+        )
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+ {
+                                       "id": "<ID>",
+                                        "name": "Salat 22",
+                                       "mealType": "LUNCH",
+                                       "source": "Fitness World",
+                                       "image": "BigMacSalat.jpg",
+                                       "ingredients": [{
+                                             "id": "1",
+                                             "name": "Brot",
+                                             "quantity": "1",
+                                             "unit": "SMALL",
+                                             "isInShoppingList": false,
+                                             "productCategory": "BREAD_BAKERY"
+                                                         }],
+                                        "prepTime": "30 min.",
+                                         "preparation": "Anweisungen eintragen",
+                                         "portions": 2,
+                                          "favorite": false,
+                                          "dishTypeCategory": "FISH",
+                                          "recipeCategory": "LOW_CARB",
+                                          "menuCategory": "MAIN_COURSE",
+                                          "garnish": "Salat"
+                                   }
+
+""".replaceFirst("<ID>", id)));
     }
 
 }
