@@ -3,6 +3,8 @@ import "../images/BigMacSalat.jpg"
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
+import RecipeCard from "./RecipeCard";
+
 
 type RecipeCardGalleryViewProps = {
     recipeToDisplay: Recipe
@@ -40,9 +42,11 @@ export default function RecipeCardGalleryView(props: RecipeCardGalleryViewProps)
             <Button onClick={onDeleteClick} variant="outlined">Löschen</Button>
             <Button onClick={onDetailsClick} variant="outlined">Details</Button>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Rezept</DialogTitle>
+                <DialogTitle>Rezept Bearbeiten</DialogTitle>
                 <DialogContent>
+
                     <h3>{props.recipeToDisplay.name}</h3>
+                    <RecipeCard recipeToDisplay={props.recipeToDisplay}/>
 
                 </DialogContent>
                 <DialogActions>
