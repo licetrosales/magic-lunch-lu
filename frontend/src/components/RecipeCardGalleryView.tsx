@@ -43,6 +43,7 @@ export default function RecipeCardGalleryView(props: RecipeCardGalleryViewProps)
                 borderRadius: 1
             }}>
             <RecipeCard recipeToDisplay={props.recipeToDisplay}/>
+            </Box>
             <Button onClick={onDeleteClick} variant="outlined">Löschen</Button>
             <Button onClick={onDetailsClick} variant="outlined">Details</Button>
             <Dialog open={open} onClose={handleClose}>
@@ -62,7 +63,7 @@ export default function RecipeCardGalleryView(props: RecipeCardGalleryViewProps)
                     </Button>
                 </DialogActions>
             </Dialog>
-            </Box>
+
             </div>
     )
 
