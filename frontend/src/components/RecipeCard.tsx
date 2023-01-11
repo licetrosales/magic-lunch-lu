@@ -6,7 +6,7 @@ import {
     CardHeader,
     CardMedia,
     Collapse,
-    IconButton, IconButtonProps, styled,
+    IconButton, IconButtonProps, ListItem, ListItemText, styled,
     Typography
 } from "@mui/material";
 import {useState} from "react";
@@ -16,6 +16,9 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import {DishTypeCategory, MealType, MenuCategory, Recipe, RecipeCategory} from "../model/Recipe";
 import {Ingredient} from "../model/Ingredient";
+import List from "@mui/material/List";
+import RecipeCardGalleryView from "./RecipeCardGalleryView";
+import IngredientCardView from "./IngredientCardView";
 
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -46,6 +49,7 @@ export default function RecipeCard(props: RecipeCardProps) {
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
+    const firstLetter = props.recipeToDisplay.name[0];
 
     const name = props.recipeToDisplay.name
     const mealType = props.recipeToDisplay.mealType
@@ -58,15 +62,20 @@ export default function RecipeCard(props: RecipeCardProps) {
     const favorite = props.recipeToDisplay.favorite
     const dishTypeCategory = props.recipeToDisplay.dishTypeCategory
     const recipeCategory = props.recipeToDisplay.recipeCategory
-    const menuCategory = props.recipeToDisplay.recipeCategory
+    const menuCategory = props.recipeToDisplay.menuCategory
     const garnish = props.recipeToDisplay.garnish
+
+    const recipeIngredientes = props.recipeToDisplay.ingredients?.map((ingredientShortInfo) => {
+            return <IngredientCardView ingredientToDisplay={ingredientShortInfo}
+                                          key={ingredientShortInfo.id}/>
+        })
 
     return (
         <Card sx={{maxWidth: 345}}>
             <CardHeader
                 avatar={
                     <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
-                        R
+                        {firstLetter}
                     </Avatar>
                 }
                 action={
@@ -90,9 +99,8 @@ export default function RecipeCard(props: RecipeCardProps) {
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon/>
-                    {favorite}
+                <IconButton aria-label="add to favorites" disabled={!favorite} color={"default"}>
+                    <FavoriteIcon />
                 </IconButton>
                 <IconButton aria-label="share">
                     <ShareIcon/>
@@ -108,35 +116,24 @@ export default function RecipeCard(props: RecipeCardProps) {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                    <Typography sx={{mb: 1.5}} color="text.secondary">
-                        <b>Speise:</b> {mealType}
-                    </Typography>
-                    <Typography sx={{mb: 1.5}} color="text.secondary">
-                        <b>Speise:</b> {portions}
-                    </Typography>
                     <Typography variant="body2">
-                        <b>Quelle</b> : {source}
+                        <b>Tageskategorie</b> : {dishTypeCategory}
                     </Typography> <br/>
                     <Typography variant="body2">
-                        <b>Zubereitungzeit</b> : {prepTime}
+                        <b>Rezeptkategorie</b> : {recipeCategory}
                     </Typography> <br/>
                     <Typography variant="body2">
-                        <b>Mahlzeit</b> : {dishTypeCategory}
-                    </Typography> <br/>
-                    <Typography variant="body2">
-                        <b>Rezeptcategorie</b> : {recipeCategory}
-                    </Typography> <br/>
-                    <Typography variant="body2">
-                        <b>Menücategorie</b> : {menuCategory}
+                        <b>Menükategorie</b> : {menuCategory}
                     </Typography> <br/>
                     <Typography variant="body2">
                         <b>Beilage</b> : {garnish}
                     </Typography> <br/>
-                    <Typography paragraph>Zutaten</Typography>
-                    <Typography paragraph>
+                    <Typography paragraph><b>Zutaten</b></Typography>
 
+                    <Typography paragraph>
+                        {recipeIngredientes}
                     </Typography>
-                    <Typography paragraph>Zubereitung</Typography>
+                    <Typography paragraph><b>Zubereitung</b></Typography>
                     <Typography>
                         {preparation}
                     </Typography>

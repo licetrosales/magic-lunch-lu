@@ -29,7 +29,6 @@ export default function IngredientList(props: IngredientListProps) {
                         items.map((item, index) =>
                             <ListItem key={item.id} divider>
                                 <ListItemText
-
                                     primary={item.quantity + " " + item.unit + " " + item.name}
                                 />
                             </ListItem>
