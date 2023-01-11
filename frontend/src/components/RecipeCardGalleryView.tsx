@@ -1,6 +1,6 @@
 import {Recipe} from "../model/Recipe";
 import "../images/BigMacSalat.jpg"
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
+import {Box, Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import RecipeCard from "./RecipeCard";
@@ -34,11 +34,15 @@ export default function RecipeCardGalleryView(props: RecipeCardGalleryViewProps)
 
     return (
         <div>
-            <h3>{props.recipeToDisplay.name}</h3>
-            <img alt="photo" src={props.recipeToDisplay.image}/>
-            <p>{props.recipeToDisplay.mealType} </p>
-            <p>{props.recipeToDisplay.prepTime} </p>
-            <p>{props.recipeToDisplay.favorite} </p>
+            <Box sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                p: 1,
+                m: 1,
+                borderRadius: 1
+            }}>
+            <RecipeCard recipeToDisplay={props.recipeToDisplay}/>
             <Button onClick={onDeleteClick} variant="outlined">Löschen</Button>
             <Button onClick={onDetailsClick} variant="outlined">Details</Button>
             <Dialog open={open} onClose={handleClose}>
@@ -58,7 +62,8 @@ export default function RecipeCardGalleryView(props: RecipeCardGalleryViewProps)
                     </Button>
                 </DialogActions>
             </Dialog>
-        </div>
+            </Box>
+            </div>
     )
 
 
