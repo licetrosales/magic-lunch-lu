@@ -4,7 +4,7 @@ import {Box, Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@m
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import RecipeCard from "./RecipeCard";
-import RecipeUpdateForm from "./RecipeUpdateForm";
+import UpdateRecipeForm from "./UpdateRecipeForm";
 
 type RecipeCardGalleryViewProps = {
     recipeToDisplay: Recipe
@@ -59,7 +59,7 @@ export default function RecipeCardGalleryView(props: RecipeCardGalleryViewProps)
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Rezept Bearbeiten</DialogTitle>
                 <DialogContent>
-                    <RecipeUpdateForm currentRecipe={props.recipeToDisplay} handleUpdateRecipe={updateRecipe}/>
+                    <UpdateRecipeForm currentRecipe={props.recipeToDisplay} handleUpdateRecipe={updateRecipe}/>
                     {/* <RecipeCard recipeToDisplay={props.recipeToDisplay}/>*/}
                 </DialogContent>
                 <DialogActions>
