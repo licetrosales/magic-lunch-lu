@@ -1,5 +1,3 @@
-import {useParams} from "react-router-dom";
-import useRecipe from "../hooks/useRecipe";
 import {
     DishTypeCategory,
     MealType,
@@ -11,16 +9,14 @@ import {
 } from "../model/Recipe";
 import {Box, Button, MenuItem, TextField, Typography} from "@mui/material";
 import {ChangeEvent, FormEvent, useState} from "react";
-import axios from "axios";
 import {Ingredient} from "../model/Ingredient";
 import IngredientList from "./IngredientList";
+
 type RecipeUpdateFormProps = {
     currentRecipe: Recipe
     handleUpdateRecipe( modifiedRecipe: Recipe, id?: string): void
 }
-export default function RecipeUpdateForm(props: RecipeUpdateFormProps) {
-
-    const [updateState, setUpdateState] = useState(-1)
+export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
 
     const currentRecipeFormWithoutEnums: NewRecipeWithId = {
         id: props.currentRecipe.id,
@@ -41,9 +37,9 @@ export default function RecipeUpdateForm(props: RecipeUpdateFormProps) {
 
     const [recipeWithoutEnums, setRecipeWithoutEnums] = useState<NewRecipe>(currentRecipeFormWithoutEnums)
     const [mealType, setMealType] = useState<MealType | string>(props.currentRecipe.mealType)
-    const [dishTypeCategory, setDishTypeCategory] = useState<DishTypeCategory | string>()
-    const [recipeCategory, setRecipeCategory] = useState<RecipeCategory | string>()
-    const [menuCategory, setMenuCategory] = useState<MenuCategory | string>()
+    const [dishTypeCategory, setDishTypeCategory] = useState<DishTypeCategory | string>(props.currentRecipe.dishTypeCategory)
+    const [recipeCategory, setRecipeCategory] = useState<RecipeCategory | string>(props.currentRecipe.recipeCategory)
+    const [menuCategory, setMenuCategory] = useState<MenuCategory | string>(props.currentRecipe.menuCategory)
     const [open, setOpen] = useState<boolean>(false)
     const [items, setItems] = useState<Ingredient []>([])
 
@@ -84,30 +80,28 @@ export default function RecipeUpdateForm(props: RecipeUpdateFormProps) {
         event.preventDefault()
 
         const recipeToSend: Recipe={
-            dishTypeCategory: props.currentRecipe.dishTypeCategory,
-            favorite: false,
-            garnish: recipeWithoutEnums.garnish,
             id: props.currentRecipe.id,
-            image: props.currentRecipe.image,
-            ingredients: [],
-            mealType: props.currentRecipe.mealType,
-            menuCategory: props.currentRecipe.menuCategory,
             name: recipeWithoutEnums.name,
+            mealType: mealType,
+            source: recipeWithoutEnums.source,
+            image: props.currentRecipe.image,
+            ingredients: items,
+            prepTime: recipeWithoutEnums.prepTime,
+            preparation: recipeWithoutEnums.preparation,
             portions: recipeWithoutEnums.portions,
-            prepTime: "",
-            preparation: "",
-            recipeCategory: undefined,
-            source: ""
-
-
+            favorite: false,
+            dishTypeCategory: dishTypeCategory,
+            recipeCategory: recipeCategory,
+            menuCategory: menuCategory,
+            garnish: recipeWithoutEnums.garnish,
         }
         console.log(recipeToSend)
         props.handleUpdateRecipe(recipeToSend, props.currentRecipe.id)
         //setRecipeWithoutEnums(currentRecipeFormWithoutEnums)
-        setMealType(props.currentRecipe.mealType)
-        setDishTypeCategory(props.currentRecipe.dishTypeCategory)
-        setRecipeCategory(props.currentRecipe.recipeCategory)
-        setMenuCategory(props.currentRecipe.menuCategory)
+        //setMealType(props.currentRecipe.mealType)
+        //setDishTypeCategory(props.currentRecipe.dishTypeCategory)
+        //setRecipeCategory(props.currentRecipe.recipeCategory)
+        //setMenuCategory(props.currentRecipe.menuCategory)
     }
         return (
         <div>

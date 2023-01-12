@@ -12,9 +12,9 @@ export type Recipe = {
     preparation: string,
     portions: number,
     favorite: boolean,
-    dishTypeCategory?: DishTypeCategory | string,
-    recipeCategory?: RecipeCategory | string,
-    menuCategory?: MenuCategory | string,
+    dishTypeCategory: DishTypeCategory | string,
+    recipeCategory: RecipeCategory | string,
+    menuCategory: MenuCategory | string,
     garnish?: string
 }
 export type NewRecipe = {
