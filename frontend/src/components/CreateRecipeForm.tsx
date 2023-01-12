@@ -17,7 +17,6 @@ import {Ingredient} from "../model/Ingredient";
 
 type CreateRecipeProps = {
     handleCreateRecipe(newRecipe: Recipe): void
-
 }
 export default function CreateRecipeForm(props: CreateRecipeProps) {
     const emptyRecipeFormWithoutEnums: NewRecipe = {
@@ -58,14 +57,12 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
         const fieldType = event.target.type
 
         setRecipeWithoutEnums((prevNewRecipe => (
-            {
-                ...prevNewRecipe,
+            {...prevNewRecipe,
                 [fieldName]: fieldType === "checkbox"
                     ? event.target.checked
                     : fieldValue
             }
-
-        )))
+            )))
     }
 
     function onMealTypeChange(event: ChangeEvent<HTMLInputElement>) {
@@ -89,7 +86,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
         setItems(childData)
     }
 
-    function handleCreateRecipeSubmit(event: FormEvent<HTMLFormElement>) {
+    function handleCreateRecipeFormSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         props.handleCreateRecipe({
             name: recipeWithoutEnums.name,
@@ -119,7 +116,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Neues Rezept</DialogTitle>
                 <DialogContent>
-                    <form onSubmit={handleCreateRecipeSubmit}>
+                    <form onSubmit={handleCreateRecipeFormSubmit}>
                         <TextField
                             type={"text"}
                             label={"Name"}
@@ -130,6 +127,15 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             margin={"dense"}
                             fullWidth
                         />
+                        <TextField
+                            type={"text"}
+                            label={"Quelle"}
+                            name={"source"}
+                            value={recipeWithoutEnums.source}
+                            onChange={handleFormChange}
+                            margin={"dense"}
+                            fullWidth
+                        /><br/>
                         <Box display="flex" justifyContent="flex-end">
                             <Button variant={"contained"} component={"label"}>
                                 Bild hochladen
@@ -144,7 +150,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                                 />
                             </Button>
                         </Box>
-                        <br/>
+
                         <TextField
                             select
                             label="Mahlzeit"
@@ -158,52 +164,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             <MenuItem value={MealType.LUNCH}>Mittagessen</MenuItem>
                             <MenuItem value={MealType.DINNER}>Abendessen</MenuItem>
 
-                        </TextField><br/>
-                        <TextField
-                            type={"text"}
-                            label={"Quelle"}
-                            name={"source"}
-                            value={recipeWithoutEnums.source}
-                            onChange={handleFormChange}
-                            margin={"dense"}
-                            fullWidth
-                        /><br/><br/>
-                        <Typography align={"center"} variant={"body1"}>
-                            Zutatenliste
-                        </Typography>
-                        <IngredientList handleCallbackItems={handleCallbackItems}/>
-
-                        <TextField
-                            type={"text"}
-                            label={"Zubereitungszeit"}
-                            placeholder={"Gesamtzeit inkl. Vorbereitung"}
-                            name={"prepTime"}
-                            value={recipeWithoutEnums.prepTime}
-                            onChange={handleFormChange}
-                            margin={"dense"}
-                            fullWidth
-                        /><br/>
-                        <TextField
-                            type={"number"}
-                            label={"Portionen"}
-                            name={"portions"}
-                            value={recipeWithoutEnums.portions}
-                            onChange={handleFormChange}
-                            margin={"dense"}
-                            fullWidth
-                        /><br/>
-                        <TextField
-                            type={"text"}
-                            label={"Zubereitung"}
-                            placeholder={"Anweisungen eintragen..."}
-                            name={"preparation"}
-                            multiline
-                            value={recipeWithoutEnums.preparation}
-                            onChange={handleFormChange}
-                            margin={"dense"}
-                            fullWidth
-                        /><br/>
-
+                        </TextField>
                         <label>
                             Favorite:
                             <input
@@ -212,12 +173,10 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                                 checked={recipeWithoutEnums.favorite}
                                 onChange={handleFormChange}
                             />
-                        </label> <br/>
-
+                        </label>
                         <TextField
                             select
                             label="Tageskategorie"
-
                             name={"dishTypeCategory"}
                             value={dishTypeCategory}
                             onChange={onDishTypeCategoryChange}
@@ -234,7 +193,6 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                         <TextField
                             select
                             label="Rezeptkategorie"
-
                             name={"recipeCategory"}
                             value={recipeCategory}
                             onChange={onRecipeCategoryChange}
@@ -250,7 +208,6 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                         <TextField
                             select
                             label="Menükategorie"
-
                             name={"menuCategory"}
                             value={menuCategory}
                             onChange={onMenuCategoryChange}
@@ -262,6 +219,40 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             <MenuItem value={MenuCategory.DESSERT}>Nachspeise</MenuItem>
                             <MenuItem value={MenuCategory.SNACK}>Snack</MenuItem>
                         </TextField><br/>
+                        <TextField
+                            type={"number"}
+                            label={"Portionen"}
+                            name={"portions"}
+                            value={recipeWithoutEnums.portions}
+                            onChange={handleFormChange}
+                            margin={"dense"}
+                            fullWidth
+                        /><br/>
+                        <TextField
+                            type={"text"}
+                            label={"Zubereitungszeit"}
+                            placeholder={"Gesamtzeit inkl. Vorbereitung"}
+                            name={"prepTime"}
+                            value={recipeWithoutEnums.prepTime}
+                            onChange={handleFormChange}
+                            margin={"dense"}
+                            fullWidth
+                        /><br/>
+                        <Typography align={"center"} variant={"body1"}>
+                            Zutatenliste
+                        </Typography>
+                        <IngredientList handleCallbackItems={handleCallbackItems}/>
+                        <TextField
+                            type={"text"}
+                            label={"Zubereitung"}
+                            placeholder={"Anweisungen eintragen..."}
+                            name={"preparation"}
+                            multiline
+                            value={recipeWithoutEnums.preparation}
+                            onChange={handleFormChange}
+                            margin={"dense"}
+                            fullWidth
+                        /><br/>
                         <TextField
                             type={"text"}
                             label={"Beilagen"}
