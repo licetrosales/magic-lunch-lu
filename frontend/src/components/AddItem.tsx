@@ -2,6 +2,7 @@ import {ChangeEvent, useState} from "react";
 
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, TextField} from "@mui/material";
 import {Ingredient, NewItem, Unit} from "../model/Ingredient";
+import uuid from "react-uuid";
 
 type AddItemProps = {
     handleAddItem(newItem: Ingredient): void
@@ -9,6 +10,7 @@ type AddItemProps = {
 
 export default function AddItem(props: AddItemProps) {
     const emptyItemFormWithoutEnums: NewItem = {
+
         name: "",
         quantity: "",
         isInShoppingList: true
@@ -40,6 +42,7 @@ export default function AddItem(props: AddItemProps) {
 
     function handleAddItem() {
         const newItem: Ingredient = {
+            id: uuid(),
             name: itemWithoutEnums.name,
             quantity: itemWithoutEnums.quantity,
             unit: unit,
