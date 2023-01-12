@@ -6,6 +6,7 @@ type IngredientCardViewProps = {
 }
 export default function IngredientCardView(props: IngredientCardViewProps) {
 const name = props.ingredientToDisplay.name
+    const id = props.ingredientToDisplay.id
     const quantity = props.ingredientToDisplay.quantity
     const unit = props.ingredientToDisplay.unit
 

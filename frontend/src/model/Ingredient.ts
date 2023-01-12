@@ -2,14 +2,14 @@ export type Ingredient = {
     id: string,
     name: string,
     quantity: string,
-    unit?: Unit | string,
+    unit: Unit | string,
     productCategory?: ProductCategory | string,
     isInShoppingList?: boolean,
 }
 export type NewItem = {
     name: string,
     quantity: string,
-    unit?: Unit | string,
+    unit: Unit | string,
     isInShoppingList: boolean
 }
 

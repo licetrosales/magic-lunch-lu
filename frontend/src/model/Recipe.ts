@@ -7,7 +7,7 @@ export type Recipe = {
     mealType: MealType | string,
     source: string,
     image: string,
-    ingredients?: Ingredient[],
+    ingredients: Ingredient[],
     prepTime: string,
     preparation: string,
     portions: number,

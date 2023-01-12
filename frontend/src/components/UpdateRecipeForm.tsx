@@ -53,7 +53,7 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
     const [recipeCategory, setRecipeCategory] = useState<RecipeCategory | string>(props.currentRecipe.recipeCategory)
     const [menuCategory, setMenuCategory] = useState<MenuCategory | string>(props.currentRecipe.menuCategory)
 
-    const [items, setItems] = useState<Ingredient []>([])
+    const [items, setItems] = useState<Ingredient []>(props.currentRecipe.ingredients)
     const [open, setOpen] = useState<boolean>(false)
 
 

@@ -13,6 +13,7 @@ export default function AddItem(props: AddItemProps) {
 
         name: "",
         quantity: "",
+        unit:"",
         isInShoppingList: true
     }
     const [itemWithoutEnums, setItemWithoutEnums] = useState(emptyItemFormWithoutEnums)
@@ -52,6 +53,7 @@ export default function AddItem(props: AddItemProps) {
         setItemWithoutEnums({
             name: "",
             quantity: "",
+            unit:"",
             isInShoppingList: true
         })
         setUnit(Unit.KG)

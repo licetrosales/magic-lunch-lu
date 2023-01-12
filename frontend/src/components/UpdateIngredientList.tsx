@@ -15,7 +15,7 @@ export default function UpdateIngredientList(props: UpgradeIngredientListProps) 
     const [items, setItems] = useState<Ingredient []>(props.currentIngredients)
     const [updateState, setUpdateState] = useState<string>(" ")
 
-
+console.log(props.currentIngredients)
     function handleOnClick() {
         props.handleCallbackItems(items)
     }
@@ -39,7 +39,7 @@ export default function UpdateIngredientList(props: UpgradeIngredientListProps) 
             <Container>
                 <Stack alignItems={"center"}>
                     <AddItem handleAddItem={handleAddItem}/>
-                    {recipeIngredientes}
+
                     <List>{
                         items.map((item, index) =>(
                             updateState === item.id ? <UpdateItem current={item} items={items} handleUpdateItem={handleUpdateItem}/>:
@@ -47,9 +47,8 @@ export default function UpdateIngredientList(props: UpgradeIngredientListProps) 
                                 <ListItemText
                                     primary={item.quantity + " " + item.unit + " " + item.name}
                                 />
-                                <Button onClick={()=> handleEdit(item.id)}>Bearbeiten</Button>
                                 <Button onClick={()=> handleDelete(item.id)}>Löschen</Button>
-
+                                <UpdateItem current={item} items={items} handleUpdateItem={handleUpdateItem}/>:
                             </ListItem>
                         )
                         )}
@@ -62,8 +61,11 @@ export default function UpdateIngredientList(props: UpgradeIngredientListProps) 
             </Container>
         </div>
     )
-    function handleEdit(id:string){
-        setUpdateState(id)
+    function handleEdit(id:string, item:Ingredient){
+        return (
+            <UpdateItem current={item} items={items} handleUpdateItem={handleUpdateItem}/>
+        )
+
 
     }
     function handleDelete(id:string) {
