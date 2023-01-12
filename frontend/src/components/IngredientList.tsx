@@ -11,6 +11,7 @@ type IngredientListProps = {
 export default function IngredientList(props: IngredientListProps) {
     const [items, setItems] = useState<Ingredient []>([])
 
+
     function handleAddItem(item: Ingredient) {
         setItems(prevItems => {
             return [item, ...prevItems]

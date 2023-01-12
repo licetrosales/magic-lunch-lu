@@ -1,5 +1,5 @@
 export type Ingredient = {
-    id?: string,
+    id: string,
     name: string,
     quantity: string,
     unit?: Unit | string,
@@ -9,6 +9,7 @@ export type Ingredient = {
 export type NewItem = {
     name: string,
     quantity: string,
+    unit?: Unit | string,
     isInShoppingList: boolean
 }
 
