@@ -8,6 +8,7 @@ import {AppBar, Box, Container, Toolbar, Typography} from "@mui/material";
 export default function MyMagicLunchApp() {
 
     const [recipes, setRecipes] = useState<Recipe[]>([])
+
     useEffect(() => {
         getRecipes()
     }, [])
@@ -46,6 +47,26 @@ export default function MyMagicLunchApp() {
             })
     }
 
+
+
+    function updateRecipe( recipe: Recipe, id?: string) {
+        console.log(recipe)
+        axios.put(recipeBaseUrl + "/" + recipe.id, recipe)
+            .then(newRecipeResponse => {
+
+                const index = recipes.indexOf(recipe)
+                let copyOfRecipes = [...recipes]
+
+                copyOfRecipes[index] = newRecipeResponse.data
+
+                setRecipes(copyOfRecipes)
+            })
+            .catch(errorMessageReponse => {
+                console.error("There is an error by PUT request: " + errorMessageReponse)
+            })
+    }
+
+
     return (
         <section>
             <Container>
@@ -57,7 +78,7 @@ export default function MyMagicLunchApp() {
                             </Typography>
                         </Toolbar>
                     </AppBar>
-                    <RecipeGallery recipesToMap={recipes} recipeToRemove={removeRecipe}/>
+                    <RecipeGallery recipesToMap={recipes} recipeToRemove={removeRecipe} recipeToUpdate={updateRecipe}/>
                     <CreateRecipeForm handleCreateRecipe={addRecipe}/>
                 </Box>
             </Container>

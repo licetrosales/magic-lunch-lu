@@ -26,7 +26,18 @@ export type NewRecipe = {
     preparation: string,
     portions: number
     favorite: boolean
-    garnish: string
+    garnish?: string
+}
+export type NewRecipeWithId = {
+    id?: string,
+    name: string,
+    source: string,
+    image: string,
+    prepTime: string,
+    preparation: string,
+    portions: number
+    favorite: boolean
+    garnish?: string
 }
 
 export enum MealType {
