@@ -5,12 +5,13 @@ import RecipeCardGalleryView from "./RecipeCardGalleryView";
 type RecipeGalleryProps = {
     recipesToMap: Recipe[]
     recipeToRemove: (id?: string) => void
+    recipeToUpdate:( recipe: Recipe, id?: string,)=>void
 }
 
 export default function RecipeGallery(props: RecipeGalleryProps) {
 
     const recipeItemComponents = props.recipesToMap.map(recipeShortInfo => {
-        return <RecipeCardGalleryView recipeToDisplay={recipeShortInfo} recipeToRemove={props.recipeToRemove}
+        return <RecipeCardGalleryView recipeToDisplay={recipeShortInfo} recipeToRemove={props.recipeToRemove} recipeToUpdate={props.recipeToUpdate}
                                       key={recipeShortInfo.id}/>
     })
     return (

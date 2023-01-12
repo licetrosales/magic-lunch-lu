@@ -4,32 +4,42 @@ import {Box, Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@m
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import RecipeCard from "./RecipeCard";
-
+import RecipeUpdateForm from "./RecipeUpdateForm";
 
 type RecipeCardGalleryViewProps = {
     recipeToDisplay: Recipe
     recipeToRemove: (id?: string) => void
+    recipeToUpdate: (recipe: Recipe, id?: string) => void
 }
 export default function RecipeCardGalleryView(props: RecipeCardGalleryViewProps) {
 
     const navigate = useNavigate()
     const [open, setOpen] = useState<boolean>(false)
 
+
     function onDeleteClick() {
         props.recipeToRemove(props.recipeToDisplay.id)
     }
+
+
     function handleOpen() {
         setOpen(true)
     }
+
     function handleClose() {
         setOpen(false)
     }
-    function onDetailsClick() {
+
+    function handleEdit() {
         //navigate("/recipes/" + props.recipeToDisplay.id)
         handleOpen()
     }
-    function updateRecipe(){
 
+
+    function updateRecipe(recipe: Recipe, id: string,) {
+        if (props.recipeToDisplay.id) {
+            props.recipeToUpdate(recipe, id)
+        }
     }
 
     return (
@@ -42,29 +52,23 @@ export default function RecipeCardGalleryView(props: RecipeCardGalleryViewProps)
                 m: 1,
                 borderRadius: 1
             }}>
-            <RecipeCard recipeToDisplay={props.recipeToDisplay}/>
+                <RecipeCard recipeToDisplay={props.recipeToDisplay}/>
             </Box>
             <Button onClick={onDeleteClick} variant="outlined">Löschen</Button>
-            <Button onClick={onDetailsClick} variant="outlined">Details</Button>
+            <Button onClick={handleEdit} variant="outlined">Ändern</Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Rezept Bearbeiten</DialogTitle>
                 <DialogContent>
-
-                    <h3>{props.recipeToDisplay.name}</h3>
-                    <RecipeCard recipeToDisplay={props.recipeToDisplay}/>
-
+                    <RecipeUpdateForm currentRecipe={props.recipeToDisplay} handleUpdateRecipe={updateRecipe}/>
+                    {/* <RecipeCard recipeToDisplay={props.recipeToDisplay}/>*/}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={updateRecipe}>
-                        Ändern
-                    </Button>
                     <Button onClick={handleClose}>
                         Schließen
                     </Button>
                 </DialogActions>
             </Dialog>
-
-            </div>
+        </div>
     )
 
 
