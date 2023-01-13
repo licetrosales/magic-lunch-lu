@@ -23,7 +23,7 @@ export default function IngredientList(props: IngredientListProps) {
     }
 
     return (
-        <div className="Ingridient-list">
+        <div className="Ingredient-list">
             <Container>
                 <Stack alignItems={"center"}>
                     <List>{

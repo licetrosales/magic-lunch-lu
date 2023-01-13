@@ -6,10 +6,7 @@ import uuid from "react-uuid";
 
 type UpdateItemProps = {
     current: Ingredient
-    items: Ingredient[]
-
-    handleUpdateItem(newItem: Ingredient): void
-
+    handleUpdateItem(updatedItem: Ingredient): void
 }
 
 
@@ -46,21 +43,24 @@ export default function UpdateItem(props: UpdateItemProps) {
         setUnit(event.target.value as Unit)
     }
 
-    function handleAddItem() {
-        const newItem: Ingredient = {
+    function handleSaveItem() {
+        const updatedItem: Ingredient = {
             id: props.current.id,
             name: itemWithoutEnums.name,
             quantity: itemWithoutEnums.quantity,
-            unit: unit,
+            unit: unit
         }
-        props.handleUpdateItem(newItem)
-        /*setItemWithoutEnums({
-            id: "",
-            name: "",
-            quantity: "",
-            isInShoppingList: true
+
+        props.handleUpdateItem(updatedItem)
+        setItemWithoutEnums({
+            id: props.current.id,
+            name: updatedItem.name,
+            quantity: updatedItem.quantity,
+            unit:updatedItem.unit,
+            isInShoppingList: updatedItem.isInShoppingList
         })
-        setUnit(Unit.KG)*/
+
+        setUnit(Unit.KG)
         handleClose()
     }
 
@@ -110,7 +110,7 @@ export default function UpdateItem(props: UpdateItemProps) {
     <Button onClick={handleClose}>
         Abbrechen
         </Button>
-        <Button onClick={handleAddItem}>
+        <Button onClick={handleSaveItem}>
         Speichern
         </Button>
         </DialogActions>
