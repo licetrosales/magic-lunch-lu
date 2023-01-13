@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -166,9 +167,10 @@ class RecipeServiceTest {
             assertEquals("Recipe Id not found!", message.getMessage());
         }
     }
+
     @Test
-    void updateRecipe_shouldReturnRecipeWithChanges_whenRecipeIdExists(){
-        Recipe recipeToUpdate = new Recipe(recipeTestWithId.id(), "suppe 1",MealType.BREAKFAST,"");
+    void updateRecipe_shouldReturnRecipeWithChanges_whenRecipeIdExists() {
+        Recipe recipeToUpdate = new Recipe(recipeTestWithId.id(), "soup 1", MealType.BREAKFAST, "");
 
         when(recipeRepo.existsById(recipeTestWithId.id())).thenReturn(true);
 
@@ -177,6 +179,31 @@ class RecipeServiceTest {
         assertNotEquals(recipeTestWithId, result);
     }
 
+    @Test
+    public void updateRecipe_shouldThrowException_whenUserDoesntExist() {
+        Recipe recipeInDB = new Recipe(recipeTestWithId.id(), "soup 1", MealType.BREAKFAST, "");
+        Recipe recipeNotExistsInDB = new Recipe(recipeTestWithId.id(), "soup 2", MealType.BREAKFAST, "");
 
+        when(recipeRepo.existsById(recipeInDB.id())).thenReturn(true);
+
+        Recipe result = recipeService.updateRecipe(recipeNotExistsInDB);
+        try {
+            recipeService.updateRecipe(recipeNotExistsInDB);
+            fail();
+        } catch (NoSuchElementException message) {
+            assertEquals("There is no element with the requested ID", message.getMessage());
+        }
+    }
+
+    @Test
+    void exceptionTesting() {
+        when(recipeRepo.existsById(recipeTestWithId.id())).thenReturn(false);
+
+        NoSuchElementException thrown = assertThrows(
+                NoSuchElementException.class, () ->
+                        recipeService.updateRecipe(recipeTestWithId), "There is no element with the requested ID"
+        );
+        assertTrue(thrown.getMessage().contentEquals("There is no element with the requested ID"));
+    }
 
 }
