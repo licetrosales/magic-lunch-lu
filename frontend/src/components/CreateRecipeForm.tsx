@@ -57,12 +57,13 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
         const fieldType = event.target.type
 
         setRecipeWithoutEnums((prevNewRecipe => (
-            {...prevNewRecipe,
+            {
+                ...prevNewRecipe,
                 [fieldName]: fieldType === "checkbox"
                     ? event.target.checked
                     : fieldValue
             }
-            )))
+        )))
     }
 
     function onMealTypeChange(event: ChangeEvent<HTMLInputElement>) {

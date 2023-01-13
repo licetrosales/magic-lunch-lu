@@ -6,7 +6,7 @@ import {
     CardHeader,
     CardMedia,
     Collapse,
-    IconButton, IconButtonProps, ListItem, ListItemText, styled,
+    IconButton, IconButtonProps, styled,
     Typography
 } from "@mui/material";
 import {useState} from "react";
@@ -15,9 +15,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import {DishTypeCategory, MealType, MenuCategory, Recipe, RecipeCategory} from "../model/Recipe";
-import {Ingredient} from "../model/Ingredient";
-import List from "@mui/material/List";
-import RecipeCardGalleryView from "./RecipeCardGalleryView";
 import IngredientCardView from "./IngredientCardView";
 
 
@@ -66,9 +63,9 @@ export default function RecipeCard(props: RecipeCardProps) {
     const garnish = props.recipeToDisplay.garnish
 
     const recipeIngredientes = props.recipeToDisplay.ingredients?.map((ingredientShortInfo) => {
-            return <IngredientCardView ingredientToDisplay={ingredientShortInfo}
-                                          key={ingredientShortInfo.id}/>
-        })
+        return <IngredientCardView ingredientToDisplay={ingredientShortInfo}
+                                   key={ingredientShortInfo.id}/>
+    })
 
     return (
         <Card sx={{maxWidth: 345}}>
@@ -100,7 +97,7 @@ export default function RecipeCard(props: RecipeCardProps) {
             </CardContent>
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites" disabled={!favorite} color={"default"}>
-                    <FavoriteIcon />
+                    <FavoriteIcon/>
                 </IconButton>
                 <IconButton aria-label="share">
                     <ShareIcon/>

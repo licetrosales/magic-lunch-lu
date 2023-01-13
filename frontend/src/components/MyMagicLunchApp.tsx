@@ -8,7 +8,6 @@ import {AppBar, Box, Container, Toolbar, Typography} from "@mui/material";
 export default function MyMagicLunchApp() {
 
     const [recipes, setRecipes] = useState<Recipe[]>([])
-    const [state, setState] = useState<any>()
 
     useEffect(() => {
         getRecipes()

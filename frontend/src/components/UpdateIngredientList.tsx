@@ -37,7 +37,7 @@ export default function UpdateIngredientList(props: UpgradeIngredientListProps) 
 
         const indexOfModifiedItem = items.findIndex(item => item.id === modifiedItem.id)
         let copyOfItems = [...items]
-        let item = {...items[indexOfModifiedItem]}
+
         copyOfItems[indexOfModifiedItem] = modifiedItem
 
         setItems(copyOfItems)
