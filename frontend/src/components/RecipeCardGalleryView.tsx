@@ -13,7 +13,7 @@ type RecipeCardGalleryViewProps = {
 }
 export default function RecipeCardGalleryView(props: RecipeCardGalleryViewProps) {
 
-    const navigate = useNavigate()
+
     const [open, setOpen] = useState<boolean>(false)
 
 

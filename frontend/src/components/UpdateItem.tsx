@@ -1,8 +1,7 @@
 import {ChangeEvent, useState} from "react";
 
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, TextField} from "@mui/material";
-import {Ingredient, NewItem, Unit} from "../model/Ingredient";
-import uuid from "react-uuid";
+import {Ingredient, Unit} from "../model/Ingredient";
 
 type UpdateItemProps = {
     current: Ingredient
