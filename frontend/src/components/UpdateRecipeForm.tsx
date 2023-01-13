@@ -9,18 +9,14 @@ import {
 } from "../model/Recipe";
 import {
     Box,
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
+    Button, Dialog, DialogActions, DialogContent,
     DialogTitle,
-    MenuItem,
-    TextField,
+    MenuItem, TextField,
     Typography
 } from "@mui/material";
 import {ChangeEvent, FormEvent, useState} from "react";
 import {Ingredient} from "../model/Ingredient";
-import IngredientList from "./IngredientList";
+
 import UpdateIngredientList from "./UpdateIngredientList";
 import IngredientCardView from "./IngredientCardView";
 
@@ -116,7 +112,6 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
             menuCategory: menuCategory,
             garnish: recipeWithoutEnums.garnish,
         }
-        console.log(recipeToSend)
 
         props.handleUpdateRecipe(recipeToSend, props.currentRecipe.id)
             }

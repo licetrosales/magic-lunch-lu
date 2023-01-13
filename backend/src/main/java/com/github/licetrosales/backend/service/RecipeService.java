@@ -58,12 +58,10 @@ public void delete(String id) {
         recipeRepo.delete(recipe);
 }
 public Recipe updateRecipe(Recipe recipeToUpdate){
+Recipe recipe = recipeRepo.findById(recipeToUpdate.id()).orElseThrow();
 
-        if(!recipeRepo.existsById(recipeToUpdate.id())){
-            throw new NoSuchElementException("There is no element with the requested ID");
-        } else {
-            recipeRepo.save(recipeToUpdate);
-        }
-        return recipeToUpdate;
+            recipeRepo.save(recipe);
+
+        return recipe;
 }
 }
