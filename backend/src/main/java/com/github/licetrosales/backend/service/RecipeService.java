@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+
 import static org.springframework.data.mongodb.core.query.Update.update;
+
 @Service
 public class RecipeService {
     private final RecipeRepo recipeRepo;
@@ -46,22 +48,25 @@ public class RecipeService {
         return recipeRepo.save(newRecipeWithId);
     }
 
-public Recipe findById(String id){
-    Optional<Recipe> optionalRecipe = recipeRepo.findById(id);
-    if (optionalRecipe.isPresent()){
-        return optionalRecipe.get();
+    public Recipe findById(String id) {
+        Optional<Recipe> optionalRecipe = recipeRepo.findById(id);
+        if (optionalRecipe.isPresent()) {
+            return optionalRecipe.get();
+        }
+        throw new IllegalArgumentException("Recipe Id not found!");
     }
-    throw new IllegalArgumentException("Recipe Id not found!");
-}
-public void delete(String id) {
+
+    public void delete(String id) {
         Recipe recipe = findById(id);
         recipeRepo.delete(recipe);
-}
-public Recipe updateRecipe(Recipe recipeToUpdate){
-Recipe recipe = recipeRepo.findById(recipeToUpdate.id()).orElseThrow();
+    }
 
-            recipeRepo.save(recipe);
-
-        return recipe;
-}
+    public Recipe updateRecipe(Recipe recipeToUpdate) {
+        if (!recipeRepo.existsById(recipeToUpdate.id())) {
+            throw new NoSuchElementException("There is no element with the requested ID");
+        } else {
+            recipeRepo.save(recipeToUpdate);
+        }
+        return recipeToUpdate;
+    }
 }

@@ -32,28 +32,15 @@ export default function UpdateIngredientList(props: UpgradeIngredientListProps) 
         setItems(newItems)
     }
 
-    function handleUpdateItem(itemtoUpdate: Ingredient) {
+    function handleUpdateItem(modifiedItem: Ingredient) {
 
-        let itemsTemp = [...items]
-        const indexOfItem = itemsTemp.indexOf(itemtoUpdate)
 
-        let item ={ ...items[indexOfItem]}
-        item = itemtoUpdate
-        items[indexOfItem]= item
-        setItems(items)
+        const indexOfModifiedItem = items.findIndex(item => item.id === modifiedItem.id)
+        let copyOfItems = [...items]
+        let item = {...items[indexOfModifiedItem]}
+        copyOfItems[indexOfModifiedItem] = modifiedItem
 
-       /* let tempItems = [...items]
-
-        const indexOfItem = tempItems.indexOf(itemtoUpdate)
-
-        let item = itemtoUpdate
-        tempItems[indexOfItem] = item
-
-        setItems(tempItems)*/
-
-console.log("sdfsdfsdfsfd")
-        console.log(items)
-
+        setItems(copyOfItems)
     }
 
     const recipeIngredientes = items?.map((ingredientShortInfo) => {

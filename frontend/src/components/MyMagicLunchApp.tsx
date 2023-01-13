@@ -13,7 +13,7 @@ export default function MyMagicLunchApp() {
     useEffect(() => {
         getRecipes()
     }, [])
-
+    //const recipeBaseUrl = "http://localhost:8080/api/users/userId/recipes"
     const recipeBaseUrl = "/api/users/userId/recipes"
 
     function getRecipes() {
@@ -52,42 +52,17 @@ export default function MyMagicLunchApp() {
     function updateRecipe(modifiedRecipe: Recipe, id?: string) {
         console.log(modifiedRecipe)
         axios.put(recipeBaseUrl + "/" + modifiedRecipe.id, modifiedRecipe)
-
-            /* .then(newRecipeResponse => {
-
-                 let recipes = [...state.recipes]
-                 let recipe = {...recipes[1]}
-                 recipe = modifiedRecipe
-                 recipes[1] = recipe
-                 setRecipes({prevRecipeGallery => {
-                     return {recipes}
-                 }})
-
-
-             })*/
-
-
-            /*           .then(() => {
-                           setState(({recipes}: Recipe []) => ({
-                               recipes: [
-                                   ...recipes.slice(0, 1),
-                                   {
-                                       ...recipes[1],
-                                       recipe: recipes[recipes.indexOf(recipe)]
-                                   },
-                                   ...recipes.slice(2)
-                               ]
-                           }))
-
-                       })*/
             .then((newRecipeResponse) => {
-                const index = recipes.indexOf(modifiedRecipe)
-                let copyOfRecipes = [...recipes]
-                copyOfRecipes[index] = newRecipeResponse.data
-                setRecipes(copyOfRecipes)
-            }
+                    // Find index of modifiedRecipe
+                    // Was ich gegoogled habe: "js index of element with id"
+                    const indexOfModifiedElement = recipes.findIndex(recipe => recipe.id === modifiedRecipe.id)
 
-            ).then(getRecipes)
+                    // "js update element at index"
+                    let copyOfRecipes = [...recipes]
+                    copyOfRecipes[indexOfModifiedElement] = newRecipeResponse.data
+                    setRecipes(copyOfRecipes)
+                }
+            )
     }
 
 
