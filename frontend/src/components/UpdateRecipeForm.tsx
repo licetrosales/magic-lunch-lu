@@ -22,14 +22,14 @@ import IngredientCardView from "./IngredientCardView";
 
 type RecipeUpdateFormProps = {
     currentRecipe: Recipe
-    handleUpdateRecipe( modifiedRecipe: Recipe, id?: string): void
+    handleUpdateRecipe(modifiedRecipe: Recipe, id?: string): void
 }
 export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
 
     const currentRecipeFormWithoutEnums: NewRecipeWithId = {
         id: props.currentRecipe.id,
-        name: props.currentRecipe.name ,
-       // mealType: props.currentRecipe.mealType,
+        name: props.currentRecipe.name,
+        // mealType: props.currentRecipe.mealType,
         source: props.currentRecipe.source,
         image: props.currentRecipe.image,
         //ingredients: [],
@@ -60,23 +60,26 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
     function handleClose() {
         setOpen(false)
     }
+
     function handleFormChange(event: ChangeEvent<HTMLInputElement>) {
         const fieldName = event.target.name
         const fieldValue = event.target.value
         const fieldType = event.target.type
 
         setRecipeWithoutEnums((prevNewRecipe => (
-            {...prevNewRecipe,
+            {
+                ...prevNewRecipe,
                 [fieldName]: fieldType === "checkbox"
                     ? event.target.checked
                     : fieldValue
             }
-            )))
+        )))
     }
 
     function onMealTypeChange(event: ChangeEvent<HTMLInputElement>) {
         setMealType(event.target.value as MealType)
     }
+
     function onDishTypeCategoryChange(event: ChangeEvent<HTMLInputElement>) {
         setDishTypeCategory(event.target.value as DishTypeCategory)
     }
@@ -93,10 +96,11 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
     function handleCallbackItems(childData: Ingredient[]) {
         setItems(childData)
     }
+
     function handleUpdateRecipeFormSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
-        const recipeToSend: Recipe={
+        const recipeToSend: Recipe = {
             id: props.currentRecipe.id,
             name: recipeWithoutEnums.name,
             mealType: mealType,
@@ -114,25 +118,25 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
         }
 
         props.handleUpdateRecipe(recipeToSend, props.currentRecipe.id)
-            }
+    }
 
     const recipeIngredientes = props.currentRecipe.ingredients?.map((ingredientShortInfo) => {
         return <IngredientCardView ingredientToDisplay={ingredientShortInfo}
                                    key={ingredientShortInfo.id}/>
     })
-        return (
+    return (
         <div>
             <form onSubmit={handleUpdateRecipeFormSubmit}>
-                    <TextField
-                        type={"text"}
-                        label={"Name"}
-                        name={"name"}
-                        value={recipeWithoutEnums.name}
-                        onChange={handleFormChange}
-                        margin={"dense"}
-                        fullWidth
-                        variant="outlined"
-                    />
+                <TextField
+                    type={"text"}
+                    label={"Name"}
+                    name={"name"}
+                    value={recipeWithoutEnums.name}
+                    onChange={handleFormChange}
+                    margin={"dense"}
+                    fullWidth
+                    variant="outlined"
+                />
                 <TextField
                     type={"text"}
                     label={"Quelle"}
@@ -243,13 +247,13 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
                     margin={"dense"}
                     fullWidth
                 /><br/>
-                <Box display="flex" justifyContent= "center">
-                <Button onClick={handleOpen} >Zutaten bearbeiten</Button>
-                    </Box>
+                <Box display="flex" justifyContent="center">
+                    <Button onClick={handleOpen}>Zutaten bearbeiten</Button>
+                </Box>
                 <Dialog open={open} onClose={handleClose}>
                     <DialogTitle>Zutaten ändern</DialogTitle>
                     <DialogContent>
-                <UpdateIngredientList currentIngredients={items} handleCallbackItems={handleCallbackItems}/>
+                        <UpdateIngredientList currentIngredients={items} handleCallbackItems={handleCallbackItems}/>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose}>
@@ -282,7 +286,7 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
                 /><br/>
 
                 <Button type={"submit"} color={"success"} variant={"contained"}>Rezept Speichern</Button>
-                </form>
+            </form>
 
         </div>
     )

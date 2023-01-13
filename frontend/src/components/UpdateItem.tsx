@@ -15,7 +15,7 @@ export default function UpdateItem(props: UpdateItemProps) {
         id: props.current.id,
         name: props.current.name,
         quantity: props.current.quantity,
-        unit:props.current.unit,
+        unit: props.current.unit,
         isInShoppingList: props.current.isInShoppingList
     }
     const [itemWithoutEnums, setItemWithoutEnums] = useState(currentItemFormWithoutEnums)
@@ -56,7 +56,7 @@ export default function UpdateItem(props: UpdateItemProps) {
             id: props.current.id,
             name: updatedItem.name,
             quantity: updatedItem.quantity,
-            unit:updatedItem.unit,
+            unit: updatedItem.unit,
             isInShoppingList: updatedItem.isInShoppingList
         })
 
@@ -67,54 +67,54 @@ export default function UpdateItem(props: UpdateItemProps) {
     return (
         <div>
             <Button onClick={handleOpen}>Bearbeiten</Button>
-    <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Zutat bearbeiten</DialogTitle>
-    <DialogContent>
-    <TextField
-        label="Name"
-    name={"name"}
-    placeholder={"Zutat"}
-    value={itemWithoutEnums.name}
-    onChange={handleChange}
-    margin={"dense"}
-    fullWidth
-    />
-    <TextField
-        label={"Menge"}
-    name={"quantity"}
-    placeholder={"Menge"}
-    value={itemWithoutEnums.quantity}
-    onChange={handleChange}
-    margin={"dense"}
-    fullWidth
-    />
-    <TextField
-        select
-    label={"Einheit"}
-    name={"unit"}
-    placeholder={"Einheit"}
-    value={unit}
-    onChange={onUnitChange}
-    margin={"dense"}
-    fullWidth
-    >
-    <MenuItem value={Unit.KG}>kg</MenuItem>
-        <MenuItem value={Unit.G}>g</MenuItem>
-        <MenuItem value={Unit.LB}>lb</MenuItem>
-        <MenuItem value={Unit.OZ}>oz</MenuItem>
-        <MenuItem value={Unit.OTHER}>other</MenuItem>
-    </TextField>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Zutat bearbeiten</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        label="Name"
+                        name={"name"}
+                        placeholder={"Zutat"}
+                        value={itemWithoutEnums.name}
+                        onChange={handleChange}
+                        margin={"dense"}
+                        fullWidth
+                    />
+                    <TextField
+                        label={"Menge"}
+                        name={"quantity"}
+                        placeholder={"Menge"}
+                        value={itemWithoutEnums.quantity}
+                        onChange={handleChange}
+                        margin={"dense"}
+                        fullWidth
+                    />
+                    <TextField
+                        select
+                        label={"Einheit"}
+                        name={"unit"}
+                        placeholder={"Einheit"}
+                        value={unit}
+                        onChange={onUnitChange}
+                        margin={"dense"}
+                        fullWidth
+                    >
+                        <MenuItem value={Unit.KG}>kg</MenuItem>
+                        <MenuItem value={Unit.G}>g</MenuItem>
+                        <MenuItem value={Unit.LB}>lb</MenuItem>
+                        <MenuItem value={Unit.OZ}>oz</MenuItem>
+                        <MenuItem value={Unit.OTHER}>other</MenuItem>
+                    </TextField>
 
-    </DialogContent>
-    <DialogActions>
-    <Button onClick={handleClose}>
-        Abbrechen
-        </Button>
-        <Button onClick={handleSaveItem}>
-        Speichern
-        </Button>
-        </DialogActions>
-        </Dialog>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>
+                        Abbrechen
+                    </Button>
+                    <Button onClick={handleSaveItem}>
+                        Speichern
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </div>
-)
+    )
 }
