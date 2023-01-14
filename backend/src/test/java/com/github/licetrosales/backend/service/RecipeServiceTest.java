@@ -180,22 +180,6 @@ class RecipeServiceTest {
     }
 
     @Test
-    public void updateRecipe_shouldThrowException_whenUserDoesntExist() {
-        Recipe recipeInDB = new Recipe(recipeTestWithId.id(), "soup 1", MealType.BREAKFAST, "");
-        Recipe recipeNotExistsInDB = new Recipe(recipeTestWithId.id(), "soup 2", MealType.BREAKFAST, "");
-
-        when(recipeRepo.existsById(recipeInDB.id())).thenReturn(true);
-
-        Recipe result = recipeService.updateRecipe(recipeNotExistsInDB);
-        try {
-            recipeService.updateRecipe(recipeNotExistsInDB);
-            fail();
-        } catch (NoSuchElementException message) {
-            assertEquals("There is no element with the requested ID", message.getMessage());
-        }
-    }
-
-    @Test
     void exceptionTesting() {
         when(recipeRepo.existsById(recipeTestWithId.id())).thenReturn(false);
 
