@@ -1,0 +1,36 @@
+.header {
+    flex: 30%;
+    background-color: lavenderblush;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header.inputContainer {
+    display: flex;
+    flex-direction: column;
+}
+.header input {
+    width: 200px;
+    height: 40px;
+    border: none;
+    border-bottom-left-radius: 8px;
+    border-top-left-radius:8px;
+    padding-left: 10px;
+    font-size: 17px;
+    border: 1px solid gray;
+}
+.header.button {
+    width: 70px;
+    height: 87px;
+    border: none;
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+    padding-left: 10px;
+    cursor: pointer;
+
+}
+.magicLunch {
+    flex: 70%;
+    width: 100%;
+}
