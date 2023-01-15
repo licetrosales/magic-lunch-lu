@@ -4,6 +4,7 @@ import {Recipe} from "../model/Recipe";
 import axios from "axios";
 import CreateRecipeForm from "./CreateRecipeForm";
 import {AppBar, Box, Container, Toolbar, Typography} from "@mui/material";
+import Header from "./Header";
 
 export default function MyMagicLunchApp() {
 
@@ -69,13 +70,7 @@ export default function MyMagicLunchApp() {
         <section>
             <Container>
                 <Box sx={{flexGrow: 1}}>
-                    <AppBar>
-                        <Toolbar>
-                            <Typography variant={"h6"}>
-                                Meine Rezepte
-                            </Typography>
-                        </Toolbar>
-                    </AppBar>
+                   <Header/>
                     <RecipeGallery recipesToMap={recipes} recipeToRemove={removeRecipe} recipeToUpdate={updateRecipe}/>
                     <CreateRecipeForm handleCreateRecipe={addRecipe}/>
                 </Box>

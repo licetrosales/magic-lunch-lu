@@ -40,9 +40,7 @@ public class RecipeController {
 
     @PutMapping(path = "/recipes/{id}")
     Recipe updateRecipe(@PathVariable String id, @RequestBody Recipe recipeToUpdate) {
-        if (!recipeToUpdate.id().equals(id)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The id in the url does not match the request body's id");
-        }
+
         return recipeService.updateRecipe(recipeToUpdate);
     }
 }

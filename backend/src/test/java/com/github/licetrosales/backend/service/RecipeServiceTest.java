@@ -23,6 +23,7 @@ class RecipeServiceTest {
     String id = "testId";
     String idDay1 = "testIdDay1";
     String name = "Big Mac Salat";
+    String modifiedName = "Tomatensuppe";
     MealType mealType = MealType.LUNCH;
     String source = "GU";
     String image = "./image.png";
@@ -42,6 +43,9 @@ class RecipeServiceTest {
             ingredients, prepTime, preparation, portions, favorite, dishTypeCategory,
             recipeCategory, menuCategory, garnish);
     Recipe recipeTestWithId = new Recipe(id, name, mealType, source, image,
+            ingredients, prepTime, preparation, portions, favorite, dishTypeCategory,
+            recipeCategory, menuCategory, garnish);
+    Recipe recipeTestWithIdWithEditedNAme = new Recipe(id, modifiedName, mealType, source, image,
             ingredients, prepTime, preparation, portions, favorite, dishTypeCategory,
             recipeCategory, menuCategory, garnish);
 
@@ -180,7 +184,8 @@ class RecipeServiceTest {
     }
 
     @Test
-    void exceptionTesting() {
+    void updateRecipe_exceptionTesting() {
+
         when(recipeRepo.existsById(recipeTestWithId.id())).thenReturn(false);
 
         NoSuchElementException thrown = assertThrows(
