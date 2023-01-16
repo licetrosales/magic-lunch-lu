@@ -5,7 +5,7 @@ import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import {Link, Route} from "react-router-dom";
 
 export default function Header() {
-    const [tabValue, setTabvalue] = useState<boolean>();
+    const [tabValue, setTabvalue] = useState("/");
     const theme = useTheme()
     console.log(theme)
     const isMatch = useMediaQuery(theme.breakpoints.down("md"))
