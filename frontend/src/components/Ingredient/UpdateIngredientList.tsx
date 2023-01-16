@@ -44,11 +44,6 @@ export default function UpdateIngredientList(props: UpgradeIngredientListProps) 
         setItems(copyOfItems)
     }
 
-    const recipeIngredientes = items?.map((ingredientShortInfo) => {
-        return <IngredientCardView ingredientToDisplay={ingredientShortInfo}
-                                   key={ingredientShortInfo.id}/>
-    })
-
     return (
         <div className="Ingredient-list">
             <Container>

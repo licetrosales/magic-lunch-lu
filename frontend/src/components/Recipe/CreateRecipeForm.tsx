@@ -9,7 +9,7 @@ import {
     TextField,
     Typography
 } from "@mui/material";
-import {ChangeEvent, FormEvent, SyntheticEvent, useEffect, useState} from "react";
+import {ChangeEvent, FormEvent, useState} from "react";
 import {DishTypeCategory, MealType, MenuCategory, NewRecipe, Recipe, RecipeCategory} from "../../model/Recipe";
 import IngredientList from "../Ingredient/IngredientList";
 import {Ingredient} from "../../model/Ingredient";

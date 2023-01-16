@@ -29,7 +29,7 @@ export default function DrawerAppBar() {
                             <ListItemButton onClick={() => {
                                 setOpenDrawer(false)
                                 navigate(routes[index])
-                            }} key={index}
+                            }} key={pages[index]}
                            >
                                 <ListItemIcon>
                                     {pagesIcons[index]}
