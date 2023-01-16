@@ -7,7 +7,7 @@ import RamenDiningIcon from '@mui/icons-material/RamenDining';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import InfoIcon from '@mui/icons-material/Info';
 import HomeIcon from '@mui/icons-material/Home';
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import LogoutIcon from '@mui/icons-material/Logout';
 
 
