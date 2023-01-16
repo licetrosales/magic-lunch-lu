@@ -62,22 +62,7 @@ public class RecipeService {
     }
 
     public Recipe updateRecipe(Recipe recipeToUpdate) {
-        /*Recipe recipeToUpdateWithId = new Recipe(
-                idRecipeService.generateId(),
-                recipeToUpdate.name(),
-                recipeToUpdate.mealType(),
-                recipeToUpdate.source(),
-                recipeToUpdate.image(),
-                recipeToUpdate.ingredients(),
-                recipeToUpdate.prepTime(),
-                recipeToUpdate.preparation(),
-                recipeToUpdate.portions(),
-                recipeToUpdate.favorite(),
-                recipeToUpdate.dishTypeCategory(),
-                recipeToUpdate.recipeCategory(),
-                recipeToUpdate.menuCategory(),
-                recipeToUpdate.garnish()
-        );*/
+
         if (!recipeRepo.existsById(recipeToUpdate.id())) {
             throw new NoSuchElementException("There is no element with the requested ID");
         } else {
