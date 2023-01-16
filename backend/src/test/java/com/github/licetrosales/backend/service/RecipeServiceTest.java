@@ -174,11 +174,11 @@ class RecipeServiceTest {
 
     @Test
     void updateRecipe_shouldReturnRecipeWithChanges_whenRecipeIdExists() {
-        Recipe recipeToUpdate = new Recipe(recipeTestWithId.id(), "soup 1", MealType.BREAKFAST, "");
+        RecipeDTO recipeToUpdate = new RecipeDTO("soup 1", MealType.BREAKFAST, "","",ingredients, "","",2,false, dishTypeCategory, recipeCategory, menuCategory,"" );
 
         when(recipeRepo.existsById(recipeTestWithId.id())).thenReturn(true);
 
-        Recipe result = recipeService.updateRecipe(recipeToUpdate);
+        Recipe result = recipeService.updateRecipe(recipeTestWithId.id(), recipeToUpdate);
 
         assertNotEquals(recipeTestWithId, result);
     }
@@ -190,7 +190,7 @@ class RecipeServiceTest {
 
         NoSuchElementException thrown = assertThrows(
                 NoSuchElementException.class, () ->
-                        recipeService.updateRecipe(recipeTestWithId), "There is no element with the requested ID"
+                        recipeService.updateRecipe(recipeTestWithId.id(),recipeTestWithoutId), "There is no element with the requested ID"
         );
         assertTrue(thrown.getMessage().contentEquals("There is no element with the requested ID"));
     }
