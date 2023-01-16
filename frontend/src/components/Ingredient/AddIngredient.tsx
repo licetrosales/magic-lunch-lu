@@ -1,7 +1,7 @@
 import {ChangeEvent, useState} from "react";
 
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, TextField} from "@mui/material";
-import {Ingredient, NewItem} from "../model/Ingredient";
+import {Ingredient, NewItem} from "../../model/Ingredient";
 import uuid from "react-uuid";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
@@ -9,7 +9,7 @@ type AddItemProps = {
     handleAddItem(newItem: Ingredient): void
 }
 
-export default function AddItem(props: AddItemProps) {
+export default function AddIngredient(props: AddItemProps) {
     const emptyItemFormWithoutEnums: NewItem = {
 
         name: "",

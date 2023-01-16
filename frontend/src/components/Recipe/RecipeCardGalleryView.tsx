@@ -1,5 +1,5 @@
-import {Recipe} from "../model/Recipe";
-import "../images/BigMacSalat.jpg"
+import {Recipe} from "../../model/Recipe";
+import "../../images/BigMacSalat.jpg"
 import {Box, Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
 import {useState} from "react";
 import RecipeCard from "./RecipeCard";

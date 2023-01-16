@@ -1,9 +1,9 @@
-import {Ingredient} from "../model/Ingredient";
+import {Ingredient} from "../../model/Ingredient";
 import {useState} from "react";
 import {Button, Container, ListItem, ListItemText, Stack} from "@mui/material";
 import List from "@mui/material/List";
-import AddItem from "./AddItem";
-import UpdateItem from "./UpdateItem";
+import AddIngredient from "./AddIngredient";
+import UpdateIngredient from "./UpdateIngredient";
 import IngredientCardView from "./IngredientCardView";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
@@ -53,7 +53,7 @@ export default function UpdateIngredientList(props: UpgradeIngredientListProps) 
         <div className="Ingredient-list">
             <Container>
                 <Stack alignItems={"center"}>
-                    <AddItem handleAddItem={handleAddItem}/>
+                    <AddIngredient handleAddItem={handleAddItem}/>
 
                     <List>{
                         items.map((item, index) => (
@@ -63,7 +63,7 @@ export default function UpdateIngredientList(props: UpgradeIngredientListProps) 
                                     />
                                     <Button onClick={() => handleDelete(item.id)} color={"secondary"} startIcon={< DeleteOutlineIcon/>}></Button>
 
-                                    <UpdateItem current={item} handleUpdateItem={handleUpdateItem}/>
+                                    <UpdateIngredient current={item} handleUpdateItem={handleUpdateItem}/>
 
                                 </ListItem>
 

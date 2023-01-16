@@ -14,8 +14,8 @@ import {orange} from "@mui/material/colors";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import {Recipe} from "../model/Recipe";
-import IngredientCardView from "./IngredientCardView";
+import {Recipe} from "../../model/Recipe";
+import IngredientCardView from "../Ingredient/IngredientCardView";
 
 
 interface ExpandMoreProps extends IconButtonProps {
