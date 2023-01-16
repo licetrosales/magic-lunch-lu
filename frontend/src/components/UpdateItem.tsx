@@ -2,6 +2,8 @@ import {ChangeEvent, useState} from "react";
 
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, TextField} from "@mui/material";
 import {Ingredient, Unit} from "../model/Ingredient";
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+
 
 type UpdateItemProps = {
     current: Ingredient
@@ -65,7 +67,7 @@ export default function UpdateItem(props: UpdateItemProps) {
 
     return (
         <div>
-            <Button onClick={handleOpen} color={"secondary"}>Bearbeiten</Button>
+            <Button onClick={handleOpen} color={"secondary"} startIcon={<ModeEditOutlineIcon/>}></Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Zutat bearbeiten</DialogTitle>
                 <DialogContent>

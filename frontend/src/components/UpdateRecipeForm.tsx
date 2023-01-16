@@ -19,7 +19,8 @@ import {Ingredient} from "../model/Ingredient";
 
 import UpdateIngredientList from "./UpdateIngredientList";
 import IngredientCardView from "./IngredientCardView";
-import List from "@mui/material/List";
+import RefreshIcon from '@mui/icons-material/Refresh';
+
 
 type RecipeUpdateFormProps = {
     currentRecipe: Recipe
@@ -270,7 +271,7 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
                     </DialogContent>
                     <DialogActions>
 
-                        <Button onClick={handleClose} color={"secondary"} >
+                        <Button onClick={handleClose} color={"secondary"}>
                             Schließen
                         </Button>
 
@@ -278,8 +279,11 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
                 </Dialog>
                 <Typography align={"center"} variant={"body1"}>
                     {recipeIngredientes}
-
                 </Typography>
+                <Box display="flex" justifyContent="center">
+                    <Button type={"submit"} color={"secondary"} variant={"outlined"}
+                            startIcon={<RefreshIcon/>}></Button>
+                </Box>
                 <TextField
                     type={"text"}
                     label={"Zubereitung"}
@@ -303,7 +307,7 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
                     color="secondary"
                 /><br/>
 
-                <Button type={"submit"} color={"success"} variant={"contained"}>Rezept Speichern</Button>
+                <Button type={"submit"} color={"inherit"} variant={"contained"}>Rezept Speichern</Button>
             </form>
 
         </div>

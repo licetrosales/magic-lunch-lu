@@ -117,8 +117,8 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                  display="flex"
                  justifyContent="center"
                  alignItems="center"
-                 >
-            <Button onClick={handleOpen} color={"secondary"} >Neues Rezept</Button>
+            >
+                <Button onClick={handleOpen} color={"secondary"}>Neues Rezept</Button>
             </Box>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Neues Rezept</DialogTitle>
@@ -285,7 +285,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             color="secondary"
                         /><br/>
 
-                        <Button type={"submit"} color={"success"} variant={"contained"}>Rezept speichern</Button>
+                        <Button type={"submit"} color={"inherit"} variant={"contained"}>Rezept speichern</Button>
                     </form>
                 </DialogContent>
                 <DialogActions>
