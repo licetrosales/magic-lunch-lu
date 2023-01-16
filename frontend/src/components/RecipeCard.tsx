@@ -10,7 +10,7 @@ import {
     Typography
 } from "@mui/material";
 import {useState} from "react";
-import {red} from "@mui/material/colors";
+import {deepOrange, deepPurple, orange, pink, red} from "@mui/material/colors";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -71,7 +71,7 @@ export default function RecipeCard(props: RecipeCardProps) {
         <Card sx={{maxWidth: 345}}>
             <CardHeader
                 avatar={
-                    <Avatar sx={{bgcolor: red[500]}} aria-label="recipe">
+                    <Avatar sx={{bgcolor: orange[500]}} aria-label="recipe">
                         {firstLetter}
                     </Avatar>
                 }
