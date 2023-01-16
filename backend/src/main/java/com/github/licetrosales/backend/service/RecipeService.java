@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import static org.springframework.data.mongodb.core.query.Update.update;
-
 @Service
 public class RecipeService {
     private final RecipeRepo recipeRepo;

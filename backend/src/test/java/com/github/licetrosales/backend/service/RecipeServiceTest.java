@@ -10,7 +10,6 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -174,7 +173,7 @@ class RecipeServiceTest {
 
     @Test
     void updateRecipe_shouldReturnRecipeWithChanges_whenRecipeIdExists() {
-        RecipeDTO recipeToUpdate = new RecipeDTO("soup 1", MealType.BREAKFAST, "","",ingredients, "","",2,false, dishTypeCategory, recipeCategory, menuCategory,"" );
+        RecipeDTO recipeToUpdate = new RecipeDTO("soup 1", MealType.BREAKFAST, "", "", ingredients, "", "", 2, false, dishTypeCategory, recipeCategory, menuCategory, "");
 
         when(recipeRepo.existsById(recipeTestWithId.id())).thenReturn(true);
 
@@ -190,7 +189,7 @@ class RecipeServiceTest {
 
         NoSuchElementException thrown = assertThrows(
                 NoSuchElementException.class, () ->
-                        recipeService.updateRecipe(recipeTestWithId.id(),recipeTestWithoutId), "There is no element with the requested ID"
+                        recipeService.updateRecipe(recipeTestWithId.id(), recipeTestWithoutId), "There is no element with the requested ID"
         );
         assertTrue(thrown.getMessage().contentEquals("There is no element with the requested ID"));
     }

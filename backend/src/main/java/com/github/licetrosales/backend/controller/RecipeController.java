@@ -2,10 +2,10 @@ package com.github.licetrosales.backend.controller;
 
 import com.github.licetrosales.backend.model.Recipe;
 import com.github.licetrosales.backend.model.RecipeDTO;
-import com.github.licetrosales.backend.repo.RecipeRepo;
 import com.github.licetrosales.backend.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
