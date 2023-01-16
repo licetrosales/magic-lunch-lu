@@ -58,8 +58,8 @@ class RecipeServiceTest {
     String ingredientName2 = "Cheddar";
     String ingredientQuantity1 = "1";
     String ingredientQuantity2 = "10";
-    Unit ingredientUnit1 = Unit.SMALL;
-    Unit ingredientUnit2 = Unit.G;
+    String ingredientUnit1 = "small";
+    String ingredientUnit2 = "g";
     ProductCategory productCategory1 = ProductCategory.PRODUCE;
 
     Boolean isInShoppingList = false;
