@@ -65,7 +65,7 @@ export default function UpdateItem(props: UpdateItemProps) {
 
     return (
         <div>
-            <Button onClick={handleOpen}>Bearbeiten</Button>
+            <Button onClick={handleOpen} color={"secondary"}>Bearbeiten</Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Zutat bearbeiten</DialogTitle>
                 <DialogContent>
@@ -77,6 +77,7 @@ export default function UpdateItem(props: UpdateItemProps) {
                         onChange={handleChange}
                         margin={"dense"}
                         fullWidth
+                        color="secondary"
                     />
                     <TextField
                         label={"Menge"}
@@ -86,6 +87,7 @@ export default function UpdateItem(props: UpdateItemProps) {
                         onChange={handleChange}
                         margin={"dense"}
                         fullWidth
+                        color="secondary"
                     />
                     <TextField
                         select
@@ -96,6 +98,7 @@ export default function UpdateItem(props: UpdateItemProps) {
                         onChange={onUnitChange}
                         margin={"dense"}
                         fullWidth
+                        color="secondary"
                     >
                         <MenuItem value={Unit.KG}>kg</MenuItem>
                         <MenuItem value={Unit.G}>g</MenuItem>
@@ -106,10 +109,10 @@ export default function UpdateItem(props: UpdateItemProps) {
 
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>
+                    <Button onClick={handleClose} color={"secondary"}>
                         Abbrechen
                     </Button>
-                    <Button onClick={handleSaveItem}>
+                    <Button onClick={handleSaveItem} color={"secondary"}>
                         Speichern
                     </Button>
                 </DialogActions>

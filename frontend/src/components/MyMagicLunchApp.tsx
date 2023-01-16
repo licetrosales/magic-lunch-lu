@@ -67,12 +67,12 @@ export default function MyMagicLunchApp() {
 
 
     return (
-        <section>
+        <section className={"section-content"}>
             <Container>
-                <Box sx={{flexGrow: 1}}>
-                   <Header/>
-                    <RecipeGallery recipesToMap={recipes} recipeToRemove={removeRecipe} recipeToUpdate={updateRecipe}/>
+                <Box sx={{flexGrow: 1} }>
+
                     <CreateRecipeForm handleCreateRecipe={addRecipe}/>
+                    <RecipeGallery recipesToMap={recipes} recipeToRemove={removeRecipe} recipeToUpdate={updateRecipe}/>
                 </Box>
             </Container>
         </section>

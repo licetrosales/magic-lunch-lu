@@ -10,7 +10,7 @@ import {
 import {
     Box,
     Button, Dialog, DialogActions, DialogContent,
-    DialogTitle,
+    DialogTitle, ListItem, ListItemText,
     MenuItem, TextField,
     Typography
 } from "@mui/material";
@@ -19,6 +19,7 @@ import {Ingredient} from "../model/Ingredient";
 
 import UpdateIngredientList from "./UpdateIngredientList";
 import IngredientCardView from "./IngredientCardView";
+import List from "@mui/material/List";
 
 type RecipeUpdateFormProps = {
     currentRecipe: Recipe
@@ -59,6 +60,7 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
 
     function handleClose() {
         setOpen(false)
+
     }
 
     function handleFormChange(event: ChangeEvent<HTMLInputElement>) {
@@ -136,6 +138,7 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
                     margin={"dense"}
                     fullWidth
                     variant="outlined"
+                    color="secondary"
                 />
                 <TextField
                     type={"text"}
@@ -145,9 +148,10 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
                     onChange={handleFormChange}
                     margin={"dense"}
                     fullWidth
+                    color="secondary"
                 /><br/>
                 <Box display="flex" justifyContent="flex-end">
-                    <Button variant={"contained"} component={"label"}>
+                    <Button variant={"contained"} component={"label"} color={"secondary"}>
                         Bild hochladen
                         <input
                             hidden accept={"images/*"}
@@ -157,6 +161,7 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
                             name={"image"}
                             value={recipeWithoutEnums.image}
                             onChange={handleFormChange}
+                            color="secondary"
                         />
                     </Button>
                 </Box>
@@ -169,6 +174,7 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
                     onChange={onMealTypeChange}
                     margin={"dense"}
                     fullWidth
+                    color="secondary"
                 >
                     <MenuItem value={MealType.BREAKFAST}>Frühstück</MenuItem>
                     <MenuItem value={MealType.LUNCH}>Mittagessen</MenuItem>
@@ -192,6 +198,7 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
                     onChange={onDishTypeCategoryChange}
                     margin={"dense"}
                     fullWidth
+                    color="secondary"
                 >
                     <MenuItem value={DishTypeCategory.VEGGIE}>Veggie</MenuItem>
                     <MenuItem value={DishTypeCategory.MEAT}>Fleisch</MenuItem>
@@ -208,6 +215,8 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
                     onChange={onRecipeCategoryChange}
                     margin={"dense"}
                     fullWidth
+                    color="secondary"
+
                 >
                     <MenuItem value={RecipeCategory.SALAD}>Salat</MenuItem>
                     <MenuItem value={RecipeCategory.SOUP}>Suppe</MenuItem>
@@ -223,6 +232,7 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
                     onChange={onMenuCategoryChange}
                     margin={"dense"}
                     fullWidth
+                    color="secondary"
                 >
                     <MenuItem value={MenuCategory.ENTREE}>Vorspeise</MenuItem>
                     <MenuItem value={MenuCategory.MAIN_COURSE}>Hauptspeise</MenuItem>
@@ -237,6 +247,7 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
                     onChange={handleFormChange}
                     margin={"dense"}
                     fullWidth
+                    color="secondary"
                 /><br/>
                 <TextField
                     type={"text"}
@@ -246,23 +257,28 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
                     onChange={handleFormChange}
                     margin={"dense"}
                     fullWidth
+                    color="secondary"
                 /><br/>
                 <Box display="flex" justifyContent="center">
-                    <Button onClick={handleOpen}>Zutaten bearbeiten</Button>
+                    <Button onClick={handleOpen} color={"secondary"}>Zutaten bearbeiten</Button>
                 </Box>
                 <Dialog open={open} onClose={handleClose}>
                     <DialogTitle>Zutaten ändern</DialogTitle>
                     <DialogContent>
                         <UpdateIngredientList currentIngredients={items} handleCallbackItems={handleCallbackItems}/>
+
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleClose}>
+
+                        <Button onClick={handleClose} color={"secondary"} >
                             Schließen
                         </Button>
+
                     </DialogActions>
                 </Dialog>
                 <Typography align={"center"} variant={"body1"}>
                     {recipeIngredientes}
+
                 </Typography>
                 <TextField
                     type={"text"}
@@ -273,6 +289,7 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
                     onChange={handleFormChange}
                     margin={"dense"}
                     fullWidth
+                    color="secondary"
                 /><br/>
                 <TextField
                     type={"text"}
@@ -283,6 +300,7 @@ export default function UpdateRecipeForm(props: RecipeUpdateFormProps) {
                     margin={"dense"}
                     fullWidth
                     multiline
+                    color="secondary"
                 /><br/>
 
                 <Button type={"submit"} color={"success"} variant={"contained"}>Rezept Speichern</Button>

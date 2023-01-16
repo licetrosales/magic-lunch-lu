@@ -113,7 +113,13 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
 
     return (
         <div>
-            <Button onClick={handleOpen}>Neues Rezept</Button>
+            <Box m={1}
+                 display="flex"
+                 justifyContent="center"
+                 alignItems="center"
+                 >
+            <Button onClick={handleOpen} color={"secondary"} >Neues Rezept</Button>
+            </Box>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Neues Rezept</DialogTitle>
                 <DialogContent>
@@ -127,6 +133,9 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             onChange={handleFormChange}
                             margin={"dense"}
                             fullWidth
+                            color="secondary"
+
+
                         />
                         <TextField
                             type={"text"}
@@ -136,9 +145,10 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             onChange={handleFormChange}
                             margin={"dense"}
                             fullWidth
+                            color="secondary"
                         /><br/>
                         <Box display="flex" justifyContent="flex-end">
-                            <Button variant={"contained"} component={"label"}>
+                            <Button variant={"contained"} component={"label"} color={"secondary"}>
                                 Bild hochladen
                                 <input
                                     hidden accept={"images/*"}
@@ -160,6 +170,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             onChange={onMealTypeChange}
                             margin={"dense"}
                             fullWidth
+                            color="secondary"
                         >
                             <MenuItem value={MealType.BREAKFAST}>Frühstück</MenuItem>
                             <MenuItem value={MealType.LUNCH}>Mittagessen</MenuItem>
@@ -173,6 +184,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                                 name="favorite"
                                 checked={recipeWithoutEnums.favorite}
                                 onChange={handleFormChange}
+                                color="secondary"
                             />
                         </label>
                         <TextField
@@ -183,6 +195,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             onChange={onDishTypeCategoryChange}
                             margin={"dense"}
                             fullWidth
+                            color="secondary"
                         >
                             <MenuItem value={DishTypeCategory.VEGGIE}>Veggie</MenuItem>
                             <MenuItem value={DishTypeCategory.MEAT}>Fleisch</MenuItem>
@@ -199,6 +212,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             onChange={onRecipeCategoryChange}
                             margin={"dense"}
                             fullWidth
+                            color="secondary"
                         >
                             <MenuItem value={RecipeCategory.SALAD}>Salat</MenuItem>
                             <MenuItem value={RecipeCategory.SOUP}>Suppe</MenuItem>
@@ -214,6 +228,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             onChange={onMenuCategoryChange}
                             margin={"dense"}
                             fullWidth
+                            color="secondary"
                         >
                             <MenuItem value={MenuCategory.ENTREE}>Vorspeise</MenuItem>
                             <MenuItem value={MenuCategory.MAIN_COURSE}>Hauptspeise</MenuItem>
@@ -228,6 +243,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             onChange={handleFormChange}
                             margin={"dense"}
                             fullWidth
+                            color="secondary"
                         /><br/>
                         <TextField
                             type={"text"}
@@ -238,8 +254,9 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             onChange={handleFormChange}
                             margin={"dense"}
                             fullWidth
+                            color="secondary"
                         /><br/>
-                        <Typography align={"center"} variant={"body1"}>
+                        <Typography align={"center"} variant={"h6"}>
                             Zutatenliste
                         </Typography>
                         <IngredientList handleCallbackItems={handleCallbackItems}/>
@@ -253,6 +270,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             onChange={handleFormChange}
                             margin={"dense"}
                             fullWidth
+                            color="secondary"
                         /><br/>
                         <TextField
                             type={"text"}
@@ -264,13 +282,14 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             margin={"dense"}
                             fullWidth
                             multiline
+                            color="secondary"
                         /><br/>
 
                         <Button type={"submit"} color={"success"} variant={"contained"}>Rezept speichern</Button>
                     </form>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>
+                    <Button onClick={handleClose} color={"secondary"}>
                         Schließen
                     </Button>
                 </DialogActions>

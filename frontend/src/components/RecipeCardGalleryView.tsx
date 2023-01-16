@@ -54,20 +54,24 @@ export default function RecipeCardGalleryView(props: RecipeCardGalleryViewProps)
             }}>
                 <RecipeCard recipeToDisplay={props.recipeToDisplay}/>
             </Box>
-            <Button onClick={onDeleteClick} variant="outlined">Löschen</Button>
-            <Button onClick={handleEdit} variant="outlined">Ändern</Button>
+            <Box  m={1}
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center">
+            <Button onClick={onDeleteClick} variant="outlined" color="secondary">Löschen</Button>
+            <Button onClick={handleEdit} variant="outlined" color="secondary">Ändern</Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Rezept Bearbeiten</DialogTitle>
                 <DialogContent>
                     <UpdateRecipeForm currentRecipe={props.recipeToDisplay} handleUpdateRecipe={updateRecipe}/>
-                    {/* <RecipeCard recipeToDisplay={props.recipeToDisplay}/>*/}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>
+                    <Button onClick={handleClose} color={"secondary"}>
                         Schließen
                     </Button>
                 </DialogActions>
             </Dialog>
+            </Box>
         </div>
     )
 

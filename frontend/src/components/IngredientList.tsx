@@ -37,7 +37,7 @@ export default function IngredientList(props: IngredientListProps) {
                     }
                     </List>
                     <AddItem handleAddItem={handleAddItem}/>
-                    <Button onClick={handleOnClick} variant={"contained"} component={"label"}>
+                    <Button onClick={handleOnClick} variant={"outlined"} component={"label"} color={"secondary"}>
                         Zutatenliste speichern
                     </Button>
                 </Stack>

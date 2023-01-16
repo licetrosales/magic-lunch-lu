@@ -60,7 +60,7 @@ export default function UpdateIngredientList(props: UpgradeIngredientListProps) 
                                     <ListItemText
                                         primary={item.quantity + " " + item.unit + " " + item.name}
                                     />
-                                    <Button onClick={() => handleDelete(item.id)}>Löschen</Button>
+                                    <Button onClick={() => handleDelete(item.id)} color={"secondary"}>Löschen</Button>
 
                                     <UpdateItem current={item} handleUpdateItem={handleUpdateItem}/>
 
@@ -70,7 +70,7 @@ export default function UpdateIngredientList(props: UpgradeIngredientListProps) 
                         )}
                     </List>
 
-                    <Button onClick={handleOnClick} variant={"contained"} component={"label"}>
+                    <Button onClick={handleOnClick} variant={"contained"} component={"label"} color={"secondary"}>
                         Zutatenliste speichern
                     </Button>
                 </Stack>

@@ -62,7 +62,7 @@ export default function AddItem(props: AddItemProps) {
 
     return (
         <div>
-            <Button onClick={handleOpen}>Zutat eintragen</Button>
+            <Button onClick={handleOpen} color={"secondary"}>Zutat eintragen</Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Neue Zutat</DialogTitle>
                 <DialogContent>
@@ -74,6 +74,7 @@ export default function AddItem(props: AddItemProps) {
                         onChange={handleChange}
                         margin={"dense"}
                         fullWidth
+                        color="secondary"
                     />
                     <TextField
                         label={"Menge"}
@@ -83,6 +84,7 @@ export default function AddItem(props: AddItemProps) {
                         onChange={handleChange}
                         margin={"dense"}
                         fullWidth
+                        color="secondary"
                     />
                     <TextField
                         select
@@ -93,6 +95,7 @@ export default function AddItem(props: AddItemProps) {
                         onChange={onUnitChange}
                         margin={"dense"}
                         fullWidth
+                        color="secondary"
                     >
                         <MenuItem value={Unit.KG}>kg</MenuItem>
                         <MenuItem value={Unit.G}>g</MenuItem>
@@ -103,10 +106,10 @@ export default function AddItem(props: AddItemProps) {
 
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>
+                    <Button onClick={handleClose} color={"secondary"}>
                         Abbrechen
                     </Button>
-                    <Button onClick={handleAddItem}>
+                    <Button onClick={handleAddItem} color={"secondary"}>
                         Speichern
                     </Button>
                 </DialogActions>
