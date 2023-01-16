@@ -19,6 +19,7 @@ function App() {
                 <Route path={"/recipes"} element={<MyMagicLunchApp/>}></Route>
                 <Route path={"/weekplan-history"} element={<WeekPlanner/>}></Route>
                 <Route path={"/impressum"} element={<WeekPlanner/>}></Route>
+
             </Routes>
         </div>
     );

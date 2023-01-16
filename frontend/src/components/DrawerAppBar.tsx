@@ -5,19 +5,20 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 import RamenDiningIcon from '@mui/icons-material/RamenDining';
 import DateRangeIcon from '@mui/icons-material/DateRange';
-import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 import InfoIcon from '@mui/icons-material/Info';
 import HomeIcon from '@mui/icons-material/Home';
+import {Link, useNavigate} from "react-router-dom";
 import LogoutIcon from '@mui/icons-material/Logout';
-import {Link} from "react-router-dom";
 
 
 export default function DrawerAppBar() {
 
     const [openDrawer, setOpenDrawer] = useState<boolean>(false)
-    const pages = ["Startseite","Meine Rezepte", "Wochenplan", "Impressum"]
-    const pagesIcons = [<HomeIcon/>, <RamenDiningIcon/>, <DateRangeIcon/>, <InfoIcon/>]
-    const routes = ["/", "/recipes", "/weekplan-history", "/impressum"]
+    const pages = ["Startseite","Meine Rezepte", "Wochenplan", "Impressum","Logout"]
+    const pagesIcons = [<HomeIcon/>, <RamenDiningIcon/>, <DateRangeIcon/>, <InfoIcon/>,<LogoutIcon/>]
+    const routes = ["/", "/recipes", "/weekplan-history", "/impressum", "/logout"]
+    const navigate  = useNavigate()
+
     return (
         <div>
             <Drawer open={openDrawer}
@@ -25,8 +26,11 @@ export default function DrawerAppBar() {
                 <List>
                     {
                         pages.map((page, index) => (
-                            <ListItemButton onClick={() => setOpenDrawer(false)} key={index}
-                            component = {Link} to={`/${routes[index]}`}>
+                            <ListItemButton onClick={() => {
+                                setOpenDrawer(false)
+                                navigate(routes[index])
+                            }} key={index}
+                           >
                                 <ListItemIcon>
                                     {pagesIcons[index]}
                                     <ListItemText>
