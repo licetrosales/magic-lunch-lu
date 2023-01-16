@@ -1,7 +1,6 @@
 import {Recipe} from "../model/Recipe";
 import "../images/BigMacSalat.jpg"
 import {Box, Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
-import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import RecipeCard from "./RecipeCard";
 import UpdateRecipeForm from "./UpdateRecipeForm";

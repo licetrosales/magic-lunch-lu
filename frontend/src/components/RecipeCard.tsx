@@ -10,11 +10,11 @@ import {
     Typography
 } from "@mui/material";
 import {useState} from "react";
-import {deepOrange, deepPurple, orange, pink, red} from "@mui/material/colors";
+import {orange} from "@mui/material/colors";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import {DishTypeCategory, MealType, MenuCategory, Recipe, RecipeCategory} from "../model/Recipe";
+import {Recipe} from "../model/Recipe";
 import IngredientCardView from "./IngredientCardView";
 
 
