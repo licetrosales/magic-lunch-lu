@@ -37,20 +37,6 @@ public class RecipeController {
 
     @PutMapping(path = "/recipes/{id}")
     Recipe updateRecipe(@PathVariable String id, @RequestBody RecipeDTO recipeToUpdateWithoutId) {
-        Recipe recipeToUpdateWithId = new Recipe(id,
-                recipeToUpdateWithoutId.name(),
-                recipeToUpdateWithoutId.mealType(),
-                recipeToUpdateWithoutId.source(),
-                recipeToUpdateWithoutId.image(),
-                recipeToUpdateWithoutId.ingredients(),
-                recipeToUpdateWithoutId.prepTime(),
-                recipeToUpdateWithoutId.preparation(),
-                recipeToUpdateWithoutId.portions(),
-                recipeToUpdateWithoutId.favorite(),
-                recipeToUpdateWithoutId.dishTypeCategory(),
-                recipeToUpdateWithoutId.recipeCategory(),
-                recipeToUpdateWithoutId.menuCategory(),
-                recipeToUpdateWithoutId.garnish());
-        return recipeService.updateRecipe(recipeToUpdateWithId);
+        return recipeService.updateRecipe(id, recipeToUpdateWithoutId);
     }
 }

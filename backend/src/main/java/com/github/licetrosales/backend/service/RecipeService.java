@@ -61,13 +61,27 @@ public class RecipeService {
         recipeRepo.delete(recipe);
     }
 
-    public Recipe updateRecipe(Recipe recipeToUpdate) {
+    public Recipe updateRecipe(String id, RecipeDTO recipeToUpdateWithoutId) {
+        Recipe recipeToUpdateWithId = new Recipe(id,
+                recipeToUpdateWithoutId.name(),
+                recipeToUpdateWithoutId.mealType(),
+                recipeToUpdateWithoutId.source(),
+                recipeToUpdateWithoutId.image(),
+                recipeToUpdateWithoutId.ingredients(),
+                recipeToUpdateWithoutId.prepTime(),
+                recipeToUpdateWithoutId.preparation(),
+                recipeToUpdateWithoutId.portions(),
+                recipeToUpdateWithoutId.favorite(),
+                recipeToUpdateWithoutId.dishTypeCategory(),
+                recipeToUpdateWithoutId.recipeCategory(),
+                recipeToUpdateWithoutId.menuCategory(),
+                recipeToUpdateWithoutId.garnish());
 
-        if (!recipeRepo.existsById(recipeToUpdate.id())) {
+        if (!recipeRepo.existsById(recipeToUpdateWithId.id())) {
             throw new NoSuchElementException("There is no element with the requested ID");
         } else {
-            recipeRepo.save(recipeToUpdate);
+            recipeRepo.save(recipeToUpdateWithId);
         }
-        return recipeToUpdate;
+        return recipeToUpdateWithId;
     }
 }
