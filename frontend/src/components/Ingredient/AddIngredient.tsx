@@ -1,6 +1,6 @@
 import {ChangeEvent, useState} from "react";
 
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, TextField} from "@mui/material";
+import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField} from "@mui/material";
 import {Ingredient, NewItem} from "../../model/Ingredient";
 import uuid from "react-uuid";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';

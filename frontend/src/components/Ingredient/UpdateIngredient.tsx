@@ -1,6 +1,6 @@
 import {ChangeEvent, useState} from "react";
 
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, TextField} from "@mui/material";
+import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField} from "@mui/material";
 import {Ingredient} from "../../model/Ingredient";
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 
