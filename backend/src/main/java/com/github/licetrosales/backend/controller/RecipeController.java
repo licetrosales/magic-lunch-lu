@@ -5,9 +5,7 @@ import com.github.licetrosales.backend.model.RecipeDTO;
 import com.github.licetrosales.backend.repo.RecipeRepo;
 import com.github.licetrosales.backend.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
@@ -39,8 +37,21 @@ public class RecipeController {
     }
 
     @PutMapping(path = "/recipes/{id}")
-    Recipe updateRecipe(@PathVariable String id, @RequestBody Recipe recipeToUpdate) {
-
-        return recipeService.updateRecipe(recipeToUpdate);
+    Recipe updateRecipe(@PathVariable String id, @RequestBody RecipeDTO recipeToUpdateWithoutId) {
+        Recipe recipeToUpdateWithId = new Recipe(id,
+                recipeToUpdateWithoutId.name(),
+                recipeToUpdateWithoutId.mealType(),
+                recipeToUpdateWithoutId.source(),
+                recipeToUpdateWithoutId.image(),
+                recipeToUpdateWithoutId.ingredients(),
+                recipeToUpdateWithoutId.prepTime(),
+                recipeToUpdateWithoutId.preparation(),
+                recipeToUpdateWithoutId.portions(),
+                recipeToUpdateWithoutId.favorite(),
+                recipeToUpdateWithoutId.dishTypeCategory(),
+                recipeToUpdateWithoutId.recipeCategory(),
+                recipeToUpdateWithoutId.menuCategory(),
+                recipeToUpdateWithoutId.garnish());
+        return recipeService.updateRecipe(recipeToUpdateWithId);
     }
 }
