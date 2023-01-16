@@ -6,19 +6,19 @@ import {
     NewRecipeWithId,
     Recipe,
     RecipeCategory
-} from "../model/Recipe";
+} from "../../model/Recipe";
 import {
     Box,
     Button, Dialog, DialogActions, DialogContent,
-    DialogTitle, 
+    DialogTitle,
     MenuItem, TextField,
     Typography
 } from "@mui/material";
 import {ChangeEvent, FormEvent, useState} from "react";
-import {Ingredient} from "../model/Ingredient";
+import {Ingredient} from "../../model/Ingredient";
 
-import UpdateIngredientList from "./UpdateIngredientList";
-import IngredientCardView from "./IngredientCardView";
+import UpdateIngredientList from "../Ingredient/UpdateIngredientList";
+import IngredientCardView from "../Ingredient/IngredientCardView";
 import RefreshIcon from '@mui/icons-material/Refresh';
 
 

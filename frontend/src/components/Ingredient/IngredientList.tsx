@@ -1,8 +1,8 @@
 import {Button, Container, ListItem, ListItemText, Stack} from "@mui/material";
 import {useState} from "react";
 import List from "@mui/material/List"
-import {Ingredient} from "../model/Ingredient";
-import AddItem from "./AddItem";
+import {Ingredient} from "../../model/Ingredient";
+import AddIngredient from "./AddIngredient";
 
 type IngredientListProps = {
     handleCallbackItems(childData: Ingredient[]): void
@@ -36,7 +36,7 @@ export default function IngredientList(props: IngredientListProps) {
                         )
                     }
                     </List>
-                    <AddItem handleAddItem={handleAddItem}/>
+                    <AddIngredient handleAddItem={handleAddItem}/>
                     <Button onClick={handleOnClick} variant={"outlined"} component={"label"} color={"secondary"}>
                         Zutatenliste speichern
                     </Button>

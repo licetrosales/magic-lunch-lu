@@ -1,7 +1,7 @@
 import {ChangeEvent, useState} from "react";
 
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, TextField} from "@mui/material";
-import {Ingredient} from "../model/Ingredient";
+import {Ingredient} from "../../model/Ingredient";
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 
 
@@ -11,7 +11,7 @@ type UpdateItemProps = {
 }
 
 
-export default function UpdateItem(props: UpdateItemProps) {
+export default function UpdateIngredient(props: UpdateItemProps) {
     const currentItemFormWithoutEnums: Ingredient = {
         id: props.current.id,
         name: props.current.name,

@@ -1,4 +1,4 @@
-import {Ingredient} from "../model/Ingredient";
+import {Ingredient} from "../../model/Ingredient";
 
 type IngredientCardViewProps = {
     ingredientToDisplay: Ingredient

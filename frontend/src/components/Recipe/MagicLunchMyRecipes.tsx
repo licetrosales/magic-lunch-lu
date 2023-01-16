@@ -1,11 +1,11 @@
 import RecipeGallery from "./RecipeGallery";
 import {useEffect, useState} from "react";
-import {Recipe} from "../model/Recipe";
+import {Recipe} from "../../model/Recipe";
 import axios from "axios";
 import CreateRecipeForm from "./CreateRecipeForm";
 import {Box, Container} from "@mui/material";
 
-export default function MyMagicLunchApp() {
+export default function MagicLunchMyRecipes() {
 
     const [recipes, setRecipes] = useState<Recipe[]>([])
 
@@ -37,7 +37,6 @@ export default function MyMagicLunchApp() {
                 console.error("There is an error by POST request: " + errorMessageReponse)
             })
     }
-
     function removeRecipe(id?: string) {
         axios.delete(recipeBaseUrl + "/" + id)
             .then(() => {
@@ -46,7 +45,6 @@ export default function MyMagicLunchApp() {
                 })
             })
     }
-
 
     function updateRecipe(modifiedRecipe: Recipe, id?: string) {
         console.log(modifiedRecipe)
@@ -64,12 +62,10 @@ export default function MyMagicLunchApp() {
             )
     }
 
-
     return (
         <section className={"section-content"}>
             <Container>
                 <Box sx={{flexGrow: 1} }>
-
                     <CreateRecipeForm handleCreateRecipe={addRecipe}/>
                     <RecipeGallery recipesToMap={recipes} recipeToRemove={removeRecipe} recipeToUpdate={updateRecipe}/>
                 </Box>

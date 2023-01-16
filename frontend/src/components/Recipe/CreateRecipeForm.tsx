@@ -9,10 +9,11 @@ import {
     TextField,
     Typography
 } from "@mui/material";
-import {ChangeEvent, FormEvent, useEffect, useState} from "react";
-import {DishTypeCategory, MealType, MenuCategory, NewRecipe, Recipe, RecipeCategory} from "../model/Recipe";
-import IngredientList from "./IngredientList";
-import {Ingredient} from "../model/Ingredient";
+import {ChangeEvent, FormEvent, SyntheticEvent, useEffect, useState} from "react";
+import {DishTypeCategory, MealType, MenuCategory, NewRecipe, Recipe, RecipeCategory} from "../../model/Recipe";
+import IngredientList from "../Ingredient/IngredientList";
+import {Ingredient} from "../../model/Ingredient";
+import axios from "axios";
 
 
 type CreateRecipeProps = {
@@ -42,7 +43,7 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
     const [menuCategory, setMenuCategory] = useState<MenuCategory | string>(MenuCategory.MAIN_COURSE)
     const [open, setOpen] = useState<boolean>(false)
     const [items, setItems] = useState<Ingredient []>([])
-
+    const[imageSelected, setImageSelected]=useState("")
     function handleOpen() {
         setOpen(true)
     }
@@ -50,6 +51,10 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
     function handleClose() {
         setOpen(false)
     }
+
+
+
+
 
     function handleFormChange(event: ChangeEvent<HTMLInputElement>) {
         const fieldName = event.target.name
@@ -111,6 +116,21 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
         setMenuCategory(MenuCategory.MAIN_COURSE)
     }
 
+    function handleImageSelected(event:any){
+        setImageSelected(event.target.files[0])
+
+        console.log(event.target.files[0])
+
+        const formData=new FormData()
+        formData.append("file",imageSelected)
+        formData.append("upload_preset","y43msivz")
+
+        const cloudinaryUrl="https://api.cloudinary.com/v1_1/debod1ejt/upload"
+        axios.post(cloudinaryUrl,formData)
+            .then((imageUploadResponse)=>{console.log(imageUploadResponse)
+            })
+    }
+
     return (
         <div>
             <Box m={1}
@@ -134,8 +154,6 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             margin={"dense"}
                             fullWidth
                             color="secondary"
-
-
                         />
                         <TextField
                             type={"text"}
@@ -151,14 +169,15 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             <Button variant={"contained"} component={"label"} color={"secondary"}>
                                 Bild hochladen
                                 <input
-                                    hidden accept={"images/*"}
+                                    hidden
+                                    accept={"images/*"}
                                     multiple
                                     type={"file"}
 
                                     name={"image"}
                                     value={recipeWithoutEnums.image}
-                                    onChange={handleFormChange}
-                                />
+                                    onChange={handleImageSelected}
+                                    />
                             </Button>
                         </Box>
 
