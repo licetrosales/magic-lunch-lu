@@ -11,13 +11,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users/userId")
 public class RecipeController {
-    private final RecipeRepo recipeRepo;
+
     private final RecipeService recipeService;
 
     @Autowired
-    public RecipeController(RecipeService recipeService, RecipeRepo recipeRepo) {
+    public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
-        this.recipeRepo = recipeRepo;
     }
 
     @GetMapping("/recipes")
