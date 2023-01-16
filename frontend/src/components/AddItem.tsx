@@ -1,7 +1,7 @@
 import {ChangeEvent, useState} from "react";
 
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, TextField} from "@mui/material";
-import {Ingredient, NewItem, Unit} from "../model/Ingredient";
+import {Ingredient, NewItem} from "../model/Ingredient";
 import uuid from "react-uuid";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
@@ -18,8 +18,6 @@ export default function AddItem(props: AddItemProps) {
         isInShoppingList: true
     }
     const [itemWithoutEnums, setItemWithoutEnums] = useState(emptyItemFormWithoutEnums)
-    const [unit, setUnit] = useState<Unit | string>(Unit.KG)
-
     const [open, setOpen] = useState<boolean>(false)
 
     function handleOpen() {
@@ -38,17 +36,12 @@ export default function AddItem(props: AddItemProps) {
         }))
     }
 
-    function onUnitChange(event: ChangeEvent<HTMLInputElement>) {
-        setUnit(event.target.value as Unit)
-    }
-
     function handleAddItem() {
         const newItem: Ingredient = {
             id: uuid(),
             name: itemWithoutEnums.name,
             quantity: itemWithoutEnums.quantity,
-            unit: unit,
-
+            unit: itemWithoutEnums.unit
         }
         props.handleAddItem(newItem)
         setItemWithoutEnums({
@@ -57,7 +50,6 @@ export default function AddItem(props: AddItemProps) {
             unit: "",
             isInShoppingList: true
         })
-        setUnit(Unit.KG)
         handleClose()
     }
 
@@ -89,22 +81,17 @@ export default function AddItem(props: AddItemProps) {
                         color="secondary"
                     />
                     <TextField
-                        select
+
                         label={"Einheit"}
                         name={"unit"}
                         placeholder={"Einheit"}
-                        value={unit}
-                        onChange={onUnitChange}
+                        value={itemWithoutEnums.unit}
+                        onChange={handleChange}
                         margin={"dense"}
                         fullWidth
                         color="secondary"
-                    >
-                        <MenuItem value={Unit.KG}>kg</MenuItem>
-                        <MenuItem value={Unit.G}>g</MenuItem>
-                        <MenuItem value={Unit.LB}>lb</MenuItem>
-                        <MenuItem value={Unit.OZ}>oz</MenuItem>
-                        <MenuItem value={Unit.OTHER}>other</MenuItem>
-                    </TextField>
+                    />
+
 
                 </DialogContent>
                 <DialogActions>

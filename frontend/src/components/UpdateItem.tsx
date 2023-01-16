@@ -1,7 +1,7 @@
 import {ChangeEvent, useState} from "react";
 
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, TextField} from "@mui/material";
-import {Ingredient, Unit} from "../model/Ingredient";
+import {Ingredient} from "../model/Ingredient";
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 
 
@@ -20,7 +20,6 @@ export default function UpdateItem(props: UpdateItemProps) {
         isInShoppingList: props.current.isInShoppingList
     }
     const [itemWithoutEnums, setItemWithoutEnums] = useState(currentItemFormWithoutEnums)
-    const [unit, setUnit] = useState<Unit | string>(props.current.unit)
 
     const [open, setOpen] = useState<boolean>(false)
 
@@ -40,16 +39,13 @@ export default function UpdateItem(props: UpdateItemProps) {
         }))
     }
 
-    function onUnitChange(event: ChangeEvent<HTMLInputElement>) {
-        setUnit(event.target.value as Unit)
-    }
 
     function handleSaveItem() {
         const updatedItem: Ingredient = {
             id: props.current.id,
             name: itemWithoutEnums.name,
             quantity: itemWithoutEnums.quantity,
-            unit: unit
+            unit: itemWithoutEnums.unit
         }
 
         props.handleUpdateItem(updatedItem)
@@ -61,7 +57,7 @@ export default function UpdateItem(props: UpdateItemProps) {
             isInShoppingList: updatedItem.isInShoppingList
         })
 
-        setUnit(Unit.KG)
+
         handleClose()
     }
 
@@ -92,23 +88,16 @@ export default function UpdateItem(props: UpdateItemProps) {
                         color="secondary"
                     />
                     <TextField
-                        select
+
                         label={"Einheit"}
                         name={"unit"}
                         placeholder={"Einheit"}
-                        value={unit}
-                        onChange={onUnitChange}
+                        value={itemWithoutEnums.unit}
+                        onChange={handleChange}
                         margin={"dense"}
                         fullWidth
                         color="secondary"
-                    >
-                        <MenuItem value={Unit.KG}>kg</MenuItem>
-                        <MenuItem value={Unit.G}>g</MenuItem>
-                        <MenuItem value={Unit.LB}>lb</MenuItem>
-                        <MenuItem value={Unit.OZ}>oz</MenuItem>
-                        <MenuItem value={Unit.OTHER}>other</MenuItem>
-                    </TextField>
-
+                    />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color={"secondary"}>

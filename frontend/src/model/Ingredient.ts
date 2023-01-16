@@ -2,27 +2,18 @@ export type Ingredient = {
     id: string,
     name: string,
     quantity: string,
-    unit: Unit | string,
+    unit: string,
     productCategory?: ProductCategory | string,
     isInShoppingList?: boolean,
 }
 export type NewItem = {
     name: string,
     quantity: string,
-    unit: Unit | string,
+    unit: string,
     isInShoppingList: boolean
 }
 
-export enum Unit {
-    OZ = "OZ",
-    LB = "LB",
-    G = "G",
-    KG = "KG",
-    LT = "LT",
-    SMALL = "SMALL",
-    BIG = "BIG",
-    OTHER = "OTHER"
-}
+
 
 export enum ProductCategory {
     BREAD_BAKERY = "BREAD_BAKERY",

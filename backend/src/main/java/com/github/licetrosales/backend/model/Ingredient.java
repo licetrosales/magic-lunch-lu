@@ -10,14 +10,14 @@ public record Ingredient(
         String id,
         String name,
         String quantity,
-        Unit unit,
+        String unit,
         boolean isInShoppingList,
         ProductCategory productCategory
 ) {
     Ingredient(
             String name,
             String quantity,
-            Unit unit,
+            String unit,
             Boolean isInShoppingList
     ) {
         this(null, name, quantity, unit, false, null);
