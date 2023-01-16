@@ -47,9 +47,9 @@ public class RecipeService {
     }
 
     public Recipe findById(String id) {
-        Optional<Recipe> optionalRecipe = recipeRepo.findById(id);
-        if (optionalRecipe.isPresent()) {
-            return optionalRecipe.get();
+        Optional<Recipe> recipe = recipeRepo.findById(id);
+        if (recipe.isPresent()) {
+            return recipe.get();
         }
         throw new IllegalArgumentException("Recipe Id not found!");
     }

@@ -7,7 +7,6 @@ import {Link} from "react-router-dom";
 export default function Header() {
     const [tabValue, setTabvalue] = useState("/");
     const theme = useTheme()
-    console.log(theme)
     const isMatch = useMediaQuery(theme.breakpoints.down("md"))
     const pages = ["Startseite", "Meine Rezepte", "Wochenplan", "Impressum"]
     const routes = ["/", "/recipes", "/weekplan-history", "/impressum"]

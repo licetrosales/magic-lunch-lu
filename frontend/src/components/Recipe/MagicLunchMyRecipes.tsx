@@ -12,7 +12,6 @@ export default function MagicLunchMyRecipes() {
     useEffect(() => {
         getRecipes()
     }, [])
-    //const recipeBaseUrl = "http://localhost:8080/api/users/userId/recipes"
     const recipeBaseUrl = "/api/users/userId/recipes"
 
     function getRecipes() {
@@ -37,6 +36,7 @@ export default function MagicLunchMyRecipes() {
                 console.error("There is an error by POST request: " + errorMessageReponse)
             })
     }
+
     function removeRecipe(id?: string) {
         axios.delete(recipeBaseUrl + "/" + id)
             .then(() => {
@@ -50,11 +50,7 @@ export default function MagicLunchMyRecipes() {
         console.log(modifiedRecipe)
         axios.put(recipeBaseUrl + "/" + modifiedRecipe.id, modifiedRecipe)
             .then((newRecipeResponse) => {
-                    // Find index of modifiedRecipe
-                    // Was ich gegoogled habe: "js index of element with id"
                     const indexOfModifiedElement = recipes.findIndex(recipe => recipe.id === modifiedRecipe.id)
-
-                    // "js update element at index"
                     let copyOfRecipes = [...recipes]
                     copyOfRecipes[indexOfModifiedElement] = newRecipeResponse.data
                     setRecipes(copyOfRecipes)
@@ -65,7 +61,7 @@ export default function MagicLunchMyRecipes() {
     return (
         <section className={"section-content"}>
             <Container>
-                <Box sx={{flexGrow: 1} }>
+                <Box sx={{flexGrow: 1}}>
                     <CreateRecipeForm handleCreateRecipe={addRecipe}/>
                     <RecipeGallery recipesToMap={recipes} recipeToRemove={removeRecipe} recipeToUpdate={updateRecipe}/>
                 </Box>
