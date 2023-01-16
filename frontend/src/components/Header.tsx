@@ -1,9 +1,9 @@
 import React, {Fragment, useState} from "react";
 import {AppBar, Button, Tab, Tabs, Toolbar, Typography, useMediaQuery, useTheme} from "@mui/material";
-import DiningRoundedIcon from '@mui/icons-material/DiningRounded';
 import DrawerAppBar from "./DrawerAppBar";
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import {Link, Route} from "react-router-dom";
+
 export default function Header() {
     const [tabValue, setTabvalue] = useState<boolean>();
     const theme = useTheme()
@@ -15,7 +15,7 @@ export default function Header() {
 
         <div>
 
-            <AppBar sx={{background: "#744f93"}}position="sticky">
+            <AppBar sx={{background: "#7e4ea5"}} position="sticky">
                 <Toolbar>
                     {
                         isMatch ? (

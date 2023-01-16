@@ -5,6 +5,7 @@ import List from "@mui/material/List";
 import AddItem from "./AddItem";
 import UpdateItem from "./UpdateItem";
 import IngredientCardView from "./IngredientCardView";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 type UpgradeIngredientListProps = {
     currentIngredients: Ingredient[]
@@ -60,7 +61,7 @@ export default function UpdateIngredientList(props: UpgradeIngredientListProps) 
                                     <ListItemText
                                         primary={item.quantity + " " + item.unit + " " + item.name}
                                     />
-                                    <Button onClick={() => handleDelete(item.id)} color={"secondary"}>Löschen</Button>
+                                    <Button onClick={() => handleDelete(item.id)} color={"secondary"} startIcon={< DeleteOutlineIcon/>}></Button>
 
                                     <UpdateItem current={item} handleUpdateItem={handleUpdateItem}/>
 
@@ -71,7 +72,7 @@ export default function UpdateIngredientList(props: UpgradeIngredientListProps) 
                     </List>
 
                     <Button onClick={handleOnClick} variant={"contained"} component={"label"} color={"secondary"}>
-                        Zutatenliste speichern
+                         Speichern
                     </Button>
                 </Stack>
             </Container>

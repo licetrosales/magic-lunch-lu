@@ -3,6 +3,7 @@ import {ChangeEvent, useState} from "react";
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, TextField} from "@mui/material";
 import {Ingredient, NewItem, Unit} from "../model/Ingredient";
 import uuid from "react-uuid";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 type AddItemProps = {
     handleAddItem(newItem: Ingredient): void
@@ -62,7 +63,8 @@ export default function AddItem(props: AddItemProps) {
 
     return (
         <div>
-            <Button onClick={handleOpen} color={"secondary"}>Zutat eintragen</Button>
+            <Button onClick={handleOpen} color={"secondary"} startIcon={<AddCircleOutlineIcon/>}>Zutat
+                eintragen</Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Neue Zutat</DialogTitle>
                 <DialogContent>
