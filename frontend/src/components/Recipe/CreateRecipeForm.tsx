@@ -16,6 +16,8 @@ import {Ingredient} from "../../model/Ingredient";
 import axios from "axios";
 
 
+
+
 type CreateRecipeProps = {
     handleCreateRecipe(newRecipe: Recipe): void
 }
@@ -51,10 +53,6 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
     function handleClose() {
         setOpen(false)
     }
-
-
-
-
 
     function handleFormChange(event: ChangeEvent<HTMLInputElement>) {
         const fieldName = event.target.name
@@ -116,20 +114,22 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
         setMenuCategory(MenuCategory.MAIN_COURSE)
     }
 
-    function handleImageSelected(event:any){
+    function handleImageSelected(event:any) {
         setImageSelected(event.target.files[0])
-
         console.log(event.target.files[0])
+    }
 
+function handleUploadImageSelected(){
         const formData=new FormData()
         formData.append("file",imageSelected)
         formData.append("upload_preset","y43msivz")
 
-        const cloudinaryUrl="https://api.cloudinary.com/v1_1/debod1ejt/upload"
+        const cloudinaryUrl="https://api.cloudinary.com/v1_1/debod1ejt/image/upload"
         axios.post(cloudinaryUrl,formData)
             .then((imageUploadResponse)=>{console.log(imageUploadResponse)
             })
     }
+
 
     return (
         <div>
@@ -166,19 +166,21 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
                             color="secondary"
                         /><br/>
                         <Box display="flex" justifyContent="flex-end">
-                            <Button variant={"contained"} component={"label"} color={"secondary"}>
-                                Bild hochladen
-                                <input
-                                    hidden
-                                    accept={"images/*"}
-                                    multiple
+
+                                <TextField
+
+                                   /* accept={"images/!*"}
+                                    multiple*/
                                     type={"file"}
 
-                                    name={"image"}
-                                    value={recipeWithoutEnums.image}
+                                  /*  name={"image"}
+                                    value={recipeWithoutEnums.image}*/
                                     onChange={handleImageSelected}
                                     />
+                            <Button onClick={handleUploadImageSelected} variant={"contained"} component={"label"} color={"secondary"}>
+                                Bild hochladen
                             </Button>
+
                         </Box>
 
                         <TextField
