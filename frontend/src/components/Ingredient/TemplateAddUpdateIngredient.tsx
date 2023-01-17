@@ -6,14 +6,14 @@ import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 
-type UpdateItemProps = {
+type TemplateUpdateIngredientProps = {
     current: Ingredient
     handleNewUpdatedIngredient(newUpdatedItem: Ingredient): void
     isNew: Boolean
 }
 
 
-export default function UpdateIngredient(props: UpdateItemProps) {
+export default function TemplateAddUpdateIngredient(props: TemplateUpdateIngredientProps) {
     const currentItemFormWithoutEnums: Ingredient = {
         id: props.current.id,
         name: props.current.name,
