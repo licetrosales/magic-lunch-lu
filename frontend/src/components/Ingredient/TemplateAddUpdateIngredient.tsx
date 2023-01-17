@@ -3,11 +3,13 @@ import {ChangeEvent, useState} from "react";
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField} from "@mui/material";
 import {Ingredient} from "../../model/Ingredient";
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 
 type UpdateItemProps = {
     current: Ingredient
-    handleUpdateItem(updatedItem: Ingredient): void
+    handleNewUpdatedIngredient(newUpdatedItem: Ingredient): void
+    isNew: Boolean
 }
 
 
@@ -25,11 +27,9 @@ export default function UpdateIngredient(props: UpdateItemProps) {
     function handleOpen() {
         setOpen(true)
     }
-
     function handleClose() {
         setOpen(false)
     }
-
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
         const fieldName = event.target.name
         const fieldValue = event.target.value
@@ -37,32 +37,35 @@ export default function UpdateIngredient(props: UpdateItemProps) {
             ...prevItem, [fieldName]: fieldValue
         }))
     }
-
-
     function handleSaveItem() {
-        const updatedItem: Ingredient = {
+        const newUpdatedItem: Ingredient = {
             id: props.current.id,
             name: itemWithoutEnums.name,
             quantity: itemWithoutEnums.quantity,
             unit: itemWithoutEnums.unit
         }
 
-        props.handleUpdateItem(updatedItem)
+        props.handleNewUpdatedIngredient(newUpdatedItem)
         setItemWithoutEnums({
             id: props.current.id,
-            name: updatedItem.name,
-            quantity: updatedItem.quantity,
-            unit: updatedItem.unit,
-            isInShoppingList: updatedItem.isInShoppingList
+            name: newUpdatedItem.name,
+            quantity: newUpdatedItem.quantity,
+            unit: newUpdatedItem.unit,
+            isInShoppingList: newUpdatedItem.isInShoppingList
         })
         handleClose()
     }
 
     return (
         <div>
+            {props.isNew ?
+                <Button onClick={handleOpen} color={"secondary"} startIcon={<AddCircleOutlineIcon/>}>
+                    Zutat eintragen</Button>:
             <Button onClick={handleOpen} color={"secondary"} startIcon={<ModeEditOutlineIcon/>}></Button>
+            }
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Zutat bearbeiten</DialogTitle>
+                {props.isNew ? <DialogTitle>Neue Zutat</DialogTitle>
+                    :<DialogTitle>Zutat bearbeiten</DialogTitle>}
                 <DialogContent>
                     <TextField
                         label="Name"
