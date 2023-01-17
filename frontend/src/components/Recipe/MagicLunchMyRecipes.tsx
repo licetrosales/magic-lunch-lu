@@ -1,9 +1,17 @@
 import RecipeGallery from "./RecipeGallery";
 import {useEffect, useState} from "react";
-import {Recipe} from "../../model/Recipe";
+import {
+    DishTypeCategory,
+    MealType,
+    MenuCategory,
+    NewRecipe,
+    NewRecipeWithId,
+    Recipe,
+    RecipeCategory
+} from "../../model/Recipe";
 import axios from "axios";
-import CreateRecipeForm from "./CreateRecipeForm";
 import {Box, Container} from "@mui/material";
+import TemplateAddUpdateRecipeForm from "./TemplateAddUpdateRecipeForm";
 
 export default function MagicLunchMyRecipes() {
 
@@ -58,11 +66,28 @@ export default function MagicLunchMyRecipes() {
             )
     }
 
+    const emptyRecipeFormWithoutEnums: Recipe = {
+        id: "",
+        name: "",
+        mealType: MealType.BREAKFAST,
+        source: "",
+        image: "",
+        ingredients: [],
+        prepTime: "",
+        preparation: "",
+        dishTypeCategory: DishTypeCategory.VEGGIE,
+        portions: 1,
+        favorite: false,
+        recipeCategory: RecipeCategory.LOW_CARB,
+        menuCategory: MenuCategory.MAIN_COURSE,
+        garnish: ""
+    }
     return (
         <section className={"section-content"}>
             <Container>
                 <Box sx={{flexGrow: 1}}>
-                    <CreateRecipeForm handleCreateRecipe={addRecipe}/>
+                    <TemplateAddUpdateRecipeForm currentRecipe={emptyRecipeFormWithoutEnums}
+                                                 handleCreateUpdateRecipe={addRecipe} isNew={true}/>
                     <RecipeGallery recipesToMap={recipes} recipeToRemove={removeRecipe} recipeToUpdate={updateRecipe}/>
                 </Box>
             </Container>

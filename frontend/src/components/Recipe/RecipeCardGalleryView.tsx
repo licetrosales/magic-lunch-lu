@@ -3,7 +3,7 @@ import "../../images/BigMacSalat.jpg"
 import {Box, Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
 import {useState} from "react";
 import RecipeCard from "./RecipeCard";
-import UpdateRecipeForm from "./UpdateRecipeForm";
+import TemplateAddUpdateRecipeForm from "./TemplateAddUpdateRecipeForm";
 
 type RecipeCardGalleryViewProps = {
     recipeToDisplay: Recipe
@@ -29,13 +29,11 @@ export default function RecipeCardGalleryView(props: RecipeCardGalleryViewProps)
         setOpen(false)
     }
 
-    function handleEdit() {
-        //navigate("/recipes/" + props.recipeToDisplay.id)
-        handleOpen()
+    function addRecipe(recipe: Recipe) {
+        props.recipeToUpdate(recipe)
     }
 
-
-    function updateRecipe(recipe: Recipe, id: string,) {
+    function updateRecipe(recipe: Recipe, id: string) {
         if (props.recipeToDisplay.id) {
             props.recipeToUpdate(recipe, id)
         }
@@ -58,18 +56,8 @@ export default function RecipeCardGalleryView(props: RecipeCardGalleryViewProps)
                  justifyContent="center"
                  alignItems="center">
                 <Button onClick={onDeleteClick} variant="outlined" color="secondary">Löschen</Button>
-                <Button onClick={handleEdit} variant="outlined" color="secondary">Ändern</Button>
-                <Dialog open={open} onClose={handleClose}>
-                    <DialogTitle>Rezept Bearbeiten</DialogTitle>
-                    <DialogContent>
-                        <UpdateRecipeForm currentRecipe={props.recipeToDisplay} handleUpdateRecipe={updateRecipe}/>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose} color={"secondary"}>
-                            Schließen
-                        </Button>
-                    </DialogActions>
-                </Dialog>
+                <TemplateAddUpdateRecipeForm currentRecipe={props.recipeToDisplay}
+                                             handleCreateUpdateRecipe={updateRecipe} isNew={false}/>
             </Box>
         </div>
     )
