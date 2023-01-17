@@ -1,57 +1,81 @@
 import {
+    DishTypeCategory,
+    MealType,
+    MenuCategory,
+    NewRecipe,
+    NewRecipeWithId,
+    Recipe,
+    RecipeCategory
+} from "../../model/Recipe";
+import {
     Box,
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
+    Button, Dialog, DialogActions, DialogContent,
     DialogTitle,
-    MenuItem,
-    TextField,
+    MenuItem, TextField,
     Typography
 } from "@mui/material";
 import {ChangeEvent, FormEvent, useState} from "react";
-import {DishTypeCategory, MealType, MenuCategory, NewRecipe, Recipe, RecipeCategory} from "../../model/Recipe";
-import IngredientList from "../Ingredient/IngredientList";
 import {Ingredient} from "../../model/Ingredient";
+
+import UpdateIngredientList from "../Ingredient/UpdateIngredientList";
+import IngredientCardView from "../Ingredient/IngredientCardView";
+import RefreshIcon from '@mui/icons-material/Refresh';
 import axios from "axios";
+import IngredientList from "../Ingredient/IngredientList";
 
 
-
-
-type CreateRecipeProps = {
-    handleCreateRecipe(newRecipe: Recipe): void
+type TemplateAddUpdateRecipeFormProps = | {
+    currentRecipe: Recipe
+    handleCreateUpdateRecipe(newRecipe: Recipe): void
+    isNew: boolean
 }
-export default function CreateRecipeForm(props: CreateRecipeProps) {
-    const emptyRecipeFormWithoutEnums: NewRecipe = {
-        name: "",
-        //mealType: MealType.BREAKFAST,
-        source: "",
-        image: "",
+    | {
+    currentRecipe: Recipe
+    handleCreateUpdateRecipe(modifiedRecipe: Recipe, id?: string): void
+    isNew: boolean
+}
+export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateRecipeFormProps) {
+    const currentRecipeFormWithoutEnums: NewRecipeWithId = {
+        id: props.currentRecipe.id,
+        name: props.currentRecipe.name,
+        // mealType: props.currentRecipe.mealType,
+        source: props.currentRecipe.source,
+        image: props.currentRecipe.image,
         //ingredients: [],
-        prepTime: "",
-        preparation: "",
+        prepTime: props.currentRecipe.prepTime,
+        preparation: props.currentRecipe.preparation,
         //dishTypeCategory: DishTypeCategory.VEGGIE,
-        portions: 1,
-        favorite: false,
+        portions: props.currentRecipe.portions,
+        favorite: props.currentRecipe.favorite,
         //recipeCategory: RecipeCategory.LOW_CARB,
         //menuCategory: MenuCatefory.MAIN_COURSE,
-        garnish: ""
+        garnish: props.currentRecipe.garnish
     }
 
-    const [recipeWithoutEnums, setRecipeWithoutEnums] = useState<NewRecipe>(emptyRecipeFormWithoutEnums)
-    const [mealType, setMealType] = useState<MealType | string>(MealType.LUNCH)
-    const [dishTypeCategory, setDishTypeCategory] = useState<DishTypeCategory | string>(DishTypeCategory.VEGGIE)
-    const [recipeCategory, setRecipeCategory] = useState<RecipeCategory | string>(RecipeCategory.LOW_CARB)
-    const [menuCategory, setMenuCategory] = useState<MenuCategory | string>(MenuCategory.MAIN_COURSE)
-    const [open, setOpen] = useState<boolean>(false)
-    const [items, setItems] = useState<Ingredient []>([])
-    const[imageSelected, setImageSelected]=useState("")
-    function handleOpen() {
-        setOpen(true)
+    const [recipeWithoutEnums, setRecipeWithoutEnums] = useState<NewRecipe>(currentRecipeFormWithoutEnums)
+    const [mealType, setMealType] = useState<MealType | string>(props.currentRecipe.mealType)
+    const [dishTypeCategory, setDishTypeCategory] = useState<DishTypeCategory | string>(props.currentRecipe.dishTypeCategory)
+    const [recipeCategory, setRecipeCategory] = useState<RecipeCategory | string>(props.currentRecipe.recipeCategory)
+    const [menuCategory, setMenuCategory] = useState<MenuCategory | string>(props.currentRecipe.menuCategory)
+    const [imageSelected, setImageSelected] = useState("")
+    const [items, setItems] = useState<Ingredient []>(props.currentRecipe.ingredients)
+    const [openRecipeMD, setOpenRecipeMD] = useState<boolean>(false)
+    const [openIngredientMD, setOpenIngredientMD] = useState<boolean>(false)
+
+    function handleOpenRecipeMD() {
+        setOpenRecipeMD(true)
     }
 
-    function handleClose() {
-        setOpen(false)
+    function handleCloseRecipeMD() {
+        setOpenRecipeMD(false)
+    }
+
+    function handleOpenIngredientMD() {
+        setOpenIngredientMD(true)
+    }
+
+    function handleCloseIngredientMD() {
+        setOpenIngredientMD(false)
     }
 
     function handleFormChange(event: ChangeEvent<HTMLInputElement>) {
@@ -90,13 +114,14 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
         setItems(childData)
     }
 
-    function handleCreateRecipeFormSubmit(event: FormEvent<HTMLFormElement>) {
+    function handleCreateUpdateRecipeFormSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        props.handleCreateRecipe({
+        const recipeToSend: Recipe = {
+            id: props.currentRecipe.id,
             name: recipeWithoutEnums.name,
             mealType: mealType,
             source: recipeWithoutEnums.source,
-            image: recipeWithoutEnums.image,
+            image: props.currentRecipe.image,
             ingredients: items,
             prepTime: recipeWithoutEnums.prepTime,
             preparation: recipeWithoutEnums.preparation,
@@ -105,28 +130,41 @@ export default function CreateRecipeForm(props: CreateRecipeProps) {
             dishTypeCategory: dishTypeCategory,
             recipeCategory: recipeCategory,
             menuCategory: menuCategory,
-            garnish: recipeWithoutEnums.garnish
-        })
-        setRecipeWithoutEnums(emptyRecipeFormWithoutEnums)
+            garnish: recipeWithoutEnums.garnish,
+        }
+        if (props.isNew) {
+            props.handleCreateUpdateRecipe(recipeToSend)
+        } else {
+            props.handleCreateUpdateRecipe(recipeToSend, props.currentRecipe.id)
+        }
+        setRecipeWithoutEnums(currentRecipeFormWithoutEnums)
         setMealType(MealType.LUNCH)
         setDishTypeCategory(DishTypeCategory.VEGGIE)
         setRecipeCategory(RecipeCategory.LOW_CARB)
         setMenuCategory(MenuCategory.MAIN_COURSE)
     }
 
-    function handleImageSelected(event:any) {
+
+    const recipeIngredientes = props.currentRecipe.ingredients?.map((ingredientShortInfo) => {
+        return <IngredientCardView ingredientToDisplay={ingredientShortInfo}
+                                   key={ingredientShortInfo.id}/>
+    })
+
+
+    function handleImageSelected(event: any) {
         setImageSelected(event.target.files[0])
         console.log(event.target.files[0])
     }
 
-function handleUploadImageSelected(){
-        const formData=new FormData()
-        formData.append("file",imageSelected)
-        formData.append("upload_preset","y43msivz")
+    function handleUploadImageSelected() {
+        const formData = new FormData()
+        formData.append("file", imageSelected)
+        formData.append("upload_preset", "y43msivz")
 
-        const cloudinaryUrl="https://api.cloudinary.com/v1_1/debod1ejt/image/upload"
-        axios.post(cloudinaryUrl,formData)
-            .then((imageUploadResponse)=>{console.log(imageUploadResponse)
+        const cloudinaryUrl = "https://api.cloudinary.com/v1_1/debod1ejt/image/upload"
+        axios.post(cloudinaryUrl, formData)
+            .then((imageUploadResponse) => {
+                console.log(imageUploadResponse)
             })
     }
 
@@ -138,21 +176,28 @@ function handleUploadImageSelected(){
                  justifyContent="center"
                  alignItems="center"
             >
-                <Button onClick={handleOpen} color={"secondary"}>Neues Rezept</Button>
+                {props.isNew ? <Button onClick={handleOpenRecipeMD} color={"secondary"}>Neues Rezept</Button> :
+                    <Button onClick={handleOpenRecipeMD} color={"secondary"} variant={"outlined"}>Ändern</Button>
+                }
+
             </Box>
-            <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Neues Rezept</DialogTitle>
+            <Dialog open={openRecipeMD} onClose={handleCloseRecipeMD}>
+                {props.isNew ? <DialogTitle>Neues Rezept</DialogTitle> :
+                    <DialogTitle>Rezept bearbeiten</DialogTitle>
+                }
+
                 <DialogContent>
-                    <form onSubmit={handleCreateRecipeFormSubmit}>
+
+                    <form onSubmit={handleCreateUpdateRecipeFormSubmit}>
                         <TextField
                             type={"text"}
                             label={"Name"}
-                            placeholder={"Rezeptname"}
                             name={"name"}
                             value={recipeWithoutEnums.name}
                             onChange={handleFormChange}
                             margin={"dense"}
                             fullWidth
+                            variant="outlined"
                             color="secondary"
                         />
                         <TextField
@@ -167,25 +212,23 @@ function handleUploadImageSelected(){
                         /><br/>
                         <Box display="flex" justifyContent="flex-end">
 
-                                <TextField
+                            <TextField
+                                type={"file"}
 
-                                   /* accept={"images/!*"}
-                                    multiple*/
-                                    type={"file"}
+                                name={"image"}
 
-                                  /*  name={"image"}
-                                    value={recipeWithoutEnums.image}*/
-                                    onChange={handleImageSelected}
-                                    />
-                            <Button onClick={handleUploadImageSelected} variant={"contained"} component={"label"} color={"secondary"}>
+                                onChange={handleImageSelected}
+                                color="secondary"
+                            />
+                            <Button onClick={handleUploadImageSelected} variant={"contained"} component={"label"}
+                                    color={"secondary"}>
                                 Bild hochladen
                             </Button>
-
                         </Box>
 
                         <TextField
                             select
-                            label="Mahlzeit"
+                            label={"Mahlzeit"}
                             name={"mealType"}
                             value={mealType}
                             onChange={onMealTypeChange}
@@ -205,7 +248,6 @@ function handleUploadImageSelected(){
                                 name="favorite"
                                 checked={recipeWithoutEnums.favorite}
                                 onChange={handleFormChange}
-                                color="secondary"
                             />
                         </label>
                         <TextField
@@ -234,6 +276,7 @@ function handleUploadImageSelected(){
                             margin={"dense"}
                             fullWidth
                             color="secondary"
+
                         >
                             <MenuItem value={RecipeCategory.SALAD}>Salat</MenuItem>
                             <MenuItem value={RecipeCategory.SOUP}>Suppe</MenuItem>
@@ -269,7 +312,6 @@ function handleUploadImageSelected(){
                         <TextField
                             type={"text"}
                             label={"Zubereitungszeit"}
-                            placeholder={"Gesamtzeit inkl. Vorbereitung"}
                             name={"prepTime"}
                             value={recipeWithoutEnums.prepTime}
                             onChange={handleFormChange}
@@ -277,14 +319,45 @@ function handleUploadImageSelected(){
                             fullWidth
                             color="secondary"
                         /><br/>
-                        <Typography align={"center"} variant={"h6"}>
-                            Zutatenliste
-                        </Typography>
-                        <IngredientList handleCallbackItems={handleCallbackItems}/>
+
+                        {props.isNew ? <><Typography align={"center"} variant={"h6"}>
+                                Zutatenliste
+                            </Typography>
+                                <IngredientList handleCallbackItems={handleCallbackItems}/> :
+                            </> :
+                            <>
+                                <Box display="flex" justifyContent="center">
+                                    <Button onClick={handleOpenIngredientMD} color={"secondary"}>Zutaten
+                                        bearbeiten</Button>
+                                </Box>
+                                <Dialog open={openIngredientMD} onClose={handleCloseIngredientMD}>
+                                    <DialogTitle>Zutaten ändern</DialogTitle>
+                                    <DialogContent>
+                                        <UpdateIngredientList currentIngredients={items}
+                                                              handleCallbackItems={handleCallbackItems}/>
+
+                                    </DialogContent>
+                                    <DialogActions>
+
+                                        <Button onClick={handleCloseIngredientMD} color={"secondary"}>
+                                            Schließen
+                                        </Button>
+
+                                    </DialogActions>
+                                </Dialog>
+                                {!props.isNew ?
+                                    <Typography align={"center"} variant={"body1"}>
+                                        {recipeIngredientes}
+                                    </Typography> : null}
+                                <Box display="flex" justifyContent="center">
+                                    <Button type={"submit"} color={"secondary"} variant={"outlined"}
+                                            startIcon={<RefreshIcon/>}></Button>
+                                </Box>
+                            </>
+                        }
                         <TextField
                             type={"text"}
                             label={"Zubereitung"}
-                            placeholder={"Anweisungen eintragen..."}
                             name={"preparation"}
                             multiline
                             value={recipeWithoutEnums.preparation}
@@ -296,7 +369,6 @@ function handleUploadImageSelected(){
                         <TextField
                             type={"text"}
                             label={"Beilagen"}
-                            placeholder={"falls das Rezept keine Beilage enthält"}
                             name={"garnish"}
                             value={recipeWithoutEnums.garnish}
                             onChange={handleFormChange}
@@ -306,16 +378,15 @@ function handleUploadImageSelected(){
                             color="secondary"
                         /><br/>
 
-                        <Button type={"submit"} color={"inherit"} variant={"contained"}>Rezept speichern</Button>
+                        <Button type={"submit"} color={"inherit"} variant={"contained"}>Rezept Speichern</Button>
                     </form>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} color={"secondary"}>
+                    <Button onClick={handleCloseRecipeMD} color={"secondary"}>
                         Schließen
                     </Button>
                 </DialogActions>
             </Dialog>
-
         </div>
     )
 }

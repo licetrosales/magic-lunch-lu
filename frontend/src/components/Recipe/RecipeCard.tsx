@@ -96,7 +96,7 @@ export default function RecipeCard(props: RecipeCardProps) {
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites" disabled={!favorite} color={"default"}>
+                <IconButton aria-label="add to favorites" disabled={!favorite} color={"error"}>
                     <FavoriteIcon/>
                 </IconButton>
                 <IconButton aria-label="share">
