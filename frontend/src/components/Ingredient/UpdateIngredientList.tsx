@@ -2,10 +2,9 @@ import {Ingredient} from "../../model/Ingredient";
 import {useState} from "react";
 import {Button, Container, ListItem, ListItemText, Stack} from "@mui/material";
 import List from "@mui/material/List";
-import AddIngredient from "./AddIngredient";
-import UpdateIngredient from "./UpdateIngredient";
-import IngredientCardView from "./IngredientCardView";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import TemplateAddUpdateIngredient from "./TemplateAddUpdateIngredient";
+import uuid from "react-uuid";
 
 type UpgradeIngredientListProps = {
     currentIngredients: Ingredient[]
@@ -27,6 +26,12 @@ export default function UpdateIngredientList(props: UpgradeIngredientListProps) 
             return [item, ...prevItems]
         })
     }
+    const newIngredient: Ingredient = {
+        id: uuid(),
+        name: "",
+        quantity: "",
+        unit: ""
+    }
 
     function handleDelete(id: string) {
         const newItems = items.filter((li) => li.id !== id)
@@ -34,13 +39,9 @@ export default function UpdateIngredientList(props: UpgradeIngredientListProps) 
     }
 
     function handleUpdateItem(modifiedItem: Ingredient) {
-
-
         const indexOfModifiedItem = items.findIndex(item => item.id === modifiedItem.id)
         let copyOfItems = [...items]
-
         copyOfItems[indexOfModifiedItem] = modifiedItem
-
         setItems(copyOfItems)
     }
 
@@ -48,7 +49,7 @@ export default function UpdateIngredientList(props: UpgradeIngredientListProps) 
         <div className="Ingredient-list">
             <Container>
                 <Stack alignItems={"center"}>
-                    <AddIngredient handleAddItem={handleAddItem}/>
+                    <TemplateAddUpdateIngredient current={newIngredient} handleNewUpdatedIngredient={handleAddItem} isNew={true}/>
 
                     <List>{
                         items.map((item, index) => (
@@ -57,11 +58,8 @@ export default function UpdateIngredientList(props: UpgradeIngredientListProps) 
                                         primary={item.quantity + " " + item.unit + " " + item.name}
                                     />
                                     <Button onClick={() => handleDelete(item.id)} color={"secondary"} startIcon={< DeleteOutlineIcon/>}></Button>
-
-                                    <UpdateIngredient current={item} handleUpdateItem={handleUpdateItem}/>
-
+                                    <TemplateAddUpdateIngredient current={item} handleNewUpdatedIngredient={handleUpdateItem} isNew={false}/>
                                 </ListItem>
-
                             )
                         )}
                     </List>
