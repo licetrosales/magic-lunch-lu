@@ -17,6 +17,23 @@ export type Recipe = {
     menuCategory: MenuCategory | string,
     garnish?: string
 }
+export type RecipeWithImg = {
+    id?: string,
+    name: string,
+    mealType: MealType | string,
+    source: string,
+    image: string,
+    ingredients: Ingredient[],
+    prepTime: string,
+    preparation: string,
+    portions: number,
+    favorite: boolean,
+    dishTypeCategory: DishTypeCategory | string,
+    recipeCategory: RecipeCategory | string,
+    menuCategory: MenuCategory | string,
+    garnish?: string
+    imgFormData: FormData
+}
 export type NewRecipe = {
 
     name: string,

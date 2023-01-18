@@ -1,20 +1,26 @@
 package com.github.licetrosales.backend.service;
 
-import com.github.licetrosales.backend.model.Image;
 import com.github.licetrosales.backend.model.Recipe;
 import com.github.licetrosales.backend.model.RecipeDTO;
 import com.github.licetrosales.backend.repo.RecipeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import com.cloudinary.utils.ObjectUtils;
+import com.cloudinary.Cloudinary;
+
+
+import java.util.Map;
 
 @Service
 public class RecipeService {
     private final RecipeRepo recipeRepo;
     private final IdRecipeService idRecipeService;
+
 
     @Autowired
     public RecipeService(RecipeRepo recipeRepo, IdRecipeService idRecipeService) {
@@ -44,6 +50,17 @@ public class RecipeService {
                 recipe.garnish()
 
         );
+
+
+        Cloudinary cloudinary = new Cloudinary();
+        cloudinary.upload("my_image.png", ObjectUtils.emptyMap());
+
+
+        File file = new File("my_image.png");
+        Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+
+
+
         return recipeRepo.save(newRecipeWithId);
     }
 
@@ -84,9 +101,6 @@ public class RecipeService {
         return recipeToUpdateWithId;
     }
 
-    public Image addImage(Image img) {
 
-        return recipeRepo.save(img);
-    }
 
 }
