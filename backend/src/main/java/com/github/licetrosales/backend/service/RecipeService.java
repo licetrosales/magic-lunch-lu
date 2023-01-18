@@ -1,5 +1,6 @@
 package com.github.licetrosales.backend.service;
 
+import com.github.licetrosales.backend.model.Image;
 import com.github.licetrosales.backend.model.Recipe;
 import com.github.licetrosales.backend.model.RecipeDTO;
 import com.github.licetrosales.backend.repo.RecipeRepo;
@@ -82,4 +83,10 @@ public class RecipeService {
         }
         return recipeToUpdateWithId;
     }
+
+    public Image addImage(Image img) {
+
+        return recipeRepo.save(img);
+    }
+
 }
