@@ -1,6 +1,5 @@
 package com.github.licetrosales.backend.controller;
 
-import com.github.licetrosales.backend.model.Image;
 import com.github.licetrosales.backend.model.Recipe;
 import com.github.licetrosales.backend.model.RecipeDTO;
 import com.github.licetrosales.backend.service.RecipeService;
@@ -41,9 +40,4 @@ public class RecipeController {
         return recipeService.updateRecipe(id, recipeToUpdateWithoutId);
     }
 
-    @PostMapping("/upload-image")
-    Image addImage(@RequestBody Image img) {
-
-        return recipeService.addImage(img);
-    }
 }

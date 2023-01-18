@@ -34,6 +34,9 @@ export default function MagicLunchMyRecipes() {
     }
 
     function addRecipe(newRecipeWithoutId: Recipe) {
+      /*  const formData = new FormData()
+        return formData.append("file",Re )*/
+
         axios.post(recipeBaseUrl, newRecipeWithoutId)
             .then(newRecipeResponse => {
                 setRecipes(prevRecipeGallery => {
@@ -82,6 +85,9 @@ export default function MagicLunchMyRecipes() {
         menuCategory: MenuCategory.MAIN_COURSE,
         garnish: ""
     }
+
+
+
     return (
         <section className={"section-content"}>
             <Container>

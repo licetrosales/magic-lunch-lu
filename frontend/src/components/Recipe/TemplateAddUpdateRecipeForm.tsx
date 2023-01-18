@@ -5,7 +5,7 @@ import {
     NewRecipe,
     NewRecipeWithId,
     Recipe,
-    RecipeCategory
+    RecipeCategory, RecipeWithImg
 } from "../../model/Recipe";
 import {
     Box,
@@ -27,6 +27,7 @@ import IngredientList from "../Ingredient/IngredientList";
 type TemplateAddUpdateRecipeFormProps = | {
     currentRecipe: Recipe
     handleCreateUpdateRecipe(newRecipe: Recipe): void
+
     isNew: boolean
 }
     | {
@@ -61,6 +62,7 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
     const [items, setItems] = useState<Ingredient []>(props.currentRecipe.ingredients)
     const [openRecipeMD, setOpenRecipeMD] = useState<boolean>(false)
     const [openIngredientMD, setOpenIngredientMD] = useState<boolean>(false)
+    const [formData, setFormData] = useState()
 
     function handleOpenRecipeMD() {
         setOpenRecipeMD(true)
@@ -121,7 +123,7 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
             name: recipeWithoutEnums.name,
             mealType: mealType,
             source: recipeWithoutEnums.source,
-            image: props.currentRecipe.image,
+            image: imageSelected,
             ingredients: items,
             prepTime: recipeWithoutEnums.prepTime,
             preparation: recipeWithoutEnums.preparation,
@@ -131,6 +133,7 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
             recipeCategory: recipeCategory,
             menuCategory: menuCategory,
             garnish: recipeWithoutEnums.garnish,
+
         }
         if (props.isNew) {
             props.handleCreateUpdateRecipe(recipeToSend)
@@ -150,33 +153,25 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
                                    key={ingredientShortInfo.id}/>
     })
 
-
-    function handleImageSelected(event: any) {
+    function handleImageSelected(event:any){
         setImageSelected(event.target.files[0])
         console.log(event.target.files[0])
     }
-
-    function handleUploadImageSelected() {
-        const formData = new FormData()
+    function handleUploadImage(event: any) {
+        let formData = new FormData()
         formData.append("file", imageSelected)
-        formData.append("upload_preset", "y43msivz")
+        formData.append("upload_preset","y43msivz")
+        console.log("*----------------*")
+        console.log(formData)
 
-        const cloudinaryUrl = "https://api.cloudinary.com/v1_1/debod1ejt/image/upload"
-
-        axios.post(cloudinaryUrl, formData)
-            .then((imageUploadResponse) => {
-                console.log(imageUploadResponse)
-            })
-        /*const recipeBaseUrl = "/api/users/userId/recipes"+ "/" + id)
-        axios.post(recipeBaseUrl, image)
-            .then(newImageResponse => {
-
-                })
+        const recipeBaseUrl = "/api/users/userId/recipes/upload"
+        axios.post(recipeBaseUrl, formData)
+            .then(messageResponse => {
+                console.log(messageResponse)
             })
             .catch(errorMessageReponse => {
                 console.error("There is an error by POST request: " + errorMessageReponse)
-            })*/
-
+            })
     }
 
 
@@ -231,7 +226,7 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
                                 onChange={handleImageSelected}
                                 color="secondary"
                             />
-                            <Button onClick={handleUploadImageSelected} variant={"contained"} component={"label"}
+                            <Button onClick={handleUploadImage} variant={"contained"} component={"label"}
                                     color={"secondary"}>
                                 Bild hochladen
                             </Button>
