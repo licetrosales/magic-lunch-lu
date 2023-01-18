@@ -162,10 +162,21 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
         formData.append("upload_preset", "y43msivz")
 
         const cloudinaryUrl = "https://api.cloudinary.com/v1_1/debod1ejt/image/upload"
+
         axios.post(cloudinaryUrl, formData)
             .then((imageUploadResponse) => {
                 console.log(imageUploadResponse)
             })
+        const recipeBaseUrl = "/api/users/userId/recipes"+ "/" + id)
+        axios.post(recipeBaseUrl, image)
+            .then(newImageResponse => {
+
+                })
+            })
+            .catch(errorMessageReponse => {
+                console.error("There is an error by POST request: " + errorMessageReponse)
+            })
+
     }
 
 
