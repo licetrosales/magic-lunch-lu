@@ -1,6 +1,9 @@
-import {Container} from "@mui/material";
+import {Box, Container, TextField} from "@mui/material";
 import {Recipe} from "../../model/Recipe";
 import RecipeCardGalleryView from "./RecipeCardGalleryView";
+import {ChangeEvent, useState} from "react";
+import SearchIcon from '@mui/icons-material/Search';
+import {Search} from "@mui/icons-material";
 
 type RecipeGalleryProps = {
     recipesToMap: Recipe[]
@@ -10,16 +13,35 @@ type RecipeGalleryProps = {
 
 export default function RecipeGallery(props: RecipeGalleryProps) {
 
-    const recipeItemComponents = props.recipesToMap.map(recipeShortInfo => {
+    const [searchText, setSearchText] = useState<string>("")
+
+    const filteredRecipes: Recipe [] = props.recipesToMap.filter((recipe) =>
+        recipe.name.toLowerCase().includes(searchText.toLowerCase())
+
+    )
+
+    const recipeItemComponents = filteredRecipes.map(recipeShortInfo => {
         return <RecipeCardGalleryView recipeToDisplay={recipeShortInfo} recipeToRemove={props.recipeToRemove}
                                       recipeToUpdate={props.recipeToUpdate}
                                       key={recipeShortInfo.id}/>
     })
+
+    function onSearchChange(event:ChangeEvent<HTMLInputElement>){
+        setSearchText(event.target.value)
+    }
+
     return (
         <section>
 
             <Container>
-                <br/><br/>
+
+            <Box
+                 display="flex"
+                 justifyContent="center"
+                 alignItems="center">
+                <TextField placeholder={"Suche"} value={searchText} onChange={onSearchChange} color={"secondary"}  />
+                <SearchIcon color={"secondary"}/>
+            </Box>
                 {recipeItemComponents}
 
             </Container>
