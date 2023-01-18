@@ -167,7 +167,7 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
             .then((imageUploadResponse) => {
                 console.log(imageUploadResponse)
             })
-        const recipeBaseUrl = "/api/users/userId/recipes"+ "/" + id)
+        /*const recipeBaseUrl = "/api/users/userId/recipes"+ "/" + id)
         axios.post(recipeBaseUrl, image)
             .then(newImageResponse => {
 
@@ -175,7 +175,7 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
             })
             .catch(errorMessageReponse => {
                 console.error("There is an error by POST request: " + errorMessageReponse)
-            })
+            })*/
 
     }
 
