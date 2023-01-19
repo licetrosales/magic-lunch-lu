@@ -8,7 +8,7 @@ import TemplateAddUpdateRecipeForm from "./TemplateAddUpdateRecipeForm";
 type RecipeCardGalleryViewProps = {
     recipeToDisplay: Recipe
     recipeToRemove: (id?: string) => void
-    recipeToUpdate: (recipe: Recipe, id?: string) => void
+    recipeToUpdate: (recipe: Recipe, imgToUpdate?: File, id?: string) => void
 }
 export default function RecipeCardGalleryView(props: RecipeCardGalleryViewProps) {
 
@@ -33,9 +33,9 @@ export default function RecipeCardGalleryView(props: RecipeCardGalleryViewProps)
         props.recipeToUpdate(recipe)
     }
 
-    function updateRecipe(recipe: Recipe, id: string) {
+    function updateRecipe(recipe: Recipe, imgToUpdate: File, id: string) {
         if (props.recipeToDisplay.id) {
-            props.recipeToUpdate(recipe, id)
+            props.recipeToUpdate(recipe, imgToUpdate, id)
         }
     }
 

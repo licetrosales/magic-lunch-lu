@@ -33,12 +33,12 @@ public class RecipeController {
 
         return recipeService.addRecipe(recipe);
     }*/
-    @PostMapping(value = "/recipes",
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PostMapping(value = "/recipes")
+
     public Recipe addRecipe(
-            @RequestPart("recipe") String recipe, @RequestPart("file") MultipartFile file) {
-        Recipe recipeJson = recipeService.getJson(recipe, file);
-        return recipeJson;
+            @RequestPart("recipe") RecipeDTO recipe, @RequestPart("file") MultipartFile file) {
+
+        return recipeService.addRecipe(recipe, file);
     }
 
     @DeleteMapping("/recipes/{id}")
