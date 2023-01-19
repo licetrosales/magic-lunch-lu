@@ -1,5 +1,6 @@
 package com.github.licetrosales.backend.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.licetrosales.backend.model.Recipe;
 import com.github.licetrosales.backend.model.RecipeDTO;
 import com.github.licetrosales.backend.repo.RecipeRepo;
@@ -7,11 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+
 import com.cloudinary.utils.ObjectUtils;
 import com.cloudinary.Cloudinary;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.util.Map;
@@ -32,7 +36,16 @@ public class RecipeService {
         return recipeRepo.findAll();
     }
 
-    public Recipe addRecipe(RecipeDTO recipe) {
+
+    public Recipe getJson(String recipeAsString, MultipartFile file) {
+       Recipe recipeJson = new Recipe();
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            recipeJson = objectMapper.readValue(recipe, Recipe.class);
+        } catch (IOException err) {
+            System.out.printf("Error", err.toString());
+        }
+
         Recipe newRecipeWithId = new Recipe(
                 idRecipeService.generateId(),
                 recipe.name(),
@@ -52,17 +65,17 @@ public class RecipeService {
         );
 
 
-        Cloudinary cloudinary = new Cloudinary();
+        /*Cloudinary cloudinary = new Cloudinary();
         cloudinary.upload("my_image.png", ObjectUtils.emptyMap());
 
-
         File file = new File("my_image.png");
-        Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
-
+        Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());*/
 
 
         return recipeRepo.save(newRecipeWithId);
     }
+
+
 
     public Recipe findById(String id) {
         Optional<Recipe> recipe = recipeRepo.findById(id);
@@ -100,7 +113,6 @@ public class RecipeService {
         }
         return recipeToUpdateWithId;
     }
-
 
 
 }
