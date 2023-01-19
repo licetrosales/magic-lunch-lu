@@ -26,7 +26,7 @@ export default function RecipeGallery(props: RecipeGalleryProps) {
                                       key={recipeShortInfo.id}/>
     })
 
-    function onSearchChange(event:ChangeEvent<HTMLInputElement>){
+    function handleChange(event:ChangeEvent<HTMLInputElement>){
         setSearchText(event.target.value)
     }
 
@@ -39,7 +39,7 @@ export default function RecipeGallery(props: RecipeGalleryProps) {
                  display="flex"
                  justifyContent="center"
                  alignItems="center">
-                <TextField placeholder={"Suche"} value={searchText} onChange={onSearchChange} color={"secondary"}  />
+                <TextField placeholder={"Suche"} value={searchText} onChange={handleChange} color={"secondary"}  />
                 <SearchIcon color={"secondary"}/>
             </Box>
                 {recipeItemComponents}
