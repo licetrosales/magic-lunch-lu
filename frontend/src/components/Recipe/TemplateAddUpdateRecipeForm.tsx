@@ -26,13 +26,13 @@ import IngredientList from "../Ingredient/IngredientList";
 
 type TemplateAddUpdateRecipeFormProps = | {
     currentRecipe: Recipe
-    handleCreateUpdateRecipe(newRecipe: Recipe): void
+    handleCreateUpdateRecipe(newRecipe: Recipe, formDataImage): void
 
     isNew: boolean
 }
     | {
     currentRecipe: Recipe
-    handleCreateUpdateRecipe(modifiedRecipe: Recipe, id?: string): void
+    handleCreateUpdateRecipe(modifiedRecipe: Recipe, id?: string, formDataImage): void
     isNew: boolean
 }
 export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateRecipeFormProps) {
@@ -62,7 +62,7 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
     const [items, setItems] = useState<Ingredient []>(props.currentRecipe.ingredients)
     const [openRecipeMD, setOpenRecipeMD] = useState<boolean>(false)
     const [openIngredientMD, setOpenIngredientMD] = useState<boolean>(false)
-    const [formData, setFormData] = useState()
+    const [formData, setFormData] = useState<FormData>()
 
     function handleOpenRecipeMD() {
         setOpenRecipeMD(true)
@@ -115,6 +115,28 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
     function handleCallbackItems(childData: Ingredient[]) {
         setItems(childData)
     }
+    function handleImageSelected(event:any){
+        setImageSelected(event.target.files[0])
+        console.log(event.target.files[0])
+    }
+    function handleUploadImage(event: any) {
+        let formData = new FormData()
+        formData.append("file", imageSelected)
+        formData.append("upload_preset","y43msivz")
+        console.log("*----------------*")
+        console.log(formData)
+        setFormData(formData)
+        /*const recipeBaseUrl = "/api/users/userId/recipes/upload"
+        axios.post(recipeBaseUrl, formData)
+            .then(messageResponse => {
+                console.log(messageResponse)
+            })
+            .catch(errorMessageReponse => {
+                console.error("There is an error by POST request: " + errorMessageReponse)
+            })*/
+
+    }
+
 
     function handleCreateUpdateRecipeFormSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -136,9 +158,9 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
 
         }
         if (props.isNew) {
-            props.handleCreateUpdateRecipe(recipeToSend)
+            props.handleCreateUpdateRecipe(recipeToSend, formData)
         } else {
-            props.handleCreateUpdateRecipe(recipeToSend, props.currentRecipe.id)
+            props.handleCreateUpdateRecipe(recipeToSend, props.currentRecipe.id, formData)
         }
         setRecipeWithoutEnums(currentRecipeFormWithoutEnums)
         setMealType(MealType.LUNCH)
@@ -153,26 +175,6 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
                                    key={ingredientShortInfo.id}/>
     })
 
-    function handleImageSelected(event:any){
-        setImageSelected(event.target.files[0])
-        console.log(event.target.files[0])
-    }
-    function handleUploadImage(event: any) {
-        let formData = new FormData()
-        formData.append("file", imageSelected)
-        formData.append("upload_preset","y43msivz")
-        console.log("*----------------*")
-        console.log(formData)
-
-        const recipeBaseUrl = "/api/users/userId/recipes/upload"
-        axios.post(recipeBaseUrl, formData)
-            .then(messageResponse => {
-                console.log(messageResponse)
-            })
-            .catch(errorMessageReponse => {
-                console.error("There is an error by POST request: " + errorMessageReponse)
-            })
-    }
 
 
     return (
