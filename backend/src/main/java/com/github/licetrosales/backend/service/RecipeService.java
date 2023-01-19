@@ -13,12 +13,17 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import com.cloudinary.utils.ObjectUtils;
+
 import com.cloudinary.Cloudinary;
 import org.springframework.web.multipart.MultipartFile;
+import com.cloudinary.*;
 
+import com.cloudinary.*;
+import com.cloudinary.utils.ObjectUtils;
+import io.github.cdimascio.dotenv.Dotenv;
 
 import java.util.Map;
+
 
 @Service
 public class RecipeService {
@@ -37,8 +42,12 @@ public class RecipeService {
     }
 
 
-    public Recipe addRecipe(RecipeDTO recipe, MultipartFile file) {
-        Recipe newRecipeWithId = new Recipe(
+    public Recipe addRecipe(RecipeDTO recipe, MultipartFile file) throws IOException {
+        Cloudinary cloudinary = new Cloudinary();
+        Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+        System.out.println(uploadResult.get("url"));
+
+              Recipe newRecipeWithId = new Recipe(
                 idRecipeService.generateId(),
                 recipe.name(),
                 recipe.mealType(),
@@ -55,12 +64,6 @@ public class RecipeService {
                 recipe.garnish()
 
         );
-//        Cloudinary cloudinary = new Cloudinary();
-//        cloudinary.uploader().upload(file,ObjectUtils.emptyMap());
-//        cloudinary.upload(file, ObjectUtils.emptyMap());
-//
-//        File file = new File("my_image.png");
-//        Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());*/
 
         return recipeRepo.save(newRecipeWithId);
     }

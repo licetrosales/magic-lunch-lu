@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -36,7 +37,7 @@ public class RecipeController {
     @PostMapping(value = "/recipes")
 
     public Recipe addRecipe(
-            @RequestPart("recipe") RecipeDTO recipe, @RequestPart("file") MultipartFile file) {
+            @RequestPart("recipe") RecipeDTO recipe, @RequestPart("file") MultipartFile file) throws IOException {
 
         return recipeService.addRecipe(recipe, file);
     }
