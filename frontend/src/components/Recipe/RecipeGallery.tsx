@@ -5,7 +5,7 @@ import RecipeCardGalleryView from "./RecipeCardGalleryView";
 type RecipeGalleryProps = {
     recipesToMap: Recipe[]
     recipeToRemove: (id?: string) => void
-    recipeToUpdate: (recipe: Recipe, id?: string,) => void
+    recipeToUpdate: (recipe: Recipe, imageToUpdate?: File, id?: string,) => void
 }
 
 export default function RecipeGallery(props: RecipeGalleryProps) {

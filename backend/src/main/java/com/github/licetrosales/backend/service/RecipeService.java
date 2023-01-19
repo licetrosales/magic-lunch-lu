@@ -37,15 +37,7 @@ public class RecipeService {
     }
 
 
-    public Recipe getJson(String recipeAsString, MultipartFile file) {
-       Recipe recipeJson = new Recipe();
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            recipeJson = objectMapper.readValue(recipe, Recipe.class);
-        } catch (IOException err) {
-            System.out.printf("Error", err.toString());
-        }
-
+    public Recipe addRecipe(RecipeDTO recipe, MultipartFile file) {
         Recipe newRecipeWithId = new Recipe(
                 idRecipeService.generateId(),
                 recipe.name(),
@@ -63,18 +55,15 @@ public class RecipeService {
                 recipe.garnish()
 
         );
-
-
-        /*Cloudinary cloudinary = new Cloudinary();
-        cloudinary.upload("my_image.png", ObjectUtils.emptyMap());
-
-        File file = new File("my_image.png");
-        Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());*/
-
+//        Cloudinary cloudinary = new Cloudinary();
+//        cloudinary.uploader().upload(file,ObjectUtils.emptyMap());
+//        cloudinary.upload(file, ObjectUtils.emptyMap());
+//
+//        File file = new File("my_image.png");
+//        Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());*/
 
         return recipeRepo.save(newRecipeWithId);
     }
-
 
 
     public Recipe findById(String id) {

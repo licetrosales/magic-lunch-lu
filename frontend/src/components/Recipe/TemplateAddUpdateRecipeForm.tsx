@@ -26,13 +26,13 @@ import IngredientList from "../Ingredient/IngredientList";
 
 type TemplateAddUpdateRecipeFormProps = | {
     currentRecipe: Recipe
-    handleCreateUpdateRecipe(newRecipe: Recipe, formDataImage): void
+    handleCreateUpdateRecipe(newRecipe: Recipe,imageSelected?: File  ): void
 
     isNew: boolean
 }
     | {
     currentRecipe: Recipe
-    handleCreateUpdateRecipe(modifiedRecipe: Recipe, id?: string, formDataImage): void
+    handleCreateUpdateRecipe(modifiedRecipe: Recipe, imageSelected?: File, id?: string ): void
     isNew: boolean
 }
 export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateRecipeFormProps) {
@@ -58,11 +58,11 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
     const [dishTypeCategory, setDishTypeCategory] = useState<DishTypeCategory | string>(props.currentRecipe.dishTypeCategory)
     const [recipeCategory, setRecipeCategory] = useState<RecipeCategory | string>(props.currentRecipe.recipeCategory)
     const [menuCategory, setMenuCategory] = useState<MenuCategory | string>(props.currentRecipe.menuCategory)
-    const [imageSelected, setImageSelected] = useState("")
+    const [imageSelected, setImageSelected] = useState<File>()
     const [items, setItems] = useState<Ingredient []>(props.currentRecipe.ingredients)
     const [openRecipeMD, setOpenRecipeMD] = useState<boolean>(false)
     const [openIngredientMD, setOpenIngredientMD] = useState<boolean>(false)
-    const [formData, setFormData] = useState<FormData>()
+
 
     function handleOpenRecipeMD() {
         setOpenRecipeMD(true)
@@ -115,27 +115,12 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
     function handleCallbackItems(childData: Ingredient[]) {
         setItems(childData)
     }
-    function handleImageSelected(event:any){
+    function handleImageSelected(event: ChangeEvent<HTMLInputElement>){
+        if (event.target.files !== null){
         setImageSelected(event.target.files[0])
-        console.log(event.target.files[0])
-    }
-    function handleUploadImage(event: any) {
-        let formData = new FormData()
-        formData.append("file", imageSelected)
-        formData.append("upload_preset","y43msivz")
-        console.log("*----------------*")
-        console.log(formData)
-        setFormData(formData)
-        /*const recipeBaseUrl = "/api/users/userId/recipes/upload"
-        axios.post(recipeBaseUrl, formData)
-            .then(messageResponse => {
-                console.log(messageResponse)
-            })
-            .catch(errorMessageReponse => {
-                console.error("There is an error by POST request: " + errorMessageReponse)
-            })*/
 
-    }
+    }}
+
 
 
     function handleCreateUpdateRecipeFormSubmit(event: FormEvent<HTMLFormElement>) {
@@ -145,7 +130,7 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
             name: recipeWithoutEnums.name,
             mealType: mealType,
             source: recipeWithoutEnums.source,
-            image: imageSelected,
+            image: recipeWithoutEnums.image,
             ingredients: items,
             prepTime: recipeWithoutEnums.prepTime,
             preparation: recipeWithoutEnums.preparation,
@@ -158,9 +143,9 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
 
         }
         if (props.isNew) {
-            props.handleCreateUpdateRecipe(recipeToSend, formData)
+            props.handleCreateUpdateRecipe( recipeToSend,imageSelected,)
         } else {
-            props.handleCreateUpdateRecipe(recipeToSend, props.currentRecipe.id, formData)
+            props.handleCreateUpdateRecipe(recipeToSend, imageSelected, props.currentRecipe.id)
         }
         setRecipeWithoutEnums(currentRecipeFormWithoutEnums)
         setMealType(MealType.LUNCH)
@@ -228,10 +213,7 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
                                 onChange={handleImageSelected}
                                 color="secondary"
                             />
-                            <Button onClick={handleUploadImage} variant={"contained"} component={"label"}
-                                    color={"secondary"}>
-                                Bild hochladen
-                            </Button>
+
                         </Box>
 
                         <TextField

@@ -33,11 +33,14 @@ export default function MagicLunchMyRecipes() {
             })
     }
 
-    function addRecipe(newRecipeWithoutId: Recipe) {
-      /*  const formData = new FormData()
-        return formData.append("file",Re )*/
+    function addRecipe(newRecipeWithoutId: Recipe, imageToUpload?: File) {
 
-        axios.post(recipeBaseUrl, newRecipeWithoutId)
+        const formData = new FormData()
+        if(imageToUpload !== undefined){
+        formData.append("file", imageToUpload)
+        }
+        formData.append("recipe", new Blob([JSON.stringify(newRecipeWithoutId)], {type: "application/json"}))
+        axios.post(recipeBaseUrl, formData)
             .then(newRecipeResponse => {
                 setRecipes(prevRecipeGallery => {
                     return [...prevRecipeGallery, newRecipeResponse.data]
@@ -57,9 +60,15 @@ export default function MagicLunchMyRecipes() {
             })
     }
 
-    function updateRecipe(modifiedRecipe: Recipe, id?: string) {
+    function updateRecipe(modifiedRecipe: Recipe, imageToUpdate?: File, id?: string) {
         console.log(modifiedRecipe)
-        axios.put(recipeBaseUrl + "/" + modifiedRecipe.id, modifiedRecipe)
+        const formData = new FormData()
+        if(imageToUpdate !== undefined){
+            formData.append("file", imageToUpdate)
+        }
+        formData.append("recipe", new Blob([JSON.stringify(modifiedRecipe)], {type: "application/json"}))
+
+        axios.put(recipeBaseUrl + "/" + modifiedRecipe.id, formData)
             .then((newRecipeResponse) => {
                     const indexOfModifiedElement = recipes.findIndex(recipe => recipe.id === modifiedRecipe.id)
                     let copyOfRecipes = [...recipes]
