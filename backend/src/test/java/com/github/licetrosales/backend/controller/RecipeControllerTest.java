@@ -79,7 +79,7 @@ class RecipeControllerTest {
                                            "garnish": "Salat"
                                          }
                                         """
-                        ))
+                        ),
                 .andExpect(status().isOk())
                 .andReturn();
         String content = response.getResponse().getContentAsString();
