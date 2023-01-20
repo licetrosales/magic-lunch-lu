@@ -29,11 +29,6 @@ public class RecipeController {
         return recipeService.getAllRecipes();
     }
 
-    /*@PostMapping("/recipes")
-    Recipe addRecipe(@RequestBody RecipeDTO recipe) {
-
-        return recipeService.addRecipe(recipe);
-    }*/
     @PostMapping(value = "/recipes")
 
     public Recipe addRecipe(
