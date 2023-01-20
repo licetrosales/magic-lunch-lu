@@ -3,10 +3,8 @@ import './App.css';
 import MagicLunchMyRecipes from "./components/Recipe/MagicLunchMyRecipes";
 import {Routes, Route} from "react-router-dom";
 import Home from "./components/Home";
-import WeekPlanner from "./components/WeekPlanner";
+
 import Header from "./components/Header";
-
-
 
 function App() {
     return (
@@ -17,10 +15,11 @@ function App() {
             <Routes>
                 <Route path={"/"} element={<Home/>}></Route>
                 <Route path={"/recipes"} element={<MagicLunchMyRecipes/>}></Route>
-                <Route path={"/weekplan-history"} element={<WeekPlanner/>}></Route>
-                <Route path={"/impressum"} element={<WeekPlanner/>}></Route>
+                <Route path={"/weekplan-history"} element={<Home/>}></Route>
+                <Route path={"/impressum"} element={<Home/>}></Route>
 
             </Routes>
+
         </div>
     );
 }

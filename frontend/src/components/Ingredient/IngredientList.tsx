@@ -7,10 +7,11 @@ import uuid from "react-uuid";
 
 type IngredientListProps = {
     handleCallbackItems(childData: Ingredient[]): void
+    currentIngredients: Ingredient[]
 }
 
 export default function IngredientList(props: IngredientListProps) {
-    const [items, setItems] = useState<Ingredient []>([])
+    const [items, setItems] = useState<Ingredient []>(props.currentIngredients)
 
 
     function handleAddItem(item: Ingredient) {
