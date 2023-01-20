@@ -155,7 +155,7 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
     }
 
 
-    const recipeIngredientes = props.currentRecipe.ingredients?.map((ingredientShortInfo) => {
+    const recipeIngredientes = items.map((ingredientShortInfo) => {
         return <IngredientCardView ingredientToDisplay={ingredientShortInfo}
                                    key={ingredientShortInfo.id}/>
     })
@@ -313,7 +313,7 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
                         {props.isNew ? <><Typography align={"center"} variant={"h6"}>
                                 Zutatenliste
                             </Typography>
-                                <IngredientList handleCallbackItems={handleCallbackItems}/> :
+                                <IngredientList handleCallbackItems={handleCallbackItems} currentIngredients={items}/>
                             </> :
                             <>
                                 <Box display="flex" justifyContent="center">

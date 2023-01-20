@@ -48,9 +48,9 @@ export default function TemplateAddUpdateIngredient(props: TemplateUpdateIngredi
         props.handleNewUpdatedIngredient(newUpdatedItem)
         setItemWithoutEnums({
             id: props.current.id,
-            name: newUpdatedItem.name,
-            quantity: newUpdatedItem.quantity,
-            unit: newUpdatedItem.unit,
+            name: "",
+            quantity: "",
+            unit: "",
             isInShoppingList: newUpdatedItem.isInShoppingList
         })
         handleClose()
@@ -103,7 +103,7 @@ export default function TemplateAddUpdateIngredient(props: TemplateUpdateIngredi
                         Abbrechen
                     </Button>
                     <Button onClick={handleSaveItem} color={"secondary"}>
-                        Speichern
+                        Speichern 123458765
                     </Button>
                 </DialogActions>
             </Dialog>

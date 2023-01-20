@@ -86,7 +86,7 @@ export default function RecipeCard(props: RecipeCardProps) {
             <CardMedia
                 component="img"
                 height="194"
-                image="https://res.cloudinary.com/debod1ejt/image/upload/v1672930652/cld-sample-4.jpg"
+                image={image}
                 alt="Recipe image"
             />
             <CardContent>
