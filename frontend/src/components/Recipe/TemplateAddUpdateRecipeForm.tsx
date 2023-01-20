@@ -26,13 +26,13 @@ import IngredientList from "../Ingredient/IngredientList";
 
 type TemplateAddUpdateRecipeFormProps = | {
     currentRecipe: Recipe
-    handleCreateUpdateRecipe(newRecipe: Recipe,imageSelected?: File  ): void
+    handleCreateUpdateRecipe(newRecipe: Recipe, imageSelected?: File): void
 
     isNew: boolean
 }
     | {
     currentRecipe: Recipe
-    handleCreateUpdateRecipe(modifiedRecipe: Recipe, imageSelected?: File, id?: string ): void
+    handleCreateUpdateRecipe(modifiedRecipe: Recipe, imageSelected?: File, id?: string): void
     isNew: boolean
 }
 export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateRecipeFormProps) {
@@ -115,12 +115,13 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
     function handleCallbackItems(childData: Ingredient[]) {
         setItems(childData)
     }
-    function handleImageSelected(event: ChangeEvent<HTMLInputElement>){
-        if (event.target.files !== null){
-        setImageSelected(event.target.files[0])
 
-    }}
+    function handleImageSelected(event: ChangeEvent<HTMLInputElement>) {
+        if (event.target.files !== null) {
+            setImageSelected(event.target.files[0])
 
+        }
+    }
 
 
     function handleCreateUpdateRecipeFormSubmit(event: FormEvent<HTMLFormElement>) {
@@ -143,7 +144,7 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
 
         }
         if (props.isNew) {
-            props.handleCreateUpdateRecipe( recipeToSend,imageSelected,)
+            props.handleCreateUpdateRecipe(recipeToSend, imageSelected,)
         } else {
             props.handleCreateUpdateRecipe(recipeToSend, imageSelected, props.currentRecipe.id)
         }
@@ -154,13 +155,10 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
         setMenuCategory(MenuCategory.MAIN_COURSE)
     }
 
-
-    const recipeIngredientes = items.map((ingredientShortInfo) => {
+    const recipeIngredientes = (items.length === 0)&&items.map((ingredientShortInfo) => {
         return <IngredientCardView ingredientToDisplay={ingredientShortInfo}
                                    key={ingredientShortInfo.id}/>
     })
-
-
 
     return (
         <div>
@@ -337,12 +335,9 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
                                 </Dialog>
                                 {!props.isNew ?
                                     <Typography align={"center"} variant={"body1"}>
+
                                         {recipeIngredientes}
                                     </Typography> : null}
-                                <Box display="flex" justifyContent="center">
-                                    <Button type={"submit"} color={"secondary"} variant={"outlined"}
-                                            startIcon={<RefreshIcon/>}></Button>
-                                </Box>
                             </>
                         }
                         <TextField

@@ -103,7 +103,7 @@ export default function TemplateAddUpdateIngredient(props: TemplateUpdateIngredi
                         Abbrechen
                     </Button>
                     <Button onClick={handleSaveItem} color={"secondary"}>
-                        Speichern 123458765
+                        Speichern
                     </Button>
                 </DialogActions>
             </Dialog>

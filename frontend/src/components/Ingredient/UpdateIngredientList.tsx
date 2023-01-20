@@ -65,7 +65,7 @@ export default function UpdateIngredientList(props: UpgradeIngredientListProps) 
                     </List>
 
                     <Button onClick={handleOnClick} variant={"contained"} component={"label"} color={"secondary"}>
-                         Speichern 123
+                         Speichern
                     </Button>
                 </Stack>
             </Container>
