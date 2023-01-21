@@ -5,6 +5,7 @@ import {Routes, Route} from "react-router-dom";
 import Home from "./components/Home";
 
 import Header from "./components/Header";
+import MagicLunchMyWeekPlans from "./components/MagicLunchMyWeekPlans";
 
 function App() {
     return (
@@ -15,7 +16,7 @@ function App() {
             <Routes>
                 <Route path={"/"} element={<Home/>}></Route>
                 <Route path={"/recipes"} element={<MagicLunchMyRecipes/>}></Route>
-                <Route path={"/weekplan-history"} element={<Home/>}></Route>
+                <Route path={"/mealplans"} element={<MagicLunchMyWeekPlans/>}></Route>
                 <Route path={"/impressum"} element={<Home/>}></Route>
 
             </Routes>
