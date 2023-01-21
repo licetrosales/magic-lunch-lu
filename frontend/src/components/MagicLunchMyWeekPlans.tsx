@@ -47,12 +47,12 @@ export default function MagicLunchMyWeekPlans() {
     return (
         <Grid container direction={"column"} alignItems={"center"} justifySelf={"center"} style={{minHeight:"100vh"}} spacing={5}>
 
-            <Grid item>
-                <Typography>Get a random meal by clicking below</Typography>
+            <Grid item margin={2}>
+                <Typography>Vorschlag generieren</Typography>
             </Grid>
             <Grid item>
-                <Button className="button-primary" onClick={onClickAddWeekMealPlan} variant={"contained"} color={"secondary"}
-                        startIcon={<AutoFixHighTwoToneIcon/>}>Vorschlag genenieren</Button>
+                <Button className="button-primary" onClick={onClickAddWeekMealPlan} size = {"large"} variant={"outlined"} color={"secondary"}
+                        startIcon={<AutoFixHighTwoToneIcon/>}></Button>
             </Grid>
             <Grid item>
               <WeekMealPlanGallery recipeToMap={recipes}/>
