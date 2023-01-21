@@ -155,7 +155,7 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
         setMenuCategory(MenuCategory.MAIN_COURSE)
     }
 
-    const recipeIngredientes = (items.length === 0)&&items.map((ingredientShortInfo) => {
+    const recipeIngredientes = (items.length === 0) && items.map((ingredientShortInfo) => {
         return <IngredientCardView ingredientToDisplay={ingredientShortInfo}
                                    key={ingredientShortInfo.id}/>
     })
