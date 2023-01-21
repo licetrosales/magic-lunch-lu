@@ -3,6 +3,7 @@ package com.github.licetrosales.backend.service;
 import com.github.licetrosales.backend.model.*;
 import com.github.licetrosales.backend.repo.RecipeRepo;
 import org.junit.jupiter.api.Test;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collections;
 import java.util.List;
@@ -121,7 +122,7 @@ class RecipeServiceTest {
         verify(recipeRepo).save(recipeTestWithIdDay1);
         assertEquals(recipeTestWithIdDay1.id(), result.id());
     }
-
+MultipartFile multipartFile = ;
     @Test
     void addRecipe_shouldAddRecipeWithIngredients_whenIngredientsAreGiven() {
 
@@ -130,7 +131,7 @@ class RecipeServiceTest {
         when(idRecipeService.generateId()).thenReturn(id);
         when(recipeRepo.save(recipeTestWithIdWithIngredient)).thenReturn(recipeTestWithIdWithIngredient);
 
-        Recipe result = recipeService.addRecipe(recipeToAdd);
+        Recipe result = recipeService.addRecipe(recipeToAdd, multipartFile);
 
         verify(recipeRepo).save(recipeTestWithIdWithIngredient);
         assertEquals(recipeTestWithIdWithIngredient.ingredients(), result.ingredients());

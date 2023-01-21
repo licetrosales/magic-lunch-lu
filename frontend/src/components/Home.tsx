@@ -1,16 +1,24 @@
 import "./Home.style.css"
+import {Typography} from "@mui/material";
 
 export default function Home() {
     return (
-        <div>
-            <div className={"main-header"}>
-                <header>
-                    <h1>Magic Lunch</h1>
-                </header>
-            </div>
-            <section className={"section-content "} >
+
+        <div
+            style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "lavender"
+            }}
+        >
+            <header>
+                <Typography variant={"h6"}> Login section</Typography>
+            </header>
+
+            <section className={"section-content "}>
                 <div>
-                    Login section
+
                 </div>
             </section>
         </div>
