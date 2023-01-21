@@ -9,7 +9,7 @@ export default function Header() {
     const theme = useTheme()
     const isMatch = useMediaQuery(theme.breakpoints.down("md"))
     const pages = ["Startseite", "Meine Rezepte", "Wochenplan", "Impressum"]
-    const routes = ["/", "/recipes", "/weekplan-history", "/impressum"]
+    const routes = ["/", "/recipes", "/mealplans", "/impressum"]
     return (
 
         <div>

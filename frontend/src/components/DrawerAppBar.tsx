@@ -16,7 +16,7 @@ export default function DrawerAppBar() {
     const [openDrawer, setOpenDrawer] = useState<boolean>(false)
     const pages = ["Startseite","Meine Rezepte", "Wochenplan", "Impressum","Logout"]
     const pagesIcons = [<HomeIcon/>, <RamenDiningIcon/>, <DateRangeIcon/>, <InfoIcon/>,<LogoutIcon/>]
-    const routes = ["/", "/recipes", "/weekplan-history", "/impressum", "/logout"]
+    const routes = ["/", "/recipes", "/mealplans", "/impressum", "/logout"]
     const navigate  = useNavigate()
 
     return (
