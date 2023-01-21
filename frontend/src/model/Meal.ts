@@ -1,7 +1,7 @@
-import {MealType} from "./Recipe";
+import {MealType, Recipe} from "./Recipe";
 
-export type Recipe = {
-    id?: String,
+export type Meal = {
+    id?: string,
     localDate: Date,
     mealType: MealType,
     recipe: Recipe
