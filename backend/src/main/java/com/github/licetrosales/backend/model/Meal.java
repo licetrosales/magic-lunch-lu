@@ -1,7 +1,6 @@
 package com.github.licetrosales.backend.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public record Meal(
         String id,
