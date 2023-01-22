@@ -20,12 +20,13 @@ import java.util.List;
 
         @GetMapping("/mealplans")
         List<WeekMealPlan> getAllWeekMealPlans() {
+
             return weekMealPlanService.getAllWeekMealPlans();
         }
 
-        @PostMapping(value = "/mealplans")
-        public WeekMealPlan addWeekMealPlan(@RequestBody String exerciseName){
-            return WeekMealPlanService.addWeekMealPlan();
+        @PostMapping( "/mealplans")
+        public WeekMealPlan addWeekMealPlan(@RequestBody WeekMealPlan weekMealPlan ){
+            return weekMealPlanService.addWeekMealPlan(weekMealPlan);
         }
 
 
