@@ -18,7 +18,7 @@ export default function MagicLunchMyWeekPlans() {
     const recipeBaseUrl = "/api/users/userId/recipes"
    
     useEffect(() => {
-        getRecipes()
+
     }, [])
    
     function getRecipes() {
@@ -33,6 +33,7 @@ export default function MagicLunchMyWeekPlans() {
     }
 
     function onClickAddWeekMealPlan(){
+        getRecipes()
         axios.post(weekMealPlanBaseUrl, newWeekMealPlan)
             .then(newWeekMealPlanResponse => {
                 setRecipes(prevWeekMealPlanGallery => {
