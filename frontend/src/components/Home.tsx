@@ -1,5 +1,7 @@
 import "./Home.style.css"
-import {Typography} from "@mui/material";
+import {Button, Grid, Typography} from "@mui/material";
+import AutoFixHighTwoToneIcon from "@mui/icons-material/AutoFixHighTwoTone";
+import WeekMealPlanGallery from "./WeekMealPlanGallery";
 
 export default function Home() {
     return (
@@ -9,18 +11,26 @@ export default function Home() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor: "lavender"
+                backgroundColor: "lavender",
+                backgroundImage: "url(/background.png)"
             }}
         >
-            <header>
-                <Typography variant={"h6"}> Login section</Typography>
-            </header>
+            <Grid container direction={"column"} alignItems={"center"} justifySelf={"center"}
+                  style={{minHeight: "100vh"}} spacing={5}>
 
-            <section className={"section-content "}>
-                <div>
+                <Grid item margin={2}>
+                    <Typography>Willkommen</Typography>
+                </Grid>
+                <Grid item>
 
-                </div>
-            </section>
+                    <Typography variant={"h6"}> Login</Typography><br/>
+                </Grid>
+                <Grid item>
+                    <Typography variant={"h6"}> Sign up</Typography>
+
+                </Grid>
+
+            </Grid>
         </div>
     )
 }

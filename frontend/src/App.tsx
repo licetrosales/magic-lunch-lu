@@ -9,7 +9,7 @@ import MagicLunchMyWeekPlans from "./components/MagicLunchMyWeekPlans";
 
 function App() {
     return (
-        <div className="App">
+        <div className="App" >
 
             <Header/>
 
