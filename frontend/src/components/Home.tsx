@@ -1,7 +1,7 @@
 import "./Home.style.css"
 import {Button, Grid, Typography} from "@mui/material";
 import AutoFixHighTwoToneIcon from "@mui/icons-material/AutoFixHighTwoTone";
-import WeekMealPlanGallery from "./WeekMealPlanGallery";
+import RecipeWeekMealPlanGallery from "./RecipeWeekMealPlanGallery";
 
 export default function Home() {
     return (

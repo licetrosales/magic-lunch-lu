@@ -6,6 +6,7 @@ import com.github.licetrosales.backend.model.Recipe;
 import com.github.licetrosales.backend.model.WeekMealPlan;
 import com.github.licetrosales.backend.repo.RecipeRepo;
 import com.github.licetrosales.backend.repo.WeekMealPlanRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.*;
@@ -13,30 +14,33 @@ import java.util.*;
 @Service
 public class WeekMealPlanService {
     private final WeekMealPlanRepo weekMealPlanRepo;
-    private static IdWeekMealPlanService idWeekMealPlanService;
-    static RecipeRepo recipeRepo;
-
-    public WeekMealPlanService(WeekMealPlanRepo weekMealPlanRepo, IdWeekMealPlanService idMealService) {
+    private final IdWeekMealPlanService idWeekMealPlanService;
+    @Autowired
+    private RecipeService recipeService;
+    @Autowired
+    public WeekMealPlanService(WeekMealPlanRepo weekMealPlanRepo, IdWeekMealPlanService idWeekMealPlanService) {
+        this.idWeekMealPlanService = idWeekMealPlanService;
         this.weekMealPlanRepo = weekMealPlanRepo;
-        this.idWeekMealPlanService = idMealService;
     }
+
+
 
     public List<WeekMealPlan> getAllWeekMealPlans() {
         return weekMealPlanRepo.findAll();
     }
 
-    public static WeekMealPlan addWeekMealPlan() {
+    public WeekMealPlan addWeekMealPlan(WeekMealPlan weekMealPlan) {
         List<Meal> weekMeals;
         weekMeals = weeklyMealGenerator();
-        WeekMealPlan weekMealPlan = new WeekMealPlan(
-                addWeekMealPlan().id(),
+        WeekMealPlan weekMealPlanModified = new WeekMealPlan(
+                idWeekMealPlanService.generateId(),
                 weekMeals);
-        return weekMealPlan;
+        return weekMealPlanRepo.save(weekMealPlanModified);
     }
 
-    public static List<Meal> weeklyMealGenerator() {
+    public List<Meal> weeklyMealGenerator() {
         Random random = new Random();
-        List<Recipe> listOfRecipes = recipeRepo.findAll();
+        List<Recipe> listOfRecipes = recipeService.getAllRecipes();
         List<Meal> weekMealPlan = new ArrayList<>();
         LocalDate localDate = LocalDate.now();
         MealType mealType = MealType.LUNCH;

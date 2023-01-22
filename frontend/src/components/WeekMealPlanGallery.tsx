@@ -1,24 +1,20 @@
-import {Container, Typography} from "@mui/material";
-
-import RecipeCard from "./Recipe/RecipeCard";
 import {Recipe} from "../model/Recipe";
+import RecipeCardGalleryView from "./Recipe/RecipeCardGalleryView";
+import {Container} from "@mui/material";
+import {WeekMealPlan} from "../model/WeekMealPlan";
 
 type WeekMealPlanGalleryProps = {
-    recipeToMap: Recipe[]
-
+    weekMealPlanToMap: WeekMealPlan[]
 }
 
-export default function WeekMealPlanGallery(props:WeekMealPlanGalleryProps) {
+export default function WeekMealPlanGallery(props: WeekMealPlanGalleryProps) {
 
-    const weekMealPlanItemComponents = props.recipeToMap.map((recipeInfo,index) => {
-        let today = new Date()
-        today.setDate(today.getDate() + index)
-        let date = new Date(today).toLocaleDateString("de-DE")
-
-        return <div>
-            <Typography>{date}</Typography>
-            <RecipeCard recipeToDisplay={recipeInfo} key={recipeInfo.id}/>
-        </div>
+    const weekMealPlanItemComponents = props.weekMealPlanToMap.map(weekMealPlanDateInfo => {
+        return <>
+            {weekMealPlanDateInfo.meals.map((meal)=>{
+                return meal.recipe.name
+        })}
+        </>
     })
     return (
         <section>
@@ -26,9 +22,7 @@ export default function WeekMealPlanGallery(props:WeekMealPlanGalleryProps) {
             <Container>
                 <br/><br/>
                 {weekMealPlanItemComponents}
-
             </Container>
-
         </section>
     )
 }
