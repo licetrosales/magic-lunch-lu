@@ -76,7 +76,7 @@ export default function MagicLunchMyWeekPlans() {
             </Grid>
             <Grid item>
                 <WeekMealPlanGallery weekMealPlanToMap={weekMealPlans}/>
-                {/* <RecipeWeekMealPlanGallery recipeToMap={recipes}/>*/}
+              {/* <RecipeWeekMealPlanGallery recipeToMap={recipes}/>*/}
             </Grid>
 
 

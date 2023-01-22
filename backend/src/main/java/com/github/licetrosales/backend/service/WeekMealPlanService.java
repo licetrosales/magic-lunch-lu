@@ -8,6 +8,7 @@ import com.github.licetrosales.backend.repo.RecipeRepo;
 import com.github.licetrosales.backend.repo.WeekMealPlanRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -17,12 +18,12 @@ public class WeekMealPlanService {
     private final IdWeekMealPlanService idWeekMealPlanService;
     @Autowired
     private RecipeService recipeService;
+
     @Autowired
     public WeekMealPlanService(WeekMealPlanRepo weekMealPlanRepo, IdWeekMealPlanService idWeekMealPlanService) {
         this.idWeekMealPlanService = idWeekMealPlanService;
         this.weekMealPlanRepo = weekMealPlanRepo;
     }
-
 
 
     public List<WeekMealPlan> getAllWeekMealPlans() {
