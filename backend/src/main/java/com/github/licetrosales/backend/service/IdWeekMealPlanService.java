@@ -2,10 +2,16 @@ package com.github.licetrosales.backend.service;
 
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 @Service
 public class IdWeekMealPlanService {
     public String generateId(){
-            return UUID.randomUUID().toString();
+        LocalDate localDate = LocalDate.now();//For reference
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+        String formattedString = localDate.format(formatter);
+
+        return formattedString;
         }
 }

@@ -1,7 +1,7 @@
-import {Recipe} from "../model/Recipe";
-import RecipeCardGalleryView from "./Recipe/RecipeCardGalleryView";
-import {Container} from "@mui/material";
+
+import {Container, ListItem, ListItemText, Stack} from "@mui/material";
 import {WeekMealPlan} from "../model/WeekMealPlan";
+import List from "@mui/material/List";
 
 type WeekMealPlanGalleryProps = {
     weekMealPlanToMap: WeekMealPlan[]
@@ -9,20 +9,18 @@ type WeekMealPlanGalleryProps = {
 
 export default function WeekMealPlanGallery(props: WeekMealPlanGalleryProps) {
 
-    const weekMealPlanItemComponents = props.weekMealPlanToMap.map(weekMealPlanDateInfo => {
-        return <>
-            {weekMealPlanDateInfo.meals.map((meal)=>{
-                return meal.recipe.name
-        })}
-        </>
-    })
     return (
-        <section>
-
-            <Container>
-                <br/><br/>
-                {weekMealPlanItemComponents}
-            </Container>
-        </section>
+        <Stack alignItems={"center"}>
+            <List>{
+                props.weekMealPlanToMap.map((weekMealPlan, index) =>
+                    <ListItem key={weekMealPlan.id} divider>
+                        <ListItemText
+                            primary={"Wochenplan: " + weekMealPlan.id}
+                        />
+                    </ListItem>
+                )
+            }
+            </List>
+        </Stack>
     )
 }
