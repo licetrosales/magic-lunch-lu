@@ -1,6 +1,7 @@
 package com.github.licetrosales.backend.controller;
 
 import com.github.licetrosales.backend.model.WeekMealPlan;
+import com.github.licetrosales.backend.model.WeekMealPlanDTO;
 import com.github.licetrosales.backend.service.WeekMealPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ import java.util.List;
         }
 
         @PostMapping( "/mealplans")
-        public WeekMealPlan addWeekMealPlan(@RequestBody WeekMealPlan weekMealPlan ){
+        public WeekMealPlan addWeekMealPlan(@RequestBody WeekMealPlanDTO weekMealPlan ){
             return weekMealPlanService.addWeekMealPlan(weekMealPlan);
         }
 

@@ -57,12 +57,8 @@ class WeekMealPlanControllerTest {
                         .content(
                                 """
                                     {
-                                      "id": "Today",
-                                      "weekMealPlan": [{"id": "1",
-                                      "date": "date",
-                                      "mealType": "LUNCH",                                                              
-                                      "recipe":{}                                                             
-                                    }]
+                                      "id": "",
+                                      "weekMealPlan": []
                                     }
                                 """
                         ))

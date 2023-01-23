@@ -3,16 +3,24 @@ package com.github.licetrosales.backend.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.licetrosales.backend.model.Recipe;
 import com.github.licetrosales.backend.repo.RecipeRepo;
+import org.apache.commons.compress.utils.IOUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMultipartHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -48,45 +56,18 @@ class RecipeControllerTest {
 
 
     }
-
+    @Autowired
+    private WebApplicationContext webApplicationContext;
     @Test
     @DirtiesContext
     void addRecipe_shouldReturnRecipeSendeWithPost_whenPostRequestIsSuccessful() throws Exception {
-        MvcResult response = mockMvc.perform(multipart("/api/users/userId/recipes")
-                        .(MediaType.APPLICATION_JSON)
-                        .(
-                                """
-                                        {
-                                           "name": "Salat 11",
-                                           "mealType": "LUNCH",
-                                           "source": "GU",
-                                           "image": "BigMacSalat.jpg",
-                                           "ingredients": [{
-                                             "id": "1",
-                                             "name": "Brot",
-                                             "quantity": "1",
-                                             "unit": "SMALL",
-                                             "isInShoppingList": false,
-                                             "productCategory": "BREAD_BAKERY"
-                                           }],
-                                           "prepTime": "30 min.",
-                                           "preparation": "Anweisungen eintragen",
-                                           "portions": 2,
-                                           "favorite": false,
-                                           "dishTypeCategory": "FISH",
-                                           "recipeCategory": "LOW_CARB",
-                                           "menuCategory": "MAIN_COURSE",
-                                           "garnish": "Salat"
-                                         }
-                                        """
-                        ),
-                .andExpect(status().isOk())
-                .andReturn();
-        String content = response.getResponse().getContentAsString();
-        Recipe result = objectMapper.readValue(content, Recipe.class);
-        Recipe expected = new Recipe(result.id(), result.name(), result.mealType(), result.source(), result.image(), result.ingredients(), result.prepTime(), result.preparation(), result.portions(), result.favorite(), result.dishTypeCategory(), result.recipeCategory(), result.menuCategory(), result.garnish());
-        assertEquals(expected, result);
+        byte[] image = IOUtils.toByteArray(getClass().getClassLoader().getResourceAsStream("/background.png"));
+
+        MockMultipartFile file = new MockMultipartFile("file", "/background.png", MediaType.IMAGE_JPEG_VALUE, image);
+        mockMvc.perform(multipart("/api/users/userId/recipes").file(file))
+                .andExpect(status().isOk());
     }
+
 
     @Test
     @DirtiesContext
@@ -258,7 +239,4 @@ class RecipeControllerTest {
 
 """.replaceFirst("<ID>", id)));
     }
-
-
-
 }

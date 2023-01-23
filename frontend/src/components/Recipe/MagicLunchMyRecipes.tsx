@@ -68,7 +68,7 @@ export default function MagicLunchMyRecipes() {
         }
         formData.append("recipe", new Blob([JSON.stringify(modifiedRecipe)], {type: "application/json"}))
 
-        axios.put(recipeBaseUrl + "/" + modifiedRecipe.id, formData)
+        axios.put(recipeBaseUrl + "/" + modifiedRecipe.id,modifiedRecipe)
             .then((newRecipeResponse) => {
                     const indexOfModifiedElement = recipes.findIndex(recipe => recipe.id === modifiedRecipe.id)
                     let copyOfRecipes = [...recipes]

@@ -1,9 +1,6 @@
 package com.github.licetrosales.backend.service;
 
-import com.github.licetrosales.backend.model.Meal;
-import com.github.licetrosales.backend.model.MealType;
-import com.github.licetrosales.backend.model.Recipe;
-import com.github.licetrosales.backend.model.WeekMealPlan;
+import com.github.licetrosales.backend.model.*;
 import com.github.licetrosales.backend.repo.RecipeRepo;
 import com.github.licetrosales.backend.repo.WeekMealPlanRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +27,7 @@ public class WeekMealPlanService {
         return weekMealPlanRepo.findAll();
     }
 
-    public WeekMealPlan addWeekMealPlan(WeekMealPlan weekMealPlan) {
+    public WeekMealPlan addWeekMealPlan(WeekMealPlanDTO weekMealPlanWithoutId) {
         List<Meal> weekMeals;
         weekMeals = weeklyMealGenerator();
         WeekMealPlan weekMealPlanModified = new WeekMealPlan(
