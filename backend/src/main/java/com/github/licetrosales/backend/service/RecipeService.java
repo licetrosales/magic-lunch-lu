@@ -43,17 +43,18 @@ public class RecipeService {
 
 
     public Recipe addRecipe(RecipeDTO recipe, MultipartFile file) throws IOException {
-
+        String imageUrl = "";
+        if (file != null) {
             Cloudinary cloudinary = new Cloudinary();
             Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
-            String imageUrl = uploadResult.get("url").toString();
-
+            imageUrl = uploadResult.get("url").toString();
+        }
         Recipe newRecipeWithId = new Recipe(
                 idRecipeService.generateId(),
                 recipe.name(),
                 recipe.mealType(),
                 recipe.source(),
-                uploadResult.get("url").toString(),
+                imageUrl,
                 recipe.ingredients(),
                 recipe.prepTime(),
                 recipe.preparation(),

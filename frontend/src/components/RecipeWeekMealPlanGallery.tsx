@@ -15,7 +15,7 @@ export default function RecipeWeekMealPlanGallery(props:RecipeWeekMealPlanGaller
 
 
 
-    return (
+    return (props.mealsToMap && props.mealsToMap.length > 0 ?
         <Stack alignItems={"center"}>
             <List>)(props.mealsToMap){
 
@@ -24,11 +24,11 @@ export default function RecipeWeekMealPlanGallery(props:RecipeWeekMealPlanGaller
                         <ListItemText
                             primary={"Tag: " + meal.id}
                         />
-                       {/* <RecipeCard recipeToDisplay={meal.recipe} key={meal.id}/>*/}
+                       <RecipeCard recipeToDisplay={meal.recipe} key={meal.id}/>
                     </ListItem>
                )}
 
             </List>
-        </Stack>
+        </Stack>:<p>***</p>
     )
 }

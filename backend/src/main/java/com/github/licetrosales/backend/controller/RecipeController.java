@@ -32,7 +32,7 @@ public class RecipeController {
     @PostMapping(value = "/recipes")
 
     public Recipe addRecipe(
-            @RequestPart("recipe") RecipeDTO recipe, @RequestPart("file") MultipartFile file) throws IOException {
+            @RequestPart("recipe") RecipeDTO recipe, @RequestPart(value = "file", required = false) MultipartFile file) throws IOException {
 
         return recipeService.addRecipe(recipe, file);
     }

@@ -52,9 +52,9 @@ class RecipeControllerTest {
     @Test
     @DirtiesContext
     void addRecipe_shouldReturnRecipeSendeWithPost_whenPostRequestIsSuccessful() throws Exception {
-        MvcResult response = mockMvc.perform(post("/api/users/userId/recipes")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(
+        MvcResult response = mockMvc.perform(multipart("/api/users/userId/recipes")
+                        .(MediaType.APPLICATION_JSON)
+                        .(
                                 """
                                         {
                                            "name": "Salat 11",
