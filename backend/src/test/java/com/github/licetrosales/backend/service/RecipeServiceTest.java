@@ -3,8 +3,12 @@ package com.github.licetrosales.backend.service;
 import com.github.licetrosales.backend.model.*;
 import com.github.licetrosales.backend.repo.RecipeRepo;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -99,39 +103,45 @@ class RecipeServiceTest {
     }
 
     @Test
-    void addRecipe_shouldReturnRecipe_whenRecipeIsAdded() {
+    void addRecipe_shouldReturnRecipe_whenRecipeIsAdded() throws IOException {
         when(idRecipeService.generateId()).thenReturn("testId");
         when(recipeRepo.save(recipeTestWithId)).thenReturn(recipeTestWithId);
+        byte[] fileContent = "bar".getBytes(StandardCharsets.UTF_8);
+        MockMultipartFile file = new MockMultipartFile("file", "orig", null, fileContent);
 
-        Recipe result = recipeService.addRecipe(recipeTestWithoutId);
+        Recipe result = recipeService.addRecipe(recipeTestWithoutId,file);
 
         verify(recipeRepo).save(recipeTestWithId);
         assertEquals(recipeTestWithId, result);
     }
 
     @Test
-    void addRecipe_shouldAddRecipeId_whenRecipeWithoutIdIsGiven() {
+    void addRecipe_shouldAddRecipeId_whenRecipeWithoutIdIsGiven() throws IOException {
 
         RecipeDTO recipeToAdd = recipeTestWithoutId;
 
         when(idRecipeService.generateId()).thenReturn("testIdDay1");
         when(recipeRepo.save(recipeTestWithIdDay1)).thenReturn(recipeTestWithIdDay1);
+        byte[] fileContent = "bar".getBytes(StandardCharsets.UTF_8);
+        MockMultipartFile file = new MockMultipartFile("file", "orig", null, fileContent);
 
-        Recipe result = recipeService.addRecipe(recipeToAdd);
+        Recipe result = recipeService.addRecipe(recipeToAdd, file);
 
         verify(recipeRepo).save(recipeTestWithIdDay1);
         assertEquals(recipeTestWithIdDay1.id(), result.id());
     }
-MultipartFile multipartFile = ;
+
     @Test
-    void addRecipe_shouldAddRecipeWithIngredients_whenIngredientsAreGiven() {
+    void addRecipe_shouldAddRecipeWithIngredients_whenIngredientsAreGiven() throws IOException {
 
         RecipeDTO recipeToAdd = recipeTestWithoutIdWithIngredients;
 
         when(idRecipeService.generateId()).thenReturn(id);
         when(recipeRepo.save(recipeTestWithIdWithIngredient)).thenReturn(recipeTestWithIdWithIngredient);
+        byte[] fileContent = "bar".getBytes(StandardCharsets.UTF_8);
+        MockMultipartFile file = new MockMultipartFile("file", "orig", null, fileContent);
 
-        Recipe result = recipeService.addRecipe(recipeToAdd, multipartFile);
+        Recipe result = recipeService.addRecipe(recipeToAdd, file);
 
         verify(recipeRepo).save(recipeTestWithIdWithIngredient);
         assertEquals(recipeTestWithIdWithIngredient.ingredients(), result.ingredients());
