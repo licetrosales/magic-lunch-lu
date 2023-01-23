@@ -36,7 +36,19 @@ class WeekMealPlanControllerTest {
                 .andExpect(content().json("""
                          []
                         """));
-    }@Test
+    }
+
+    @Test
+    @DirtiesContext
+    void getAllWeekMealPlans_shouldReturnListOfRecipes_whenWeekMealPlanGalleryisNotEmpty() throws Exception {
+        mockMvc.perform(get("/api/users/userId/recipes"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        []
+                        """));
+    }
+
+    @Test
     @DirtiesContext
     void addWeekMealPlan__shouldReturnWeekMealPlanSentWithPost_whenPostRequestIsSuccessful() throws Exception {
 
@@ -44,11 +56,15 @@ class WeekMealPlanControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(
                                 """
-                                                {
-                                                   "id": "Today",
-                                                   "weekMealPlan": [{}]
-                                                  }
-                                        """
+                                    {
+                                      "id": "Today",
+                                      "weekMealPlan": [{"id": "1",
+                                      "date": "date",
+                                      "mealType": "LUNCH",                                                              
+                                      "recipe":{}                                                             
+                                    }]
+                                    }
+                                """
                         ))
                 .andExpect(status().isOk())
                 .andReturn();
