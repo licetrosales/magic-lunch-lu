@@ -10,7 +10,7 @@ type WeekMealPlanGalleryProps = {
 
 export default function WeekMealPlanGallery(props: WeekMealPlanGalleryProps) {
 
-    return (
+    return (props.weekMealPlanToMap!==undefined && props.weekMealPlanToMap.length > 0 ?
         <Stack alignItems={"center"}>
             <List>{
                 props.weekMealPlanToMap.map((weekMealPlan, index) =>
@@ -23,6 +23,6 @@ export default function WeekMealPlanGallery(props: WeekMealPlanGalleryProps) {
                 )
             }
             </List>
-        </Stack>
+        </Stack>:<p>Dein Wochenplan</p>
     )
 }

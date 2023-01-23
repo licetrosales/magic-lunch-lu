@@ -67,7 +67,7 @@ export default function RecipeCard(props: RecipeCardProps) {
                                    key={ingredientShortInfo.id}/>
     })
 
-    return (
+    return (props.recipeToDisplay &&
         <Card sx={{maxWidth: 345}}>
             <CardHeader
                 avatar={
