@@ -1,34 +1,34 @@
-import {Container, Typography} from "@mui/material";
+import {Container, ListItem, ListItemText, Stack, Typography} from "@mui/material";
 
 import RecipeCard from "./Recipe/RecipeCard";
-import {Recipe} from "../model/Recipe";
+
+import {Meal} from "../model/Meal";
+import List from "@mui/material/List";
+import {useEffect, useState} from "react";
 
 type RecipeWeekMealPlanGalleryProps = {
-    recipeToMap: Recipe[]
+    mealsToMap: Meal[]
 
 }
 
 export default function RecipeWeekMealPlanGallery(props:RecipeWeekMealPlanGalleryProps) {
 
-    const weekMealPlanItemComponents = props.recipeToMap.map((recipeInfo,index) => {
-        let today = new Date()
-        today.setDate(today.getDate() + index)
-        let date = new Date(today).toLocaleDateString("de-DE")
 
-        return <div>
-            <Typography>{date}</Typography>
-            <RecipeCard recipeToDisplay={recipeInfo} key={recipeInfo.id}/>
-        </div>
-    })
+
     return (
-        <section>
+        <Stack alignItems={"center"}>
+            <List>)(props.mealsToMap){
 
-            <Container>
-                <br/><br/>
-                {weekMealPlanItemComponents}
+                props.mealsToMap.map((meal, index) =>
+                    <ListItem key={meal.id} divider>
+                        <ListItemText
+                            primary={"Tag: " + meal.id}
+                        />
+                       {/* <RecipeCard recipeToDisplay={meal.recipe} key={meal.id}/>*/}
+                    </ListItem>
+               )}
 
-            </Container>
-
-        </section>
+            </List>
+        </Stack>
     )
 }

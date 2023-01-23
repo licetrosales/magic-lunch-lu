@@ -2,6 +2,7 @@
 import {Container, ListItem, ListItemText, Stack} from "@mui/material";
 import {WeekMealPlan} from "../model/WeekMealPlan";
 import List from "@mui/material/List";
+import RecipeWeekMealPlanGallery from "./RecipeWeekMealPlanGallery";
 
 type WeekMealPlanGalleryProps = {
     weekMealPlanToMap: WeekMealPlan[]
@@ -17,6 +18,7 @@ export default function WeekMealPlanGallery(props: WeekMealPlanGalleryProps) {
                         <ListItemText
                             primary={"Wochenplan: " + weekMealPlan.id}
                         />
+                        <RecipeWeekMealPlanGallery mealsToMap={weekMealPlan.meals}/>
                     </ListItem>
                 )
             }
