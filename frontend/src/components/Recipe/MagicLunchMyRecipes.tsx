@@ -62,13 +62,14 @@ export default function MagicLunchMyRecipes() {
 
     function updateRecipe(modifiedRecipe: Recipe, imageToUpdate?: File, id?: string) {
         console.log(modifiedRecipe)
+        console.log(imageToUpdate)
         const formData = new FormData()
         if(imageToUpdate !== undefined){
             formData.append("file", imageToUpdate)
         }
         formData.append("recipe", new Blob([JSON.stringify(modifiedRecipe)], {type: "application/json"}))
 
-        axios.put(recipeBaseUrl + "/" + modifiedRecipe.id,modifiedRecipe)
+        axios.put(recipeBaseUrl + "/" + modifiedRecipe.id,formData)
             .then((newRecipeResponse) => {
                     const indexOfModifiedElement = recipes.findIndex(recipe => recipe.id === modifiedRecipe.id)
                     let copyOfRecipes = [...recipes]

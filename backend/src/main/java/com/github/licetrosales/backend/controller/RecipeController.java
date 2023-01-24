@@ -43,8 +43,9 @@ public class RecipeController {
     }
 
     @PutMapping(path = "/recipes/{id}")
-    Recipe updateRecipe(@PathVariable String id, @RequestBody RecipeDTO recipeToUpdateWithoutId) {
-        return recipeService.updateRecipe(id, recipeToUpdateWithoutId);
+    Recipe updateRecipe(@PathVariable String id,   @RequestPart("recipe") RecipeDTO recipe, @RequestPart(value = "file", required = false) MultipartFile file) throws IOException {
+
+        return recipeService.updateRecipe(id, recipe, file);
     }
 
 }
