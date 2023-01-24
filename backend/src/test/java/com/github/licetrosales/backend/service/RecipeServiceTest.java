@@ -183,12 +183,12 @@ class RecipeServiceTest {
     }
 
     @Test
-    void updateRecipe_shouldReturnRecipeWithChanges_whenRecipeIdExists() {
+    void updateRecipe_shouldReturnRecipeWithChanges_whenRecipeIdExists() throws IOException {
         RecipeDTO recipeToUpdate = new RecipeDTO("soup 1", MealType.BREAKFAST, "", "", ingredients, "", "", 2, false, dishTypeCategory, recipeCategory, menuCategory, "");
 
         when(recipeRepo.existsById(recipeTestWithId.id())).thenReturn(true);
 
-        Recipe result = recipeService.updateRecipe(recipeTestWithId.id(), recipeToUpdate);
+        Recipe result = recipeService.updateRecipe(recipeTestWithId.id(), recipeToUpdate,null);
 
         assertNotEquals(recipeTestWithId, result);
     }

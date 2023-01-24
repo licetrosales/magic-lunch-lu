@@ -1,6 +1,7 @@
 package com.github.licetrosales.backend.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.licetrosales.backend.model.CloudinaryUrl;
 import com.github.licetrosales.backend.model.Recipe;
 import com.github.licetrosales.backend.model.RecipeDTO;
 import com.github.licetrosales.backend.repo.RecipeRepo;
@@ -82,12 +83,17 @@ public class RecipeService {
         recipeRepo.delete(recipe);
     }
 
-    public Recipe updateRecipe(String id, RecipeDTO recipeToUpdateWithoutId) {
+    CloudinaryUrl cloudinaryUrl = new CloudinaryUrl();
+    public Recipe updateRecipe(String id, RecipeDTO recipeToUpdateWithoutId, MultipartFile file) throws IOException {
+        String imageUrl = recipeToUpdateWithoutId.image();
+        if (file != null) {
+            imageUrl= cloudinaryUrl.urlGenerator(file);
+        }
         Recipe recipeToUpdateWithId = new Recipe(id,
                 recipeToUpdateWithoutId.name(),
                 recipeToUpdateWithoutId.mealType(),
                 recipeToUpdateWithoutId.source(),
-                recipeToUpdateWithoutId.image(),
+                imageUrl,
                 recipeToUpdateWithoutId.ingredients(),
                 recipeToUpdateWithoutId.prepTime(),
                 recipeToUpdateWithoutId.preparation(),
