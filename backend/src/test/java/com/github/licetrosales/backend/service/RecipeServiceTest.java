@@ -3,9 +3,7 @@ package com.github.licetrosales.backend.service;
 import com.github.licetrosales.backend.model.*;
 import com.github.licetrosales.backend.repo.RecipeRepo;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -21,8 +19,9 @@ import static org.mockito.Mockito.*;
 class RecipeServiceTest {
     RecipeRepo recipeRepo = mock(RecipeRepo.class);
     IdRecipeService idRecipeService = mock(IdRecipeService.class);
+    CloudinaryUrlService cloudinaryUrl = mock(CloudinaryUrlService.class);
 
-    RecipeService recipeService = new RecipeService(recipeRepo, idRecipeService);
+    RecipeService recipeService = new RecipeService(recipeRepo, idRecipeService,cloudinaryUrl);
 
     String id = "testId";
     String idDay1 = "testIdDay1";
@@ -49,33 +48,30 @@ class RecipeServiceTest {
     Recipe recipeTestWithId = new Recipe(id, name, mealType, source, image,
             ingredients, prepTime, preparation, portions, favorite, dishTypeCategory,
             recipeCategory, menuCategory, garnish);
-    Recipe recipeTestWithIdWithEditedNAme = new Recipe(id, modifiedName, mealType, source, image,
+    /*Recipe recipeTestWithIdWithEditedNAme = new Recipe(id, modifiedName, mealType, source, image,
             ingredients, prepTime, preparation, portions, favorite, dishTypeCategory,
-            recipeCategory, menuCategory, garnish);
-
+            recipeCategory, menuCategory, garnish);*/
     Recipe recipeTestWithIdDay1 = new Recipe(idDay1, name, mealType, source, image,
             ingredients, prepTime, preparation, portions, favorite, dishTypeCategory,
             recipeCategory, menuCategory, garnish);
 
-    String ingredientId1 = "testIngredientId1";
+String ingredientId1 = "testIngredientId1";
     String ingredientName1 = "Zwiebel";
     String ingredientName2 = "Cheddar";
     String ingredientQuantity1 = "1";
     String ingredientQuantity2 = "10";
     String ingredientUnit1 = "small";
     String ingredientUnit2 = "g";
-    ProductCategory productCategory1 = ProductCategory.PRODUCE;
-
     Boolean isInShoppingList = false;
-
     Ingredient ingredientWithoutId1 = new Ingredient(null, ingredientName1, ingredientQuantity1, ingredientUnit1, isInShoppingList, null);
     Ingredient ingredientWithoutId2 = new Ingredient(idDay1, ingredientName2, ingredientQuantity2, ingredientUnit2, isInShoppingList, null);
 
     List<Ingredient> ingredientsWithoutId = List.of(ingredientWithoutId1, ingredientWithoutId2);
-    RecipeDTO recipeTestWithoutIdWithIngredients = new RecipeDTO(name, mealType, source, image,
+
+    Recipe recipeTestWithIdWithIngredient = new Recipe(id, name, mealType, source, image,
             ingredientsWithoutId, prepTime, preparation, portions, favorite, dishTypeCategory,
             recipeCategory, menuCategory, garnish);
-    Recipe recipeTestWithIdWithIngredient = new Recipe(id, name, mealType, source, image,
+    RecipeDTO recipeTestWithoutIdWithIngredients = new RecipeDTO(name, mealType, source, image,
             ingredientsWithoutId, prepTime, preparation, portions, favorite, dishTypeCategory,
             recipeCategory, menuCategory, garnish);
 
@@ -102,12 +98,15 @@ class RecipeServiceTest {
         assertThat(result).containsExactly(recipeTestWithId);
     }
 
+
     @Test
     void addRecipe_shouldReturnRecipe_whenRecipeIsAdded() throws IOException {
         when(idRecipeService.generateId()).thenReturn("testId");
         when(recipeRepo.save(recipeTestWithId)).thenReturn(recipeTestWithId);
+
         byte[] fileContent = "bar".getBytes(StandardCharsets.UTF_8);
         MockMultipartFile file = new MockMultipartFile("file", "orig", null, fileContent);
+        when(cloudinaryUrl.urlGenerator(file)).thenReturn("./image.png");
 
         Recipe result = recipeService.addRecipe(recipeTestWithoutId,file);
 
@@ -122,8 +121,11 @@ class RecipeServiceTest {
 
         when(idRecipeService.generateId()).thenReturn("testIdDay1");
         when(recipeRepo.save(recipeTestWithIdDay1)).thenReturn(recipeTestWithIdDay1);
+
+
         byte[] fileContent = "bar".getBytes(StandardCharsets.UTF_8);
         MockMultipartFile file = new MockMultipartFile("file", "orig", null, fileContent);
+        when(cloudinaryUrl.urlGenerator(file)).thenReturn("./image.png");
 
         Recipe result = recipeService.addRecipe(recipeToAdd, file);
 
@@ -136,10 +138,14 @@ class RecipeServiceTest {
 
         RecipeDTO recipeToAdd = recipeTestWithoutIdWithIngredients;
 
-        when(idRecipeService.generateId()).thenReturn(id);
-        when(recipeRepo.save(recipeTestWithIdWithIngredient)).thenReturn(recipeTestWithIdWithIngredient);
         byte[] fileContent = "bar".getBytes(StandardCharsets.UTF_8);
         MockMultipartFile file = new MockMultipartFile("file", "orig", null, fileContent);
+        when(cloudinaryUrl.urlGenerator(file)).thenReturn("./image.png");
+
+        when(idRecipeService.generateId()).thenReturn(id);
+
+        when(recipeRepo.save(recipeTestWithIdWithIngredient)).thenReturn(recipeTestWithIdWithIngredient);
+
 
         Recipe result = recipeService.addRecipe(recipeToAdd, file);
 
@@ -186,21 +192,30 @@ class RecipeServiceTest {
     void updateRecipe_shouldReturnRecipeWithChanges_whenRecipeIdExists() throws IOException {
         RecipeDTO recipeToUpdate = new RecipeDTO("soup 1", MealType.BREAKFAST, "", "", ingredients, "", "", 2, false, dishTypeCategory, recipeCategory, menuCategory, "");
 
+        byte[] fileContent = "bar".getBytes(StandardCharsets.UTF_8);
+        MockMultipartFile file = new MockMultipartFile("file", "orig", null, fileContent);
+        when(cloudinaryUrl.urlGenerator(file)).thenReturn("./image.png");
+
         when(recipeRepo.existsById(recipeTestWithId.id())).thenReturn(true);
 
-        Recipe result = recipeService.updateRecipe(recipeTestWithId.id(), recipeToUpdate,null);
+        Recipe result = recipeService.updateRecipe(recipeTestWithId.id(), recipeToUpdate,file);
 
         assertNotEquals(recipeTestWithId, result);
     }
 
     @Test
-    void updateRecipe_exceptionTesting() {
+    void updateRecipe_exceptionTesting() throws IOException {
+
+        byte[] fileContent = "bar".getBytes(StandardCharsets.UTF_8);
+        MockMultipartFile file = new MockMultipartFile("file", "orig", null, fileContent);
+        when(cloudinaryUrl.urlGenerator(file)).thenReturn("./image.png");
 
         when(recipeRepo.existsById(recipeTestWithId.id())).thenReturn(false);
 
+
         NoSuchElementException thrown = assertThrows(
                 NoSuchElementException.class, () ->
-                        recipeService.updateRecipe(recipeTestWithId.id(), recipeTestWithoutId), "There is no element with the requested ID"
+                        recipeService.updateRecipe(recipeTestWithId.id(), recipeTestWithoutId, file),"There is no element with the requested ID"
         );
         assertTrue(thrown.getMessage().contentEquals("There is no element with the requested ID"));
     }
