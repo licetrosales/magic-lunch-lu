@@ -1,42 +1,30 @@
 package com.github.licetrosales.backend.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.licetrosales.backend.model.CloudinaryUrl;
 import com.github.licetrosales.backend.model.Recipe;
 import com.github.licetrosales.backend.model.RecipeDTO;
 import com.github.licetrosales.backend.repo.RecipeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-
-
-import com.cloudinary.Cloudinary;
 import org.springframework.web.multipart.MultipartFile;
-import com.cloudinary.*;
-
-import com.cloudinary.*;
-import com.cloudinary.utils.ObjectUtils;
-import io.github.cdimascio.dotenv.Dotenv;
-
-import java.util.Map;
-
 
 @Service
 public class RecipeService {
     private final RecipeRepo recipeRepo;
     private final IdRecipeService idRecipeService;
+    private final CloudinaryUrlService cloudinaryUrl;
 
 
     @Autowired
-    public RecipeService(RecipeRepo recipeRepo, IdRecipeService idRecipeService) {
+    public RecipeService(RecipeRepo recipeRepo, IdRecipeService idRecipeService, CloudinaryUrlService cloudinaryUrl) {
         this.recipeRepo = recipeRepo;
         this.idRecipeService = idRecipeService;
+        this.cloudinaryUrl = cloudinaryUrl;
     }
+
 
     public List<Recipe> getAllRecipes() {
         return recipeRepo.findAll();
@@ -46,9 +34,7 @@ public class RecipeService {
     public Recipe addRecipe(RecipeDTO recipe, MultipartFile file) throws IOException {
         String imageUrl = "";
         if (file != null) {
-            Cloudinary cloudinary = new Cloudinary();
-            Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
-            imageUrl = uploadResult.get("url").toString();
+            imageUrl= cloudinaryUrl.urlGenerator(file);
         }
         Recipe newRecipeWithId = new Recipe(
                 idRecipeService.generateId(),
@@ -83,7 +69,7 @@ public class RecipeService {
         recipeRepo.delete(recipe);
     }
 
-    CloudinaryUrl cloudinaryUrl = new CloudinaryUrl();
+
     public Recipe updateRecipe(String id, RecipeDTO recipeToUpdateWithoutId, MultipartFile file) throws IOException {
         String imageUrl = recipeToUpdateWithoutId.image();
         if (file != null) {

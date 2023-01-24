@@ -1,13 +1,14 @@
-package com.github.licetrosales.backend.model;
+package com.github.licetrosales.backend.service;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Map;
-
-public class CloudinaryUrl {
+@Service
+public class CloudinaryUrlService {
     public String urlGenerator(MultipartFile file) throws IOException {
         String imageUrl;
 

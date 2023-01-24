@@ -1,7 +1,6 @@
 package com.github.licetrosales.backend.service;
 
 import com.github.licetrosales.backend.model.*;
-import com.github.licetrosales.backend.repo.RecipeRepo;
 import com.github.licetrosales.backend.repo.WeekMealPlanRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ class WeekMealPlanServiceTest {
     WeekMealPlanRepo weekMealPlanRepo = mock(WeekMealPlanRepo.class);
     RecipeService recipeService = mock(RecipeService.class);
     IdWeekMealPlanService idWeekMealPlanService = mock(IdWeekMealPlanService.class);
+    CloudinaryUrlService cloudinaryUrl = mock(CloudinaryUrlService.class);
 
     WeekMealPlanService weekMealPlanService = new WeekMealPlanService(weekMealPlanRepo, idWeekMealPlanService);
     String id = "testId";
@@ -52,6 +52,7 @@ class WeekMealPlanServiceTest {
         WeekMealPlan result = weekMealPlanService.addWeekMealPlan(weekMealPlanWithoutId);
 
         verify(weekMealPlanRepo).save(weekMealPlanWithId);
+
         assertEquals(weekMealPlanWithId, result);
 
     }
