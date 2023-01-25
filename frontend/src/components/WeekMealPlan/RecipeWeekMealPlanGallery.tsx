@@ -11,12 +11,12 @@ export default function RecipeWeekMealPlanGallery(props: RecipeWeekMealPlanGalle
 
     return (props.mealsToMap && props.mealsToMap.length > 0 ?
             <Stack alignItems={"center"}>
-                <List>)(props.mealsToMap){
+                <List>{
 
                     props.mealsToMap.map((meal, index) =>
                         <ListItem key={meal.id} divider>
                             <ListItemText
-                                primary={"Tag: " + meal.id}
+                                primary={"Tag: " + meal.date}
                             />
                             <ListItemText>
                                 <RecipeCard recipeToDisplay={meal.recipe} key={meal.id}/>
