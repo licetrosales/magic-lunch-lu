@@ -1,13 +1,16 @@
 package com.github.licetrosales.backend.service;
 
 import com.github.licetrosales.backend.model.*;
-import com.github.licetrosales.backend.repo.RecipeRepo;
+
 import com.github.licetrosales.backend.repo.WeekMealPlanRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.util.*;
+
+
 
 @Service
 public class WeekMealPlanService {
@@ -38,7 +41,8 @@ public class WeekMealPlanService {
     }
 
     public List<Meal> weeklyMealGenerator() {
-        Random random = new Random();
+
+        SecureRandom random = new SecureRandom();
         List<Recipe> listOfRecipes = recipeService.getAllRecipes();
         List<Meal> weekMealPlan = new ArrayList<>();
         LocalDate localDate = LocalDate.now();
