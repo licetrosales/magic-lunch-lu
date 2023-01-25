@@ -1,18 +1,13 @@
-import {Container, ListItem, ListItemText, Stack, Typography} from "@mui/material";
+import {ListItem, ListItemText, Stack} from "@mui/material";
 
-import RecipeCard from "./Recipe/RecipeCard";
-
-import {Meal} from "../model/Meal";
+import RecipeCard from "../Recipe/RecipeCard";
+import {Meal} from "../../model/Meal";
 import List from "@mui/material/List";
-import {useEffect, useState} from "react";
 
 type RecipeWeekMealPlanGalleryProps = {
     mealsToMap: Meal[]
 }
 export default function RecipeWeekMealPlanGallery(props: RecipeWeekMealPlanGalleryProps) {
-
-
-
 
     return (props.mealsToMap && props.mealsToMap.length > 0 ?
             <Stack alignItems={"center"}>
