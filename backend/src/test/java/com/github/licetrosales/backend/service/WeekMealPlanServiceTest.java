@@ -17,7 +17,7 @@ class WeekMealPlanServiceTest {
     WeekMealPlanRepo weekMealPlanRepo = mock(WeekMealPlanRepo.class);
     RecipeService recipeService = mock(RecipeService.class);
     IdWeekMealPlanService idWeekMealPlanService = mock(IdWeekMealPlanService.class);
-    CloudinaryUrlService cloudinaryUrl = mock(CloudinaryUrlService.class);
+
 
     WeekMealPlanService weekMealPlanService = new WeekMealPlanService(weekMealPlanRepo, idWeekMealPlanService);
     String id = "testId";

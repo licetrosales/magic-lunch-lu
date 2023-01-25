@@ -16,9 +16,11 @@ export default function MagicLunchMyWeekPlans() {
     const weekMealPlanBaseUrl = "/api/users/userId/mealplans"
     const recipeBaseUrl = "/api/users/userId/recipes"
 
-    useEffect(() => {
+   useEffect(() => {
         getWeekMealPlans()
     }, [])
+
+
 
     function getWeekMealPlans() {
         axios.get(weekMealPlanBaseUrl)
