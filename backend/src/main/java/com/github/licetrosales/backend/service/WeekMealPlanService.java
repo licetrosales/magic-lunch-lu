@@ -10,8 +10,6 @@ import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.util.*;
 
-
-
 @Service
 public class WeekMealPlanService {
     private final WeekMealPlanRepo weekMealPlanRepo;
