@@ -10,7 +10,7 @@ export default function MagicLunchMyWeekPlans() {
 
     const [weekMealPlans, setWeekMealPlans] = useState<WeekMealPlan[]>([])
     const weekMealPlanBaseUrl = "/api/users/userId/mealplans"
-    const recipeBaseUrl = "/api/users/userId/recipes"
+
 
     useEffect(() => {
         getWeekMealPlans()
@@ -58,7 +58,6 @@ export default function MagicLunchMyWeekPlans() {
         addWeekMealPlan(emptyWeekMealPlan)
     }
 
-    const currentWeek = [Date.now()]
     return (
         <Grid container direction={"column"} alignItems={"center"} justifySelf={"center"} style={{minHeight: "100vh"}}
               spacing={5}>

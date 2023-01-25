@@ -13,7 +13,6 @@ type WeekMealPlanGalleryProps = {
 }
 export default function WeekMealPlanGallery(props: WeekMealPlanGalleryProps) {
 
-    console.log(props.weekMealPlanToMap[0])
     return (props.weekMealPlanToMap !== undefined && props.weekMealPlanToMap.length > 0 ?
             <Stack alignItems={"center"}>
                 <List>{

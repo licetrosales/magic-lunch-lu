@@ -5,7 +5,7 @@ import {
     NewRecipe,
     NewRecipeWithId,
     Recipe,
-    RecipeCategory, RecipeWithImg
+    RecipeCategory,
 } from "../../model/Recipe";
 import {
     Box,
@@ -16,11 +16,8 @@ import {
 } from "@mui/material";
 import {ChangeEvent, FormEvent, useState} from "react";
 import {Ingredient} from "../../model/Ingredient";
-
 import UpdateIngredientList from "../Ingredient/UpdateIngredientList";
 import IngredientCardView from "../Ingredient/IngredientCardView";
-import RefreshIcon from '@mui/icons-material/Refresh';
-import axios from "axios";
 import IngredientList from "../Ingredient/IngredientList";
 
 
