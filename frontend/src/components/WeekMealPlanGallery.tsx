@@ -15,6 +15,7 @@ import List from "@mui/material/List";
 import RecipeWeekMealPlanGallery from "./RecipeWeekMealPlanGallery";
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import {useState} from "react";
+import WeekMealPlanModalDialog from "./WeekMealPlanModalDialog";
 
 type WeekMealPlanGalleryProps = {
     weekMealPlanToMap: WeekMealPlan[]
@@ -45,20 +46,8 @@ console.log(props.weekMealPlanToMap[0])
                                 <Box m={3} pt={0}>
                                 <Button onClick={handleOpenMealPlan} color={"secondary"} variant={"outlined"}
                                         startIcon={<LocalDiningIcon/>}/>
-                                <Dialog open={openMealPlan} onClose={handleCloseMealPlan}>
-                                    <DialogTitle>Wocheplan</DialogTitle>
-                                    <DialogContent>
+                                    <WeekMealPlanModalDialog openMealPlan={openMealPlan} weekMealPlan={weekMealPlan.meals}/>
 
-                                        <RecipeWeekMealPlanGallery mealsToMap={weekMealPlan.meals}/>
-
-
-                                    </DialogContent>
-                                    <DialogActions>
-                                        <Button onClick={handleCloseMealPlan} color={"secondary"}>
-                                            Schließen
-                                        </Button>
-                                    </DialogActions>
-                                </Dialog>
                             </Box>
 
 
