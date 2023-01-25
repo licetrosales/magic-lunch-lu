@@ -70,4 +70,5 @@ class RecipeControllerTest {
                 )
                 .andExpect(status().isOk());
     }
+
 }
