@@ -12,7 +12,7 @@ type RecipeWeekMealPlanGalleryProps = {
 export default function RecipeWeekMealPlanGallery(props: RecipeWeekMealPlanGalleryProps) {
 
 
-    console.log(props.mealsToMap)
+
 
     return (props.mealsToMap && props.mealsToMap.length > 0 ?
             <Stack alignItems={"center"}>
