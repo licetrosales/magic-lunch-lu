@@ -1,12 +1,10 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
 import RecipeWeekMealPlanGallery from "./RecipeWeekMealPlanGallery";
-import {Meal} from "../model/Meal";
+import {Meal} from "../../model/Meal";
 import {useState} from "react";
-import {WeekMealPlan} from "../model/WeekMealPlan";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
 
 type WeekMealPlanModalialogProps = {
-
     weekMealPlan: Meal []
 }
 export default function WeekMealPlanModalDialog(props: WeekMealPlanModalialogProps) {

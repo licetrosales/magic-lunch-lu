@@ -1,13 +1,9 @@
-import {Box, Button, Grid, Typography} from "@mui/material";
+import {Button, Grid, Typography} from "@mui/material";
 import AutoFixHighTwoToneIcon from '@mui/icons-material/AutoFixHighTwoTone';
 import {useEffect, useState} from "react";
-import {MealType, Recipe} from "../model/Recipe";
-import RecipeGallery from "./Recipe/RecipeGallery";
-import RecipeWeekMealPlanGallery from "./RecipeWeekMealPlanGallery";
 import axios from "axios";
-import {WeekMealPlan} from "../model/WeekMealPlan";
+import {WeekMealPlan} from "../../model/WeekMealPlan";
 import WeekMealPlanGallery from "./WeekMealPlanGallery";
-import {Meal} from "../model/Meal";
 
 
 export default function MagicLunchMyWeekPlans() {
@@ -16,10 +12,9 @@ export default function MagicLunchMyWeekPlans() {
     const weekMealPlanBaseUrl = "/api/users/userId/mealplans"
     const recipeBaseUrl = "/api/users/userId/recipes"
 
-   useEffect(() => {
+    useEffect(() => {
         getWeekMealPlans()
     }, [])
-
 
 
     function getWeekMealPlans() {

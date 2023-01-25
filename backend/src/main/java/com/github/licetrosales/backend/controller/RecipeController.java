@@ -4,9 +4,6 @@ import com.github.licetrosales.backend.model.Recipe;
 import com.github.licetrosales.backend.model.RecipeDTO;
 import com.github.licetrosales.backend.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,9 +40,8 @@ public class RecipeController {
     }
 
     @PutMapping(path = "/recipes/{id}")
-    Recipe updateRecipe(@PathVariable String id,   @RequestPart("recipe") RecipeDTO recipe, @RequestPart(value = "file", required = false) MultipartFile file) throws IOException {
+    Recipe updateRecipe(@PathVariable String id, @RequestPart("recipe") RecipeDTO recipe, @RequestPart(value = "file", required = false) MultipartFile file) throws IOException {
 
         return recipeService.updateRecipe(id, recipe, file);
     }
-
 }

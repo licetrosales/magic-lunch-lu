@@ -1,27 +1,16 @@
 import {
     Box,
-    Button,
-    Container,
-    Dialog, DialogActions,
-    DialogContent,
-    DialogTitle,
     ListItem,
     ListItemText,
-    Stack,
-    Typography
+    Stack
 } from "@mui/material";
-import {WeekMealPlan} from "../model/WeekMealPlan";
+import {WeekMealPlan} from "../../model/WeekMealPlan";
 import List from "@mui/material/List";
-import RecipeWeekMealPlanGallery from "./RecipeWeekMealPlanGallery";
-import LocalDiningIcon from '@mui/icons-material/LocalDining';
-import {useState} from "react";
 import WeekMealPlanModalDialog from "./WeekMealPlanModalDialog";
 
 type WeekMealPlanGalleryProps = {
     weekMealPlanToMap: WeekMealPlan[]
 }
-
-
 export default function WeekMealPlanGallery(props: WeekMealPlanGalleryProps) {
 
     console.log(props.weekMealPlanToMap[0])

@@ -14,10 +14,10 @@ import LogoutIcon from '@mui/icons-material/Logout';
 export default function DrawerAppBar() {
 
     const [openDrawer, setOpenDrawer] = useState<boolean>(false)
-    const pages = ["Startseite","Meine Rezepte", "Wochenplan", "Impressum","Logout"]
-    const pagesIcons = [<HomeIcon/>, <RamenDiningIcon/>, <DateRangeIcon/>, <InfoIcon/>,<LogoutIcon/>]
+    const pages = ["Startseite", "Meine Rezepte", "Wochenplan", "Impressum", "Logout"]
+    const pagesIcons = [<HomeIcon/>, <RamenDiningIcon/>, <DateRangeIcon/>, <InfoIcon/>, <LogoutIcon/>]
     const routes = ["/", "/recipes", "/mealplans", "/impressum", "/logout"]
-    const navigate  = useNavigate()
+    const navigate = useNavigate()
 
     return (
         <div>
@@ -30,7 +30,7 @@ export default function DrawerAppBar() {
                                 setOpenDrawer(false)
                                 navigate(routes[index])
                             }} key={pages[index]}
-                           >
+                            >
                                 <ListItemIcon>
                                     {pagesIcons[index]}
                                     <ListItemText>
@@ -38,15 +38,15 @@ export default function DrawerAppBar() {
                                             {page}
                                         </Typography>
 
-                                    </ListItemText >
-                                </ListItemIcon >
+                                    </ListItemText>
+                                </ListItemIcon>
 
                             </ListItemButton>
                         ))
                     }
                 </List>
-            </Drawer >
-            <IconButton sx={{color: "white",  marginLeft: "auto",}} onClick={() => setOpenDrawer(!openDrawer)}>
+            </Drawer>
+            <IconButton sx={{color: "white", marginLeft: "auto",}} onClick={() => setOpenDrawer(!openDrawer)}>
                 <MenuIcon/>
             </IconButton>
         </div>

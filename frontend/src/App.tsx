@@ -5,11 +5,11 @@ import {Routes, Route} from "react-router-dom";
 import Home from "./components/Home";
 
 import Header from "./components/Header";
-import MagicLunchMyWeekPlans from "./components/MagicLunchMyWeekPlans";
+import MagicLunchMyWeekPlans from "./components/WeekMealPlan/MagicLunchMyWeekPlans";
 
 function App() {
     return (
-        <div className="App" >
+        <div className="App">
 
             <Header/>
 
