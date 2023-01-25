@@ -56,7 +56,7 @@ export default function MagicLunchMyWeekPlans() {
 
     const emptyWeekMealPlan: WeekMealPlan = {
         id: "",
-        meals: []
+        weekMealPlan: []
     }
 
     function onclickAddWeekMealPlan() {
