@@ -23,14 +23,7 @@ type WeekMealPlanGalleryProps = {
 
 
 export default function WeekMealPlanGallery(props: WeekMealPlanGalleryProps) {
-    const [openMealPlan, setOpenMealPlan] = useState<boolean>(false)
-    function handleOpenMealPlan() {
-        setOpenMealPlan(true)
-    }
 
-    function handleCloseMealPlan() {
-        setOpenMealPlan(false)
-    }
 console.log(props.weekMealPlanToMap[0])
     return (props.weekMealPlanToMap !== undefined && props.weekMealPlanToMap.length > 0 ?
             <Stack alignItems={"center"}>
@@ -44,9 +37,7 @@ console.log(props.weekMealPlanToMap[0])
                             />
 
                                 <Box m={3} pt={0}>
-                                <Button onClick={handleOpenMealPlan} color={"secondary"} variant={"outlined"}
-                                        startIcon={<LocalDiningIcon/>}/>
-                                    <WeekMealPlanModalDialog openMealPlan={openMealPlan} weekMealPlan={weekMealPlan.meals}/>
+                                       <WeekMealPlanModalDialog weekMealPlan={weekMealPlan.meals}/>
 
                             </Box>
 

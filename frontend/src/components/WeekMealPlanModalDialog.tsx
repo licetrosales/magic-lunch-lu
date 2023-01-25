@@ -3,18 +3,24 @@ import RecipeWeekMealPlanGallery from "./RecipeWeekMealPlanGallery";
 import {Meal} from "../model/Meal";
 import {useState} from "react";
 import {WeekMealPlan} from "../model/WeekMealPlan";
+import LocalDiningIcon from "@mui/icons-material/LocalDining";
 type WeekMealPlanModalialogProps = {
-    openMealPlan: boolean,
+
     weekMealPlan: Meal []
 }
 export default function WeekMealPlanModalDialog (props: WeekMealPlanModalialogProps){
-const [openMealPlan, setOpenMealPlan] = useState<boolean>(false)
-    setOpenMealPlan(props.openMealPlan)
-function handleCloseMealPlan() {
+    const [openMealPlan, setOpenMealPlan] = useState<boolean>(false)
+    function handleOpenMealPlan() {
+        setOpenMealPlan(true)
+    }
 
-    setOpenMealPlan(false)
-}
+    function handleCloseMealPlan() {
+        setOpenMealPlan(false)
+    }
 return(props.weekMealPlan && props.weekMealPlan.length > 0 ?
+<>    <Button onClick={handleOpenMealPlan} color={"secondary"} variant={"outlined"}
+            startIcon={<LocalDiningIcon/>}/>
+
     <Dialog open={openMealPlan} onClose={handleCloseMealPlan}>
         <DialogTitle>Wocheplan</DialogTitle>
         <DialogContent>
@@ -25,6 +31,7 @@ return(props.weekMealPlan && props.weekMealPlan.length > 0 ?
                 Schließen
             </Button>
         </DialogActions>
-    </Dialog>: <p>Modal dialog do not show recipes</p>
+    </Dialog>
+</>: <p>Modal dialog do not show recipes</p>
 )
 }
