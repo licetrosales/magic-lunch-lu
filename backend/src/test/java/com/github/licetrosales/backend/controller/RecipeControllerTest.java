@@ -3,11 +3,13 @@ package com.github.licetrosales.backend.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.licetrosales.backend.model.*;
 import com.github.licetrosales.backend.repo.RecipeRepo;
+import com.github.licetrosales.backend.service.CloudinaryUrlService;
 import org.apache.commons.compress.utils.IOUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.annotation.DirtiesContext;
@@ -21,6 +23,7 @@ import com.fasterxml.jackson.core.JsonParser.Feature;
 import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,6 +37,8 @@ class RecipeControllerTest {
     RecipeRepo recipeRepo;
     @Autowired
     ObjectMapper objectMapper;
+    @MockBean
+    CloudinaryUrlService cloudinaryUrlService;
 
 
     @Test
@@ -58,13 +63,12 @@ class RecipeControllerTest {
 
     }
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
+
     @Test
     @DirtiesContext
 
     void addRecipe_shouldReturnRecipeSendeWithPost_whenPostRequestIsSuccessful() throws Exception {
-        MockMultipartFile recipe_jsonFile = new MockMultipartFile("recipeJson", "", "application/json", "{\"json\": \"someValue\"}".getBytes());
+        MockMultipartFile recipe_jsonFile = new MockMultipartFile("recipe", "", "application/json", "{\"json\": \"someValue\"}".getBytes());
         MockMultipartFile file
                 = new MockMultipartFile(
                 "file",
@@ -72,10 +76,8 @@ class RecipeControllerTest {
                 MediaType.IMAGE_JPEG_VALUE,
                 "xxx".getBytes()
         );
-           /*byte[] image = IOUtils.toByteArray(getClass().getClassLoader().getResourceAsStream("background.png"));
-        MockMultipartFile file = new MockMultipartFile("file", "background.png", MediaType.IMAGE_JPEG_VALUE, image);
-*/
-        MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+
+        when(cloudinaryUrlService.urlGenerator(file)).thenReturn("./image.png");
         mockMvc.perform(MockMvcRequestBuilders.multipart("/api/users/userId/recipes")
                         .file(recipe_jsonFile)
                         .file(file)

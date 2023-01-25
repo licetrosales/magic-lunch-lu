@@ -13,13 +13,14 @@ import java.util.*;
 public class WeekMealPlanService {
     private final WeekMealPlanRepo weekMealPlanRepo;
     private final IdWeekMealPlanService idWeekMealPlanService;
-    @Autowired
-    private RecipeService recipeService;
+
+    private final RecipeService recipeService;
 
     @Autowired
-    public WeekMealPlanService(WeekMealPlanRepo weekMealPlanRepo, IdWeekMealPlanService idWeekMealPlanService) {
+    public WeekMealPlanService(WeekMealPlanRepo weekMealPlanRepo, IdWeekMealPlanService idWeekMealPlanService, RecipeService recipeService) {
         this.idWeekMealPlanService = idWeekMealPlanService;
         this.weekMealPlanRepo = weekMealPlanRepo;
+        this.recipeService = recipeService;
     }
 
 

@@ -34,7 +34,7 @@ export default function WeekMealPlanGallery(props: WeekMealPlanGalleryProps) {
                                 primary={"Wochenplan: " + weekMealPlan.id}
                             />
                             <Box m={3} pt={0}>
-                                <WeekMealPlanModalDialog weekMealPlan={weekMealPlan.meals}/>
+                                <WeekMealPlanModalDialog weekMealPlan={weekMealPlan.weekMealPlan}/>
                             </Box>
                         </ListItem>
                     )
