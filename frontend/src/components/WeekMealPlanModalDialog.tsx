@@ -17,6 +17,7 @@ export default function WeekMealPlanModalDialog (props: WeekMealPlanModalialogPr
     function handleCloseMealPlan() {
         setOpenMealPlan(false)
     }
+    console.log(props.weekMealPlan)
 return(props.weekMealPlan && props.weekMealPlan.length > 0 ?
 <>    <Button onClick={handleOpenMealPlan} color={"secondary"} variant={"outlined"}
             startIcon={<LocalDiningIcon/>}/>
@@ -32,6 +33,6 @@ return(props.weekMealPlan && props.weekMealPlan.length > 0 ?
             </Button>
         </DialogActions>
     </Dialog>
-</>: <p>Modal dialog do not show recipes</p>
+</>: <p>Modal dialog do not show recipes  </p>
 )
 }

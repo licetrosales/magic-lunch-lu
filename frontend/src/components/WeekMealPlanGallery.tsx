@@ -24,24 +24,18 @@ type WeekMealPlanGalleryProps = {
 
 export default function WeekMealPlanGallery(props: WeekMealPlanGalleryProps) {
 
-console.log(props.weekMealPlanToMap[0])
+    console.log(props.weekMealPlanToMap[0])
     return (props.weekMealPlanToMap !== undefined && props.weekMealPlanToMap.length > 0 ?
             <Stack alignItems={"center"}>
                 <List>{
                     props.weekMealPlanToMap.map((weekMealPlan, index) =>
-
                         <ListItem key={weekMealPlan.id} divider>
-
                             <ListItemText
                                 primary={"Wochenplan: " + weekMealPlan.id}
                             />
-
-                                <Box m={3} pt={0}>
-                                       <WeekMealPlanModalDialog weekMealPlan={weekMealPlan.meals}/>
-
+                            <Box m={3} pt={0}>
+                                <WeekMealPlanModalDialog weekMealPlan={weekMealPlan.meals}/>
                             </Box>
-
-
                         </ListItem>
                     )
                 }
