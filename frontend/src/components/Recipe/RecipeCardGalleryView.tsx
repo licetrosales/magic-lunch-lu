@@ -1,6 +1,6 @@
 import {Recipe} from "../../model/Recipe";
 import "../../images/BigMacSalat.jpg"
-import {Box, Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
+import {Box, Button} from "@mui/material";
 import {useState} from "react";
 import RecipeCard from "./RecipeCard";
 import TemplateAddUpdateRecipeForm from "./TemplateAddUpdateRecipeForm";
@@ -12,26 +12,10 @@ type RecipeCardGalleryViewProps = {
 }
 export default function RecipeCardGalleryView(props: RecipeCardGalleryViewProps) {
 
-
-    const [open, setOpen] = useState<boolean>(false)
-
-
     function onDeleteClick() {
         props.recipeToRemove(props.recipeToDisplay.id)
     }
 
-
-    function handleOpen() {
-        setOpen(true)
-    }
-
-    function handleClose() {
-        setOpen(false)
-    }
-
-    function addRecipe(recipe: Recipe) {
-        props.recipeToUpdate(recipe)
-    }
 
     function updateRecipe(recipe: Recipe, imgToUpdate: File, id: string) {
         if (props.recipeToDisplay.id) {

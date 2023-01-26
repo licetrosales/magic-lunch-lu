@@ -4,8 +4,6 @@ import {
     DishTypeCategory,
     MealType,
     MenuCategory,
-    NewRecipe,
-    NewRecipeWithId,
     Recipe,
     RecipeCategory
 } from "../../model/Recipe";

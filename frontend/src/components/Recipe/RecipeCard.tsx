@@ -52,10 +52,8 @@ export default function RecipeCard(props: RecipeCardProps) {
     const mealType = props.recipeToDisplay.mealType
     const source = props.recipeToDisplay.source
     const image = props.recipeToDisplay.image
-    const ingredients = props.recipeToDisplay.ingredients
     const prepTime = props.recipeToDisplay.prepTime
     const preparation = props.recipeToDisplay.preparation
-    const portions = props.recipeToDisplay.portions
     const favorite = props.recipeToDisplay.favorite
     const dishTypeCategory = props.recipeToDisplay.dishTypeCategory
     const recipeCategory = props.recipeToDisplay.recipeCategory
