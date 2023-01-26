@@ -1,7 +1,6 @@
 import {Recipe} from "../../model/Recipe";
 import "../../images/BigMacSalat.jpg"
 import {Box, Button} from "@mui/material";
-import {useState} from "react";
 import RecipeCard from "./RecipeCard";
 import TemplateAddUpdateRecipeForm from "./TemplateAddUpdateRecipeForm";
 
