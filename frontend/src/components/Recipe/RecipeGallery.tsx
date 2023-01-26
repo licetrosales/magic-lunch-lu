@@ -3,7 +3,7 @@ import {Recipe} from "../../model/Recipe";
 import RecipeCardGalleryView from "./RecipeCardGalleryView";
 import {ChangeEvent, useState} from "react";
 import SearchIcon from '@mui/icons-material/Search';
-import {Search} from "@mui/icons-material";
+
 
 type RecipeGalleryProps = {
     recipesToMap: Recipe[]
