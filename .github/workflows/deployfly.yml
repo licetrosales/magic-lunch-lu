@@ -35,7 +35,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: frontend-build
-          path: backend/scr/main/resources/static
+          path: backend/src/main/resources/static
       - name: Build with maven
         run: mvn -B package --file backend/pom.xml
       - uses: actions/upload-artifact@v2
