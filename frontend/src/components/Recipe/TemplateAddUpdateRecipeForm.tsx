@@ -227,7 +227,7 @@ export default function TemplateAddUpdateRecipeForm(props: TemplateAddUpdateReci
 
                         </TextField>
                         <label>
-                            Favorite:
+                            Favorit:
                             <input
                                 type={"checkbox"}
                                 name="favorite"

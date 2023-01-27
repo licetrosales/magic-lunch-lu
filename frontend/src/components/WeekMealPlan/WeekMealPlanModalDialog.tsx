@@ -25,7 +25,7 @@ export default function WeekMealPlanModalDialog(props: WeekMealPlanModalialogPro
                           startIcon={<LocalDiningIcon/>}/>
 
                 <Dialog open={openMealPlan} onClose={handleCloseMealPlan}>
-                    <DialogTitle>Wocheplan</DialogTitle>
+                    <DialogTitle>Wochenplan</DialogTitle>
                     <DialogContent>
                         <RecipeWeekMealPlanGallery mealsToMap={props.weekMealPlan}/>
                     </DialogContent>

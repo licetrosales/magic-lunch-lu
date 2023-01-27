@@ -16,7 +16,7 @@ export default function RecipeWeekMealPlanGallery(props: RecipeWeekMealPlanGalle
                     props.mealsToMap.map((meal, index) =>
                         <ListItem key={meal.id} divider>
                             <ListItemText
-                                primary={"Tag: " + meal.date}
+                                primary={""+meal.date}
                             />
                             <ListItemText>
                                 <RecipeCard recipeToDisplay={meal.recipe} key={meal.id}/>
