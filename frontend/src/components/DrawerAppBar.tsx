@@ -14,9 +14,9 @@ import LogoutIcon from '@mui/icons-material/Logout';
 export default function DrawerAppBar() {
 
     const [openDrawer, setOpenDrawer] = useState<boolean>(false)
-    const pages = ["Startseite", "Meine Rezepte", "Wochenplan", "Impressum", "Logout"]
+    const pages = ["Startseite", "Meine Rezepte", "Wochenplan", "Info", "Logout"]
     const pagesIcons = [<HomeIcon/>, <RamenDiningIcon/>, <DateRangeIcon/>, <InfoIcon/>, <LogoutIcon/>]
-    const routes = ["/", "/recipes", "/mealplans", "/impressum", "/logout"]
+    const routes = ["/", "/recipes", "/mealplans", "/info", "/logout"]
     const navigate = useNavigate()
 
     return (

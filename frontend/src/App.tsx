@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import Header from "./components/Header";
 import MagicLunchMyWeekPlans from "./components/WeekMealPlan/MagicLunchMyWeekPlans";
 import Login from "./components/Login";
+import Info from "./components/Info";
 
 function App() {
     return (
@@ -17,7 +18,7 @@ function App() {
                 <Route path={"/"} element={<Home/>}></Route>
                 <Route path={"/recipes"} element={<MagicLunchMyRecipes/>}></Route>
                 <Route path={"/mealplans"} element={<MagicLunchMyWeekPlans/>}></Route>
-                <Route path={"/impressum"} element={<Home/>}></Route>
+                <Route path={"/info"} element={<Info/>}></Route>
                 <Route path={"/logout"} element={<Login/>}></Route>
             </Routes>
 

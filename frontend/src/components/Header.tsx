@@ -8,8 +8,8 @@ export default function Header() {
     const [tabValue, setTabvalue] = useState("/");
     const theme = useTheme()
     const isMatch = useMediaQuery(theme.breakpoints.down("md"))
-    const pages = ["Startseite", "Meine Rezepte", "Wochenplan", "Impressum"]
-    const routes = ["/", "/recipes", "/mealplans", "/impressum"]
+    const pages = ["Startseite", "Meine Rezepte", "Wochenplan", "Info"]
+    const routes = ["/", "/recipes", "/mealplans", "/info"]
     return (
 
         <div>
