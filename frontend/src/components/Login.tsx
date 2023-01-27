@@ -21,14 +21,17 @@ export default function Login() {
                         variant={"outlined"}
                         label={"Benutzername / E-Mail"}
                         fullWidth
-                        style={{marginBottom: "2em"}}>
+                        style={{marginBottom: "2em"}}
+                    color={"secondary"}>
 
                     </TextField>
 
                     <TextField
                         variant={"outlined"}
                         label={"Passwort"}
-                        fullWidth>
+                        fullWidth
+                        color={"secondary"}
+                    >
 
                     </TextField>
                 </Grid>
