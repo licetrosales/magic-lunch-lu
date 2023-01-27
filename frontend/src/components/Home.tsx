@@ -22,7 +22,7 @@ export default function Home() {
             <Grid container direction={"column"} alignItems={"center"} justifySelf={"center"}
                   style={{minHeight: "100vh"}} spacing={5}>
 
-                <Grid item margin={2}>
+                <Grid item margin={8}>
                     <Typography variant={"h5"} sx={{fontSize: "1.25rem", paddingLeft: "0%", paddingRight: "0%"}}></Typography></Grid>
                 <Grid>
                     <LunchDiningIcon/>
