@@ -65,5 +65,8 @@ public class WeekMealPlanService {
         }
         throw new IllegalArgumentException("Week meal plan Id not found!");
     }
-
+    public void deleteWeekMealPlan(String id) {
+        WeekMealPlan weekMealPlan = findById(id);
+        weekMealPlanRepo.delete(weekMealPlan);
+    }
 }
