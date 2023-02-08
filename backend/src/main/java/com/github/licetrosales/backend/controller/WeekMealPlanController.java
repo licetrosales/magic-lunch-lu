@@ -29,4 +29,8 @@ public class WeekMealPlanController {
     public WeekMealPlan addWeekMealPlan(@RequestBody WeekMealPlanDTO weekMealPlan) {
         return weekMealPlanService.addWeekMealPlan(weekMealPlan);
     }
+    @DeleteMapping("/mealplans/{id}")
+    void deleteWeekMealPlan(@PathVariable String id) {
+        weekMealPlanService.deleteWeekMealPlan(id);
+    }
 }
