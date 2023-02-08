@@ -82,6 +82,21 @@ class WeekMealPlanServiceTest {
         WeekMealPlan expected =new WeekMealPlan("123", weekMealPlan);
         assertEquals(actual, expected);
     }
+    @Test
+    public void testFindByIdWithNotExistingId_shouldReturnMessage() {
+        //GIVEN
+        when(weekMealPlanRepo.findById("789")).thenReturn(Optional.empty());
+        WeekMealPlanService studentService = new WeekMealPlanService(weekMealPlanRepo, idWeekMealPlanService, recipeService);
+
+        //WHEN
+        try {
+            weekMealPlanService.findById("789");
+            fail();
+        } catch (IllegalArgumentException e) {
+            //THEN
+            assertEquals(e.getMessage(), "Week meal plan Id not found!");
+        }
+    }
 
 
 }
