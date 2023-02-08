@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.*;
 
+
+import static net.bytebuddy.matcher.ElementMatchers.is;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -65,6 +67,20 @@ class WeekMealPlanServiceTest {
         assertEquals(weekMealPlanWithMeals, result);
         verify(weekMealPlanRepo).save(result);
 
+    }
+
+    @Test
+    public void testFindById_shouldReturnWeekMealPlan_whenWeekMealPlanIsAdded() {
+        //GIVEN
+        when(weekMealPlanRepo.findById("123")).thenReturn(Optional.of(new WeekMealPlan("123", weekMealPlan)));
+        WeekMealPlanService weekMealPlanService1 = new WeekMealPlanService(weekMealPlanRepo, idWeekMealPlanService, recipeService);
+
+        //WHEN
+        WeekMealPlan actual = weekMealPlanService1.findById("123");
+
+        //THEN
+        WeekMealPlan expected =new WeekMealPlan("123", weekMealPlan);
+        assertEquals(actual, expected);
     }
 
 
