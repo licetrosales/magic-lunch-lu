@@ -97,6 +97,20 @@ class WeekMealPlanServiceTest {
             assertEquals(e.getMessage(), "Week meal plan Id not found!");
         }
     }
+        @Test
+        public void testDelete_whenIdExists_shouldDeleteMealPlan() {
+            //GIVEN
+            when(weekMealPlanRepo.findById("2")).thenReturn(Optional.of(new WeekMealPlan("2", weekMealPlan)));
+            WeekMealPlanService weekMealPlanService = new WeekMealPlanService(weekMealPlanRepo, idWeekMealPlanService, recipeService);
+
+            //WHEN
+            weekMealPlanService.deleteWeekMealPlan("2");
+
+            //THEN
+            verify(weekMealPlanRepo).delete(new WeekMealPlan("2", weekMealPlan));
+
+        }
+
 
 
 }
