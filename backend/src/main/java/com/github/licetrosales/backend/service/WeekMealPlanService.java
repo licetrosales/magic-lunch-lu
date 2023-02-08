@@ -58,4 +58,12 @@ public class WeekMealPlanService {
         }
         return weekMealPlan;
     }
+    public WeekMealPlan findById(String id) {
+        Optional<WeekMealPlan> weekMealPlan = weekMealPlanRepo.findById(id);
+        if (weekMealPlan.isPresent()){
+            return weekMealPlan.get();
+        }
+        throw new IllegalArgumentException("Week meal plan Id not found!");
+    }
+
 }
