@@ -58,6 +58,15 @@ export default function MagicLunchMyWeekPlans() {
         addWeekMealPlan(emptyWeekMealPlan)
     }
 
+    function removeWeekMealPlan(id?: string) {
+        axios.delete(weekMealPlanBaseUrl + "/" + id)
+            .then(() => {
+                setWeekMealPlans(prevWeekMealPlansGallery => {
+                    return prevWeekMealPlansGallery.filter((weekMealPlan) => weekMealPlan.id !== id)
+                })
+            })
+    }
+
     return (
         <Grid container direction={"column"} alignItems={"center"} justifySelf={"center"} style={{minHeight: "100vh"}}
               spacing={5}>
@@ -71,7 +80,7 @@ export default function MagicLunchMyWeekPlans() {
                         startIcon={<AutoFixHighTwoToneIcon/>}></Button>
             </Grid>
             <Grid item>
-                <WeekMealPlanGallery weekMealPlanToMap={weekMealPlans}/>
+                <WeekMealPlanGallery weekMealPlanToMap={weekMealPlans} weekMealPlanToRemove={removeWeekMealPlan}/>
 
             </Grid>
 
